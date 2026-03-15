@@ -22,23 +22,21 @@ pdfMake.vfs = pdfFonts.vfs;
 
 import "../../App.css";
 
-const UnitMaster = () => {
+const Global = () => {
   const tableRef = useRef(null);
   const dt = useRef(null);
+
+  const [showModal, setShowModal] = useState(false);
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
 
-  const [showModal, setShowModal] = useState(false);
-
   const [formData, setFormData] = useState({
-    description: "",
-    uneceCode: "",
-    code: "",
-    type: "",
-    plural: "",
-    decimals: "",
-    conversionFactor: "",
+    chargeCode: "",
+    chargeName: "",
+    applicableFor: "",
+    chargeCategory: "",
+    chargeType: "",
     status: "Active",
   });
 
@@ -54,11 +52,11 @@ const UnitMaster = () => {
   };
 
   const handleSubmit = async () => {
-    let url = "http://localhost:5000/units";
+    let url = "http://localhost:5000/global-charges";
     let method = "POST";
 
     if (editingId) {
-      url = `http://localhost:5000/units/${editingId}`;
+      url = `http://localhost:5000/global-charges/${editingId}`;
       method = "PUT";
     }
 
@@ -81,20 +79,18 @@ const UnitMaster = () => {
     setEditingId(null);
 
     setFormData({
-      description: "",
-      uneceCode: "",
-      code: "",
-      type: "",
-      plural: "",
-      decimals: "",
-      conversionFactor: "",
+      chargeCode: "",
+      chargeName: "",
+      applicableFor: "",
+      chargeCategory: "",
+      chargeType: "",
       status: "Active",
     });
   };
   const confirmDelete = async () => {
     if (!deleteId) return;
 
-    await fetch(`http://localhost:5000/units/${deleteId}`, {
+    await fetch(`http://localhost:5000/global-charges/${deleteId}`, {
       method: "DELETE",
     });
 
@@ -106,6 +102,7 @@ const UnitMaster = () => {
 
   useEffect(() => {
     if (dt.current) return;
+
     $.fn.dataTable.Buttons.defaults.dom.button.className = "export-btn";
 
     dt.current = $(tableRef.current).DataTable({
@@ -182,18 +179,20 @@ const UnitMaster = () => {
       responsive: true,
 
       ajax: {
-        url: "http://localhost:5000/units",
+        url: "http://localhost:5000/global-charges",
         dataSrc: "data",
       },
 
       columns: [
-        { data: "description", responsivePriority: 1 },
+        { data: "chargeCode", responsivePriority: 1 },
 
-        { data: "code", responsivePriority: 2 },
+        { data: "chargeName", responsivePriority: 2 },
 
-        { data: "uneceCode", responsivePriority: 3 },
+        { data: "applicableFor", responsivePriority: 3 },
 
-        { data: "type", responsivePriority: 4 },
+        { data: "chargeCategory", responsivePriority: 4 },
+
+        { data: "chargeType", responsivePriority: 5 },
 
         {
           data: null,
@@ -201,8 +200,8 @@ const UnitMaster = () => {
           className: "no-export",
           render: function (data) {
             return `
-  <i class="bx bx-edit edit-icon me-2" data-id="${data._id}" style="cursor:pointer;"></i>
-  `;
+<i class="bx bx-edit edit-icon me-2" data-id="${data._id}" style="cursor:pointer;"></i>
+`;
           },
         },
 
@@ -212,8 +211,8 @@ const UnitMaster = () => {
           className: "no-export",
           render: function (data) {
             return `
-  <i class="bx bx-trash delete-icon" data-id="${data._id}" style="cursor:pointer;"></i>
-  `;
+<i class="bx bx-trash delete-icon" data-id="${data._id}" style="cursor:pointer;"></i>
+`;
           },
         },
       ],
@@ -233,13 +232,11 @@ const UnitMaster = () => {
       setEditingId(rowData._id);
 
       setFormData({
-        description: rowData.description,
-        uneceCode: rowData.uneceCode,
-        code: rowData.code,
-        type: rowData.type,
-        plural: rowData.plural,
-        decimals: rowData.decimals,
-        conversionFactor: rowData.conversionFactor,
+        chargeCode: rowData.chargeCode,
+        chargeName: rowData.chargeName,
+        applicableFor: rowData.applicableFor,
+        chargeCategory: rowData.chargeCategory,
+        chargeType: rowData.chargeType,
         status: rowData.status ? "Active" : "Inactive",
       });
 
@@ -270,20 +267,19 @@ const UnitMaster = () => {
       document.body.style.overflow = "auto";
     };
   }, [showModal]);
-
   return (
     <div className="container-xxl flex-grow-1">
       <div className="card">
         <div className="datatable-toolbar d-flex justify-content-between align-items-start">
           <div className="title-section">
-            <h5 className="table-title">Unit Master</h5>
+            <h5 className="table-title">Global Charge Codes</h5>
             <div className="breadcrumb-text">
-              Cargo Masters &gt; Unit Master
+              Finance Masters &gt; Global Charge Codes
             </div>
           </div>
 
           <button className="btn-add-record" onClick={() => setShowModal(true)}>
-            <i className="bx bx-plus"></i> Create Unit Master
+            <i className="bx bx-plus"></i> Create Global Charge Code
           </button>
         </div>
 
@@ -295,10 +291,11 @@ const UnitMaster = () => {
           >
             <thead>
               <tr>
-                <th>Description</th>
-                <th>Code</th>
-                <th>UNECE Code</th>
-                <th>Type</th>
+                <th>Charge Code</th>
+                <th>Charge Name</th>
+                <th>Applicable For</th>
+                <th>Charge Category</th>
+                <th>Charge Type</th>
                 <th>Update</th>
                 <th>Remove</th>
               </tr>
@@ -309,190 +306,133 @@ const UnitMaster = () => {
 
       {/* CREATE / EDIT MODAL */}
 
-      {/* CREATE / EDIT MODAL */}
-
       {showModal && (
         <div className="custom-modal-backdrop">
           <div className="custom-modal-card">
-            ```
             <button
               className="custom-close"
               onClick={() => setShowModal(false)}
             >
               ×
             </button>
+
             <h5 className="modal-title">
-              {editingId ? "Edit Unit Master" : "Create Unit Master"}
+              {editingId
+                ? "Edit Global Charge Code"
+                : "Create Global Charge Code"}
             </h5>
+
             <hr className="modal-divider" />
+
             <div className="row">
-              {/* Description */}
+              {/* Charge Code */}
 
               <div className="col-md-6">
                 <div className="form-group">
-                  <label>Description *</label>
-
-                  <div className="input-icon">
-                    <i className="bx bx-file"></i>
-
-                    <input
-                      type="text"
-                      name="description"
-                      className="form-field"
-                      placeholder="Enter Description"
-                      value={formData.description}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* UNECE Code */}
-
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label>UNECE Code</label>
-
-                  <div className="input-icon">
-                    <i className="bx bx-barcode"></i>
-
-                    <input
-                      type="text"
-                      name="uneceCode"
-                      className="form-field"
-                      placeholder="Enter UNECE Code"
-                      value={formData.uneceCode}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Code */}
-
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label>Code *</label>
+                  <label>Charge Code *</label>
 
                   <div className="input-icon">
                     <i className="bx bx-hash"></i>
 
                     <input
                       type="text"
-                      name="code"
+                      name="chargeCode"
                       className="form-field"
-                      placeholder="Enter Code"
-                      value={formData.code}
+                      placeholder="Enter Charge Code"
+                      value={formData.chargeCode}
                       onChange={handleChange}
                     />
                   </div>
                 </div>
               </div>
 
-              {/* Type */}
+              {/* Charge Name */}
 
               <div className="col-md-6">
                 <div className="form-group">
-                  <label>Type *</label>
+                  <label>Charge Name *</label>
 
                   <div className="input-icon">
-                    <i className="bx bx-category"></i>
+                    <i className="bx bx-file"></i>
+
+                    <input
+                      type="text"
+                      name="chargeName"
+                      className="form-field"
+                      placeholder="Enter Charge Name"
+                      value={formData.chargeName}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Applicable For */}
+
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label>Applicable For *</label>
+
+                  <div className="input-icon">
+                    <i className="bx bx-world"></i>
 
                     <select
-                      name="type"
+                      name="applicableFor"
                       className="form-field"
-                      value={formData.type}
+                      value={formData.applicableFor}
                       onChange={handleChange}
                     >
-                      <option value="">Select Type</option>
-                      <option value="Number">Number</option>
-                      <option value="Weight">Weight</option>
-                      <option value="Volume">Volume</option>
-                      <option value="Length">Length</option>
+                      <option value="">Select Applicable For</option>
+                      <option value="Import">Import</option>
+                      <option value="Export">Export</option>
+                      <option value="Both">Both</option>
                     </select>
                   </div>
                 </div>
               </div>
 
-              {/* Plural */}
+              {/* Charge Category */}
 
               <div className="col-md-6">
                 <div className="form-group">
-                  <label>Plural</label>
+                  <label>Charge Category *</label>
 
                   <div className="input-icon">
-                    <i className="bx bx-layer"></i>
-
-                    <input
-                      type="text"
-                      name="plural"
-                      className="form-field"
-                      placeholder="Enter Plural"
-                      value={formData.plural}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* No of Decimals */}
-
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label>No of Decimals</label>
-
-                  <div className="input-icon">
-                    <i className="bx bx-calculator"></i>
-
-                    <input
-                      type="number"
-                      name="decimals"
-                      className="form-field"
-                      placeholder="Enter Decimal Count"
-                      value={formData.decimals}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Conversion Factor */}
-
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label>Conversion Factor</label>
-
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                    }}
-                  >
-                    <span style={{ fontWeight: "600" }}>1</span>
-
-                    <span>=</span>
-
-                    <input
-                      type="number"
-                      name="conversionFactor"
-                      className="form-field"
-                      style={{ width: "120px" }}
-                      value={formData.conversionFactor}
-                      onChange={handleChange}
-                    />
+                    <i className="bx bx-category"></i>
 
                     <select
-                      name="conversionUnit"
+                      name="chargeCategory"
                       className="form-field"
-                      style={{ width: "150px" }}
-                      value={formData.conversionUnit || ""}
+                      value={formData.chargeCategory}
                       onChange={handleChange}
                     >
-                      <option value="">Select</option>
-                      <option value="kg">Kilogram</option>
-                      <option value="g">Gram</option>
-                      <option value="lb">Pound</option>
+                      <option value="">Select Charge Category</option>
+                      <option value="Freight">Freight</option>
+                      <option value="Handling">Handling</option>
+                      <option value="Documentation">Documentation</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* Charge Type */}
+
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label>Charge Type *</label>
+
+                  <div className="input-icon">
+                    <i className="bx bx-cube"></i>
+
+                    <select
+                      name="chargeType"
+                      className="form-field"
+                      value={formData.chargeType}
+                      onChange={handleChange}
+                    >
+                      <option value="">Select Charge Type</option>
+                      <option value="Fixed">Fixed</option>
+                      <option value="Variable">Variable</option>
                     </select>
                   </div>
                 </div>
@@ -530,6 +470,7 @@ const UnitMaster = () => {
                 </div>
               </div>
             </div>
+
             <div className="modal-buttons">
               <button className="btn-submit" onClick={handleSubmit}>
                 {editingId ? "Update" : "Create"}
@@ -551,7 +492,7 @@ const UnitMaster = () => {
             <h5 className="modal-title">Confirm Delete</h5>
 
             <p style={{ marginTop: "10px" }}>
-              Are you sure you want to delete this Unit?
+              Are you sure you want to delete this Global Charge Code?
             </p>
 
             <div className="modal-buttons">
@@ -576,4 +517,4 @@ const UnitMaster = () => {
   );
 };
 
-export default UnitMaster;
+export default Global;

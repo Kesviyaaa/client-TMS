@@ -22,6 +22,13 @@ import Ports from "./components/pages/Ports";
 import Currencies from "./components/pages/Currencies";
 import Commodities from "./components/pages/Commodities";
 import UnitMaster from "./components/pages/UnitMaster";
+import Global from "./components/pages/Global";
+import Company from "./components/pages/Company";
+import AirlineMaster from "./components/pages/AirlineMaster";
+import ShippingMaster from "./components/pages/ShippingMaster";
+import VesselMaster from "./components/pages/VesselMaster";
+import Container from "./components/pages/Container";
+import Document from "./components/pages/Document";
 
 function App() {
   const [collapsed, setCollapsed] = useState(false);
@@ -65,7 +72,14 @@ function App() {
                   <Route path="/ports" element={<Ports />} />
                   <Route path="/currencies" element={<Currencies />} />
                   <Route path="/commodities" element={<Commodities />} />
-                  <Route path="/units-of-measurements" element={<UnitMaster />} />             
+                  <Route path="/units-of-measurements" element={<UnitMaster />} />
+                  <Route path="/global-charge-codes" element={<Global />} />
+                  <Route path="/company-creations" element={<Company />} />
+                  <Route path="/airline-master" element={<AirlineMaster />} />
+                  <Route path="/shipping-line-master" element={<ShippingMaster />} />
+                  <Route path="/vessels-master" element={<VesselMaster />} />
+                  <Route path="/container-types" element={<Container />} />
+                  <Route path="/document-types" element={<Document />} />
                 </Routes>
               </div>
 

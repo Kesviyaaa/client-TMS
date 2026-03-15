@@ -1,56 +1,61 @@
 @import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap");
 
 :root {
-    --cargo-blue: #50A9E9;
+  --cargo-blue: #50a9e9;
 }
 
 .footer {
   position: fixed;
   bottom: 0;
-  left: 250px;  
-  right: 0;
-width: calc(100% - 250px);
-  padding: 10px 0;
+  left: 250px;
+  width: calc(100% - 250px);
+
+  padding: 10px 20px;
   font-size: 14px;
   z-index: 1000;
+
+  background: #ffffff;
+  border-top: 1px solid #d9dee3;
+
   transition: all 0.3s ease;
-  background-color: white;
-  border-top: 1px solid #d9dee3; 
 }
 
 .layout-wrapper.layout-menu-collapsed .footer {
-    left: 80px;
-  }
+  left: 80px;
+}
 
-  .layout-wrapper.layout-menu-collapsed 
-.layout-menu.hovered + .layout-page 
-.footer {
+.layout-wrapper.layout-menu-collapsed
+  .layout-menu.hovered
+  + .layout-page
+  .footer {
   left: 250px;
 }
 
-.layout-wrapper.layout-menu-collapsed 
-.layout-menu.hovered + .layout-page 
-.footer {
+.layout-wrapper.layout-menu-collapsed
+  .layout-menu.hovered
+  + .layout-page
+  .footer {
   left: 250px;
   width: calc(100% - 250px);
 }
 
 .layout-menu-collapsed .footer {
-  left: 78px;
-  width: calc(100% - 78px);
+  left: 80px;
+  width: calc(100% - 80px);
 }
-
-
-
 .footer a {
-    color: #50A9E9 !important;
-    text-decoration: none !important;
-    font-size: 15px;
+  color: #50a9e9 !important;
+  text-decoration: none !important;
+  font-size: 15px;
+}
+.layout-menu-collapsed .layout-menu:hover + .layout-page .footer {
+  left: 250px;
+  width: calc(100% - 250px);
 }
 
 .footer a:hover {
-    color: #50A9E9 !important;
-    text-decoration: none !important;
+  color: #50a9e9 !important;
+  text-decoration: none !important;
 }
 
 /* ===================================== */
@@ -58,170 +63,170 @@ width: calc(100% - 250px);
 /* ===================================== */
 
 .table tbody td {
-    font-family: "Public Sans", sans-serif;
-    color: #697a8d;
-    /* normal text color */
-    font-size: 0.875rem;
+  font-family: "Public Sans", sans-serif;
+  color: #697a8d;
+  /* normal text color */
+  font-size: 0.875rem;
 }
 
 .status-badge {
-    font-family: "Public Sans", sans-serif;
-    font-weight: 500;
-    color: white;
-    background-color: #28a745;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 0.75rem;
+  font-family: "Public Sans", sans-serif;
+  font-weight: 500;
+  color: white;
+  background-color: #28a745;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
 }
 
 /* Remove DataTables default icon */
-table.dataTable.dtr-inline.collapsed>tbody>tr>td.control::before {
-    display: none !important;
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.control::before {
+  display: none !important;
 }
 
 /* Control column spacing */
-table.dataTable.dtr-inline.collapsed>tbody>tr>td.control {
-    position: relative;
-    padding-left: 42px !important;
-    cursor: pointer;
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.control {
+  position: relative;
+  padding-left: 42px !important;
+  cursor: pointer;
 }
 
 /* Blue filled circle + */
-table.dataTable.dtr-inline.collapsed>tbody>tr>td.control::after {
-    content: "+";
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.control::after {
+  content: "+";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
 
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
 
-    background: #50A9E9;
-    color: #fff;
+  background: #50a9e9;
+  color: #fff;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    font-size: 14px;
-    font-weight: 700;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 /* When expanded show minus */
-table.dataTable.dtr-inline.collapsed>tbody>tr.dtr-expanded>td.control::after {
-    content: "−";
+table.dataTable.dtr-inline.collapsed
+  > tbody
+  > tr.dtr-expanded
+  > td.control::after {
+  content: "−";
 }
 
 /* ================= ADVANCED SEARCH ================= */
 body {
-    background-color: rgb(244, 244, 248);
+  background-color: rgb(244, 244, 248);
 }
 
 .layout-wrapper {
-    background-color: rgb(244, 244, 248);
-    min-height: 100vh;
+  background-color: rgb(244, 244, 248);
+  min-height: 100vh;
 }
 
 .layout-page {
-    background-color: rgb(244, 244, 248);
+  background-color: rgb(244, 244, 248);
 }
 
 .content-wrapper {
-    background-color: rgb(244, 244, 248);
+  background-color: rgb(244, 244, 248);
 }
 
 /* ================= MENU ================= */
 
 .menu-sub {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
 }
 
-.menu-item.open>.menu-sub {
-    max-height: 500px;
+.menu-item.open > .menu-sub {
+  max-height: 500px;
 }
 
 a.menu-link,
 .menu-text,
 #layout-menu .menu-text {
-    text-decoration: none !important;
+  text-decoration: none !important;
 }
 
 /* ================= LOGO ================= */
 
 .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
 }
 
 .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #646cffaa);
 }
 
 .logo.react:hover {
-    filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
 @keyframes logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
 
-    to {
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-    a:nth-of-type(2) .logo {
-        animation: logo-spin infinite 20s linear;
-    }
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
 }
 
 /* ================= DROPDOWN ================= */
 
 .dropdown-menu .dropdown-item:hover,
 .dropdown-menu .dropdown-item:focus {
-    background-color: rgba(105, 108, 255, 0.08);
-    color: #50A9E9;
+  background-color: rgba(105, 108, 255, 0.08);
+  color: #50a9e9;
 }
 
 .dropdown-menu .dropdown-item.active {
-    background-color: rgba(105, 108, 255, 0.16);
-    color: #50A9E9;
+  background-color: rgba(105, 108, 255, 0.16);
+  color: #50a9e9;
 }
 
 /* ================= SIDEBAR ================= */
 
 /* Sidebar collapsed */
 .layout-menu.layout-menu-collapsed {
-    width: 80px;
+  width: 80px;
 }
 
 /* Page shift when sidebar collapsed */
 
-
 /* Page shift when sidebar expanded */
 
-
 .layout-menu-collapsed .layout-menu:hover {
-    width: 260px !important;
+  width: 260px !important;
 }
 
 .layout-menu-collapsed .layout-menu:hover .menu-text {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
-
 .layout-menu.hovered {
-    width: 250px;
-    transition: width 0.3s ease;
+  width: 250px;
+  transition: width 0.3s ease;
 }
 
 /* ================= DATATABLE FIX ================= */
@@ -234,22 +239,22 @@ a.menu-link,
 .dataTables_wrapper,
 .table,
 .table-responsive {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 /* Full width table wrapper */
 .dataTables_wrapper {
-    width: 100% !important;
-    margin: 0 !important;
+  width: 100% !important;
+  margin: 0 !important;
 }
 
 /* ================= SNEAT CARD STYLE ================= */
 .card {
-    padding: 0 !important;
-    border: 0;
-    border-radius: 0.625rem;
-    background-color: #ffffff;
-    box-shadow: 0 0.125rem 0.375rem rgba(161, 172, 184, 0.12);
+  padding: 0 !important;
+  border: 0;
+  border-radius: 0.625rem;
+  background-color: #ffffff;
+  box-shadow: 0 0.125rem 0.375rem rgba(161, 172, 184, 0.12);
 }
 
 /* ================= TABLE ================= */
@@ -258,124 +263,124 @@ a.menu-link,
 .table,
 .table th,
 .table td {
-    border: none !important;
+  border: none !important;
 }
 
 /* Horizontal row lines */
-.table>tbody>tr {
-    border-bottom: 1px solid #eceef1;
+.table > tbody > tr {
+  border-bottom: 1px solid #eceef1;
 }
 
-.table>tbody>tr:last-child {
-    border-bottom: none;
+.table > tbody > tr:last-child {
+  border-bottom: none;
 }
 
 /* Header bottom line */
-.table>thead>tr {
-    border-bottom: 2px solid #e5e7eb;
+.table > thead > tr {
+  border-bottom: 2px solid #e5e7eb;
 }
 
 /* Padding like Sneat */
-.table> :not(caption)>*>* {
-    padding: 0.9375rem 1.25rem;
+.table > :not(caption) > * > * {
+  padding: 0.9375rem 1.25rem;
 }
 
 /* Remove vertical lines */
-.table> :not(caption)>*>*+* {
-    border-left: none !important;
+.table > :not(caption) > * > * + * {
+  border-left: none !important;
 }
 
 /* ================= FONT STYLING ================= */
 
 /* Table header */
 .table thead th {
-    font-family: "Public Sans", sans-serif;
-    font-weight: 600;
-    color: #1e2a38;
-    font-size: 0.95rem;
+  font-family: "Public Sans", sans-serif;
+  font-weight: 600;
+  color: #1e2a38;
+  font-size: 0.95rem;
 }
 
 /* Table body text — exclude control column */
 .table tbody td:not(.control) {
-    font-family: "Public Sans", sans-serif;
-    color: #697a8d;
-    font-size: 0.875rem;
+  font-family: "Public Sans", sans-serif;
+  color: #697a8d;
+  font-size: 0.875rem;
 }
 
 /* ================= DATATABLE CONTROLS ================= */
 
 /* Remove default icon */
-table.dataTable.dtr-inline.collapsed>tbody>tr>td.control::before {
-    all: unset !important;
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.control::before {
+  all: unset !important;
 }
 
 /* Control column spacing */
 td.control {
-    position: relative;
-    padding-left: 42px !important;
-    cursor: pointer;
+  position: relative;
+  padding-left: 42px !important;
+  cursor: pointer;
 }
 
 /* Sneat-style small circle with white outer ring */
 td.control::after {
-    content: "+";
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
+  content: "+";
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
 
-    width: 16px;
-    height: 16px;
+  width: 16px;
+  height: 16px;
 
-    border-radius: 50%;
-    background: #50A9E9;
-    color: #fff;
+  border-radius: 50%;
+  background: #50a9e9;
+  color: #fff;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    font-size: 11px;
-    font-weight: 700;
+  font-size: 11px;
+  font-weight: 700;
 
-    /* White outer ring */
-    box-shadow: 0 0 0 2px #fff;
+  /* White outer ring */
+  box-shadow: 0 0 0 2px #fff;
 
-    transition: all 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 /* Expanded state */
 tr.dtr-expanded td.control::after {
-    content: "−";
+  content: "−";
 }
 
 /* Optional smooth hover like Sneat */
 td.control:hover::after {
-    transform: translateY(-50%) scale(1.05);
+  transform: translateY(-50%) scale(1.05);
 }
 
 /* ================= DATATABLE SPACING ================= */
 
 .dataTables_wrapper label {
-    color: #6c757d;
-    font-size: 14px;
-    font-weight: 500;
+  color: #6c757d;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .dataTables_wrapper .table-responsive {
-    margin-top: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 /* ================= MOBILE FIX ================= */
 
 /* Add space from card border for search */
 .dataTables_wrapper .row:first-child .col-md-6:last-child {
-    padding-right: 20px;
+  padding-right: 20px;
 }
 
 /* Add space from left for "Show entries" */
 .dataTables_wrapper .row:first-child .col-md-6:first-child {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 /* ===================================================== */
@@ -383,102 +388,97 @@ td.control:hover::after {
 /* ===================================================== */
 
 .custom-modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(67, 89, 113, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(67, 89, 113, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
 .custom-modal-card {
-    width: 600px;
-    /* same width as Sneat modal */
-    max-width: 95%;
-    background: #fff;
-    border-radius: 0.5rem;
-    padding: 1.5rem 1.75rem;
-    /* horizontal padding like Sneat */
-    position: relative;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .15);
+  width: 600px;
+  /* same width as Sneat modal */
+  max-width: 95%;
+  background: #fff;
+  border-radius: 0.5rem;
+  padding: 1.5rem 1.75rem;
+  /* horizontal padding like Sneat */
+  position: relative;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
 .custom-close {
-    position: absolute;
-    top: 10px;
-    right: 12px;
-    border: none;
-    background: transparent;
-    font-size: 22px;
-    cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
 }
 
 .modal-title {
-    font-weight: 600;
-    margin-bottom: 1rem;
-    font-family: "Public Sans", sans-serif;
-    /* Sneat heading color */
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-family: "Public Sans", sans-serif;
+  /* Sneat heading color */
 }
 
-
 .details-row {
-    padding: 0.6rem 0;
-    border-bottom: 1px solid #eceef1;
-    font-size: 0.9rem;
-    font-family: "Public Sans", sans-serif;
-    color: #697a8d;
-    /* Sneat grey text */
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #eceef1;
+  font-size: 0.9rem;
+  font-family: "Public Sans", sans-serif;
+  color: #697a8d;
+  /* Sneat grey text */
 }
 
 .details-row span {
-    font-weight: 600;
-    display: inline-block;
-    width: 200px;
-    color: #566a7f;
-    /* aligns labels like Name / Email / City */
+  font-weight: 600;
+  display: inline-block;
+  width: 200px;
+  color: #566a7f;
+  /* aligns labels like Name / Email / City */
 }
 
 .details-row:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
-
 
 /* ===================================================== */
 /* ================= STATUS BADGE ====================== */
 /* ===================================================== */
 
 .status-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: rgb(142, 219, 85);
-    background-color: rgb(236, 249, 225);
-    border-radius: 0.5rem;
-    min-width: 50px;
-    text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgb(142, 219, 85);
+  background-color: rgb(236, 249, 225);
+  border-radius: 0.5rem;
+  min-width: 50px;
+  text-align: center;
 }
 
-
-
 .card-datatable {
-    padding-top: 1rem;
+  padding-top: 1rem;
 }
 
 /* ===== FIX DATATABLE TOP CONTROLS POSITION ===== */
 
-
 /* Remove bootstrap column width */
-.dataTables_wrapper .row:first-child>div {
-    width: auto !important;
-    flex: 0 0 auto !important;
-    max-width: none !important;
+.dataTables_wrapper .row:first-child > div {
+  width: auto !important;
+  flex: 0 0 auto !important;
+  max-width: none !important;
 }
 
 /* keep length + search inline */
@@ -488,280 +488,269 @@ td.control:hover::after {
 /* ================= ADD RECORD BUTTON ================= */
 
 .datatable-toolbar {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 12px;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
 }
 
 .btn-add-record {
-    background: linear-gradient(135deg,#50A9E9,#696cff);
-    color:white;
-    border:none;
-    padding:8px 18px;
-    border-radius:8px;
-    font-weight:500;
-    transition:all 0.2s ease;
+  background: linear-gradient(135deg, #50a9e9, #696cff);
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
-
-
 
 /* ================= ADD RECORD MODAL ================= */
 
 /* form layout */
 
 .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
 }
 
 .form-group label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #566a7f;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #566a7f;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .form-group input {
-    height: 38px;
-    border: 1px solid #d9dee3;
-    border-radius: 6px;
-    padding: 6px 10px;
-    font-size: 14px;
+  height: 38px;
+  border: 1px solid #d9dee3;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 14px;
 }
 
 .form-group input:focus {
-    outline: none;
-    border-color: #50A9E9;
+  outline: none;
+  border-color: #50a9e9;
 }
 
 .form-group small {
-    font-size: 12px;
-    color: #a1acb8;
-    margin-top: 4px;
+  font-size: 12px;
+  color: #a1acb8;
+  margin-top: 4px;
 }
 
 /* modal buttons */
 
 .btn-submit {
-    background: #50A9E9;
-    color: #fff;
-    border: none;
-    padding: 7px 16px;
-    border-radius: 6px;
-    cursor: pointer;
+  background: #50a9e9;
+  color: #fff;
+  border: none;
+  padding: 7px 16px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .btn-submit:hover {
-    background: #50A9E9;
+  background: #50a9e9;
 }
 
 .btn-cancel {
-    background: #f1f1f2;
-    border: none;
-    padding: 7px 16px;
-    border-radius: 6px;
-    cursor: pointer;
+  background: #f1f1f2;
+  border: none;
+  padding: 7px 16px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 /* divider under title */
 .modal-divider {
-    border: none;
-    border-top: 1px solid #e5e7eb;
-    margin: 10px 0 20px 0;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 10px 0 20px 0;
 }
 
 /* form spacing */
 .form-group {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .form-group label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 6px;
-    color: #6b7280;
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #6b7280;
 }
 
 /* input with icon */
 .input-icon {
-    position: relative;
+  position: relative;
 }
 
 .input-icon input {
-    width: 100%;
-    padding: 10px 40px 10px 12px;
-    /* space for right icon */
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
-    font-size: 14px;
+  width: 100%;
+  padding: 10px 40px 10px 12px;
+  /* space for right icon */
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 14px;
 }
 
 .input-icon i {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 18px;
-    color: #000;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #000;
 }
 
 .input-icon i {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #9ca3af;
-    font-size: 18px;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  font-size: 18px;
 }
 
 .input-icon input {
-    width: 100%;
-    padding: 10px 12px 10px 38px;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
-    font-size: 14px;
+  width: 100%;
+  padding: 10px 12px 10px 38px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 14px;
 }
 
 /* date placeholder */
 .input-icon input::placeholder {
-    color: #9ca3af;
-    text-transform: uppercase;
+  color: #9ca3af;
+  text-transform: uppercase;
 }
 
 /* helper text */
 .form-group small {
-    color: #9ca3af;
-    font-size: 12px;
+  color: #9ca3af;
+  font-size: 12px;
 }
 
 /* add new record --> buttons */
 /* Toolbar spacing inside card */
 .datatable-toolbar {
-    display: flex;
-    justify-content: flex-end;
-    padding: 18px 20px 8px 20px;
-    /* space from top border */
+  display: flex;
+  justify-content: flex-end;
+  padding: 18px 20px 8px 20px;
+  /* space from top border */
 }
 
 /* Sneat style Add button */
 .btn-add-record {
-    background: #50A9E9;
-    color: #fff;
-    border: none;
+  background: #50a9e9;
+  color: #fff;
+  border: none;
 
-    height: 38px;
-    /* same as search bar */
-    padding: 0 18px;
+  height: 38px;
+  /* same as search bar */
+  padding: 0 18px;
 
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
 
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 
-    cursor: pointer;
-    transition: all 0.2s ease;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .btn-add-record:hover {
-    transform: translateY(-1px);
-    box-shadow:0 6px 14px rgba(80,169,233,0.35);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(80, 169, 233, 0.35);
 }
 
 /* ===== Pagination alignment like Sneat ===== */
 
 .dataTables_wrapper .dataTables_paginate {
-    display: flex;
-    justify-content: flex-end;
-    /* move to right */
-    margin-top: 12px;
-    padding-right: 20px;
-    /* little gap from border */
+  display: flex;
+  justify-content: flex-end;
+  /* move to right */
+  margin-top: 12px;
+  padding-right: 20px;
+  /* little gap from border */
 }
 
 /* Bottom spacing under pagination */
 
-
 .custom-modal-card .input-icon i {
-    color: #000;
+  color: #000;
 }
 
 .modal-buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    /* space between Submit and Cancel */
-    margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  /* space between Submit and Cancel */
+  margin-top: 15px;
 }
 
 /* calendar icon spacing */
 
 .text-danger {
-    color: #ff3e1d;
-    font-size: 12px;
-    margin-top: 4px;
+  color: #ff3e1d;
+  font-size: 12px;
+  margin-top: 4px;
 }
 
 .edit-icon {
-    color: #50A9E9;
-    font-size: 18px;
-    cursor: pointer;
+  color: #50a9e9;
+  font-size: 18px;
+  cursor: pointer;
 }
 
 .delete-icon {
-    color: #ff3e1d;
-    font-size: 18px;
-    cursor: pointer;
+  color: #ff3e1d;
+  font-size: 18px;
+  cursor: pointer;
 }
 
 .edit-icon:hover {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 .delete-icon:hover {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 body {
-    transition: background 0.25s ease, color 0.25s ease;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
 /* align buttons with search + entries */
 .dataTables_wrapper .dt-buttons {
-    margin-right: 10px;
+  margin-right: 10px;
 }
-
-
-
 
 /* hover */
 .dt-buttons .btn:hover {
-    background-color: #50A9E9 !important;
-    border-color: #50A9E9 !important;
+  background-color: #50a9e9 !important;
+  border-color: #50a9e9 !important;
 }
 
 /* remove bootstrap grey style */
 
 /* dropdown icon spacing */
 .dt-buttons .bx {
-    font-size: 16px;
-    vertical-align: middle;
+  font-size: 16px;
+  vertical-align: middle;
 }
-
 
 /* ===== Customise Columns dropdown grid ===== */
 
 /* Column Visibility grid layout ONLY */
-
-
-
-
 
 /* column buttons */
 
@@ -775,109 +764,107 @@ body {
 
 /* Top controls layout */
 
-
 /* push length + search to right */
 .dataTables_wrapper .row:first-child .col-md-6:last-child {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    justify-content: flex-end;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: flex-end;
 }
 
 /* remove bootstrap width limits */
 .dataTables_wrapper .row:first-child .col-md-6 {
-    width: auto;
-    flex: none;
+  width: auto;
+  flex: none;
 }
 
 /* Space between buttons row and table */
 .dataTables_wrapper .dt-buttons {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 /* optional: adds spacing for the whole top toolbar */
 
 /* space between datatable toolbar and table */
 .dataTables_wrapper table.dataTable {
-    margin-top: 18px !important;
+  margin-top: 18px !important;
 }
 
 .dataTables_wrapper .row:nth-child(2) {
-    margin-bottom: 18px !important;
+  margin-bottom: 18px !important;
 }
 
 /* Add spacing above the table container */
 
 .dataTables_wrapper table {
-    margin-top: 18px !important;
+  margin-top: 18px !important;
 }
 
-
 .dataTables_wrapper .row.align-items-center {
-    padding: 0 20px;
-    margin-bottom: 14px;
+  padding: 0 20px;
+  margin-bottom: 14px;
 }
 
 .dataTables_wrapper .dt-buttons {
-    margin-right: 12px;
+  margin-right: 12px;
 }
 
 .dataTables_wrapper .row:last-child {
-    padding-left: 20px;
-    padding-right: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 /* Keep pagination aligned to the right */
 .dataTables_wrapper .dataTables_paginate {
-    text-align: right;
+  text-align: right;
 }
 
 /* ===== FINAL PAGINATION ALIGNMENT FIX ===== */
 
 .dataTables_wrapper .row:last-child {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-left: 20px;
-    padding-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 /* allow left info to size naturally */
 .dataTables_wrapper .row:last-child .col-md-6:first-child {
-    width: auto !important;
-    flex: none !important;
+  width: auto !important;
+  flex: none !important;
 }
 
 /* push pagination fully right */
 .dataTables_wrapper .row:last-child .col-md-6:last-child {
-    width: auto !important;
-    flex: none !important;
-    margin-left: auto !important;
+  width: auto !important;
+  flex: none !important;
+  margin-left: auto !important;
 }
 
 /* ensure pagination aligns right */
 .dataTables_wrapper .dataTables_paginate {
-    text-align: right;
+  text-align: right;
 }
 
 .dataTables_wrapper .dataTables_info {
-    color: #a1acb8 !important;
-    font-size: 13px;
+  color: #a1acb8 !important;
+  font-size: 13px;
 }
 
 /* icon inside input */
 .input-icon {
-    position: relative;
+  position: relative;
 }
 
 .input-icon i {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #6c757d;
-    font-size: 16px;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  font-size: 16px;
 }
 
 /* big dropdown like input */
@@ -885,79 +872,75 @@ body {
 /* ---------- FORM GROUP ---------- */
 
 .form-group {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 /* ---------- LABEL ---------- */
 
 .form-group label {
-    font-weight: 500;
-    font-size: 14px;
-    color: #566a7f;
-    margin-bottom: 6px;
-    display: block;
+  font-weight: 500;
+  font-size: 14px;
+  color: #566a7f;
+  margin-bottom: 6px;
+  display: block;
 }
 
 /* ---------- INPUT ICON WRAPPER ---------- */
 
 .input-icon {
-    position: relative;
+  position: relative;
 }
 
 /* ---------- ICON ---------- */
 
 .input-icon i {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #6c757d;
-    font-size: 16px;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  font-size: 16px;
 }
 
 /* ---------- COMMON FIELD STYLE ---------- */
 
 .form-field {
-    width: 100%;
-    height: 45px;
-    padding-left: 40px;
-    background: #ffffff;
-    border: 1px solid #dcdcdc;
-    border-radius: 6px;
-    font-size: 14px;
-    color: #6c757d;
+  width: 100%;
+  height: 45px;
+  padding-left: 40px;
+  background: #ffffff;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #6c757d;
 }
 
 /* ---------- TEXTAREA ---------- */
 
 textarea.form-field {
-    height: 90px;
-    padding-top: 10px;
-    resize: none;
+  height: 90px;
+  padding-top: 10px;
+  resize: none;
 }
 
 /* ---------- DATE ICON ---------- */
 
-.input-icon textarea+i,
+.input-icon textarea + i,
 .input-icon .bx-detail {
-    top: 14px;
-    transform: none;
+  top: 14px;
+  transform: none;
 }
 
 .table-title {
-    font-weight: 700;
-    font-size: 22px;
-    color: #1e293b;
-    letter-spacing: 0.2px;
-  }
-
-.datatable-toolbar {
-    padding: 15px 20px;
+  font-weight: 700;
+  font-size: 22px;
+  color: #1e293b;
+  letter-spacing: 0.2px;
 }
 
-
-
-
+.datatable-toolbar {
+  padding: 15px 20px;
+}
 
 /* Hover effect */
 
@@ -973,64 +956,66 @@ textarea.form-field {
 
 /* Remove violet outer hover from DataTables buttons */
 
-
 button:focus {
-    outline: none !important;
-    box-shadow: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* Custom hover style */
 
 .sidebar-logo {
-    height: 34px;
-    width: auto;
-    transition: all 0.3s ease;
+  height: 34px;
+  width: auto;
+  transition: all 0.3s ease;
 }
 
 /* when sidebar is collapsed */
 .layout-menu-collapsed .sidebar-logo {
-    height: 40px;
-    width: 40px;
-    object-fit: contain;
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
 }
 
 /* collapsed sidebar icon */
 .layout-menu-collapsed:not(.hovered) .sidebar-logo {
-    height: 40px;
-    width: 40px;
-    object-fit: contain;
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
 }
 
 /* when hovered show full logo */
 .layout-menu-collapsed.hovered .sidebar-logo {
-    height: 50px;
-    width: 180px;
-    width: auto;
+  height: 50px;
+  width: 180px;
+  width: auto;
 }
 
 .layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-item {
-    width: 100%;
+  width: 100%;
 }
 
-.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu>.menu-inner>.menu-item.active>.menu-link {
-    width: 100% !important;
-    display: flex !important;
-    align-items: center;
-    justify-content: flex-start;
-    padding-right: 16px;
-    background-color: rgba(80, 169, 233, 0.15) !important;
+.layout-wrapper.layout-menu-collapsed.menu-hover
+  #layout-menu
+  > .menu-inner
+  > .menu-item.active
+  > .menu-link {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-start;
+  padding-right: 16px;
+  background-color: rgba(80, 169, 233, 0.15) !important;
 }
-
 
 table.dataTable thead th {
-    font-size: 13px;
-    font-weight: 600;
-    color: #566a7f;
+  font-size: 13px;
+  font-weight: 600;
+  color: #566a7f;
 }
 
 .port-modal {
-    width: 900px;
-    max-width: 85%;
+  width: 900px;
+  max-width: 85%;
 }
 
 .input-icon {
@@ -1107,138 +1092,138 @@ table.dataTable thead th {
 ===================================== */
 
 html.dark-style body {
-    background: #0f172a;
-    color: #e2e8f0;
-  }
-  
-  /* Page wrapper */
-  html.dark-style .layout-wrapper,
-  html.dark-style .layout-page,
-  html.dark-style .content-wrapper {
-    background: #0f172a;
-  }
-  
-  /* Navbar */
-  html.dark-style .layout-navbar {
-    background: #1e293b;
-    border-bottom: 1px solid #334155;
-  }
-  
-  /* Sidebar */
-  html.dark-style .layout-menu {
-    background: #111827;
-  }
-  
-  /* Cards */
-  html.dark-style .card {
-    background: #1e293b;
-    box-shadow: none;
-  }
-  
-  /* Table */
-  html.dark-style .table thead th {
-    color: #cbd5e1;
-  }
-  
-  html.dark-style .table tbody td {
-    color: #94a3b8;
-  }
-  
-  html.dark-style .table > tbody > tr {
-    border-bottom: 1px solid #334155;
-  }
-  
-  /* Search input */
-  html.dark-style input,
-  html.dark-style .form-field {
-    background: #1f2937;
-    border: 1px solid #374151;
-    color: #e5e7eb;
-  }
-  
-  /* DataTable search */
-  
-  /* Dropdowns */
-  html.dark-style .dropdown-menu {
-    background: #1e293b;
-    border: 1px solid #334155;
-  }
-  
-  html.dark-style .dropdown-item {
-    color: #e2e8f0;
-  }
-  
-  html.dark-style .dropdown-item:hover {
-    background: #1f2937;
-  }
-  
-  /* Table pagination text */
-  html.dark-style .dataTables_info {
-    color: #94a3b8 !important;
-  }
-  
-  /* Footer */
-  html.dark-style .footer {
-    background: #111827;
-  }
-  
-  /* Status badge */
-  html.dark-style .status-badge {
-    background: rgba(34,197,94,0.15);
-    color: #4ade80;
-  }
-  
-  /* Buttons keep brand color */
-  html.dark-style .btn-add-record,
-  html.dark-style .btn-submit {
-    background: #50A9E9;
-  }
+  background: #0f172a;
+  color: #e2e8f0;
+}
 
-  .breadcrumb-text {
-    font-size:12px;
-    color:#94a3b8;
-    margin-top: 3px;
-    font-family: "Public Sans", sans-serif;
-  }
+/* Page wrapper */
+html.dark-style .layout-wrapper,
+html.dark-style .layout-page,
+html.dark-style .content-wrapper {
+  background: #0f172a;
+}
 
-  .title-section{
-    display:flex;
-    flex-direction:column;
-  }
-  
-  .breadcrumb-text{
-    font-size:13px;
-    color:#a1acb8;
-    margin-top:2px;
-  }
+/* Navbar */
+html.dark-style .layout-navbar {
+  background: #1e293b;
+  border-bottom: 1px solid #334155;
+}
 
-  .table-title {
-    font-weight: 500;
-    font-size: 25px;
-    margin: 0;
-    color: #6c757d;
-  }
+/* Sidebar */
+html.dark-style .layout-menu {
+  background: #111827;
+}
+
+/* Cards */
+html.dark-style .card {
+  background: #1e293b;
+  box-shadow: none;
+}
+
+/* Table */
+html.dark-style .table thead th {
+  color: #cbd5e1;
+}
+
+html.dark-style .table tbody td {
+  color: #94a3b8;
+}
+
+html.dark-style .table > tbody > tr {
+  border-bottom: 1px solid #334155;
+}
+
+/* Search input */
+html.dark-style input,
+html.dark-style .form-field {
+  background: #1f2937;
+  border: 1px solid #374151;
+  color: #e5e7eb;
+}
+
+/* DataTable search */
+
+/* Dropdowns */
+html.dark-style .dropdown-menu {
+  background: #1e293b;
+  border: 1px solid #334155;
+}
+
+html.dark-style .dropdown-item {
+  color: #e2e8f0;
+}
+
+html.dark-style .dropdown-item:hover {
+  background: #1f2937;
+}
+
+/* Table pagination text */
+html.dark-style .dataTables_info {
+  color: #94a3b8 !important;
+}
+
+/* Footer */
+html.dark-style .footer {
+  background: #111827;
+}
+
+/* Status badge */
+html.dark-style .status-badge {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+}
+
+/* Buttons keep brand color */
+html.dark-style .btn-add-record,
+html.dark-style .btn-submit {
+  background: #50a9e9;
+}
+
+.breadcrumb-text {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 3px;
+  font-family: "Public Sans", sans-serif;
+}
+
+.title-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.breadcrumb-text {
+  font-size: 13px;
+  color: #a1acb8;
+  margin-top: 2px;
+}
+
+.table-title {
+  font-weight: 500;
+  font-size: 25px;
+  margin: 0;
+  color: #6c757d;
+}
 
 /* ===== FINAL TABLE UI FIX ===== */
 
 .card-datatable table.dataTable thead th {
-    position: sticky !important;
-    top: 0;
-    background: #f3f4f6 !important;
-    color: #566a7f !important;
-    font-weight: 600;
-    z-index: 5;
-  }
-  
-  .card-datatable table.dataTable tbody tr:hover {
-    background-color: #e9f2fb !important;
-  }
-  
-  .card-datatable table.dataTable tbody tr:nth-child(even) {
-    background-color: #fafafa !important;
-  }
+  position: sticky !important;
+  top: 0;
+  background: #f3f4f6 !important;
+  color: #566a7f !important;
+  font-weight: 600;
+  z-index: 5;
+}
 
-  .card-datatable table.dataTable tbody tr:hover,
+.card-datatable table.dataTable tbody tr:hover {
+  background-color: #e9f2fb !important;
+}
+
+.card-datatable table.dataTable tbody tr:nth-child(even) {
+  background-color: #fafafa !important;
+}
+
+.card-datatable table.dataTable tbody tr:hover,
 .card-datatable table.dataTable tbody tr:hover td,
 .card-datatable table.dataTable tbody tr:nth-child(even):hover,
 .card-datatable table.dataTable tbody tr:nth-child(even):hover td {
@@ -1246,154 +1231,161 @@ html.dark-style body {
 }
 
 .table-hover > tbody > tr:hover > * {
-    background-color: #e9f2fb !important;
-  }
+  background-color: #e9f2fb !important;
+}
 
-  /* Toolbar layout */
-.datatable-toolbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 20px;
-    border-bottom:none !important;
-  }
-  
-  /* Title + breadcrumb stack */
-  .title-section{
-    display:flex;
-    flex-direction:column;
-  }
-  
-  /* Breadcrumb text */
-  .breadcrumb-text{
-    font-size:13px;
-    color:#a1acb8;
-    margin-top:2px;
-  }
-  
-  /* Keep your old title style */
-  .table-title{
-    font-weight:500;
-    font-size:25px;
-    margin:0;
-    color:#6c757d;
-  }
+/* Toolbar layout */
+.datatable-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  border-bottom: none !important;
+}
 
-  .card-datatable table.dataTable {
-    margin-top: 12px !important;
-  }
+/* Title + breadcrumb stack */
+.title-section {
+  display: flex;
+  flex-direction: column;
+}
 
-  .card-datatable table.dataTable tbody tr:hover {
-    background-color: #e9f2fb!important;
-    cursor: pointer;
-  }
+/* Breadcrumb text */
+.breadcrumb-text {
+  font-size: 13px;
+  color: #a1acb8;
+  margin-top: 2px;
+}
 
- 
+/* Keep your old title style */
+.table-title {
+  font-weight: 500;
+  font-size: 25px;
+  margin: 0;
+  color: #6c757d;
+}
 
-  .card-datatable table.dataTable tbody tr:hover td {
-    background-color: #e9f2fb !important;
-    transition: background-color 0.2s ease;
-    cursor: pointer;
-  }
+.card-datatable table.dataTable {
+  margin-top: 12px !important;
+}
 
-  /* Hide default arrow */
-table.dataTable.dtr-inline.collapsed > tbody > tr:not(.child) > td:first-child::before {
-    display: none !important;
-  }
-  
-  /* Only apply spacing to main rows */
-  table.dataTable.dtr-inline.collapsed > tbody > tr:not(.child) > td:first-child {
-    position: relative;
-    padding-left: 38px !important;
-    cursor: pointer;
-  }
-  
-  /* Sneat + circle */
-  table.dataTable.dtr-inline.collapsed > tbody > tr:not(.child) > td:first-child::after {
-    content: "+";
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-  
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-  
-    background: #50A9E9;
-    color: #fff;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    font-size: 11px;
-    font-weight: 700;
-  
-    box-shadow: 0 0 0 2px #fff;
-  }
-  
-  /* Expanded state */
-  table.dataTable.dtr-inline.collapsed > tbody > tr.dtr-expanded:not(.child) > td:first-child::after {
-    content: "−";
-  }
+.card-datatable table.dataTable tbody tr:hover {
+  background-color: #e9f2fb !important;
+  cursor: pointer;
+}
 
-  /* ================= DETAILS MODAL ================= */
-  
-  .details-row{
-    display:flex;
-    align-items:center;
-    padding:8px 0;
-    border-bottom:1px solid #eceef1;
-    font-size:14px;
-    font-family:"Public Sans",sans-serif;
-    color:#697a8d;
-  }
-  
-  .details-row:last-child{
-    border-bottom:none;
-  }
-  
-  /* Label */
-  .details-row span:first-child{
-    width:180px;
-    font-weight:600;
-    color:#566a7f;
-  }
-  
-  /* Value */
-  .details-row span:last-child{
-    flex:1;
-  }
+.card-datatable table.dataTable tbody tr:hover td {
+  background-color: #e9f2fb !important;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
 
-  /* DETAILS MODAL - SNEAT STYLE */
-  
-  .details-row{
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    font-family: "Public Sans", sans-serif;
-    font-size: 14px;
-    border-bottom: 1px solid #eceef1;
-  }
-  
-  .details-row:last-child{
-    border-bottom: none;
-  }
-  
-  /* KEY (Label) */
-  .details-row span:first-child{
-    width: 180px;
-    font-weight: 800;
-    color: black;
-  }
-  
-  /* VALUE */
-  .details-row span:last-child{
-    flex: 1;
-    color: #697a8d;
-  }
-  
+/* Hide default arrow */
+table.dataTable.dtr-inline.collapsed
+  > tbody
+  > tr:not(.child)
+  > td:first-child::before {
+  display: none !important;
+}
+
+/* Only apply spacing to main rows */
+table.dataTable.dtr-inline.collapsed > tbody > tr:not(.child) > td:first-child {
+  position: relative;
+  padding-left: 38px !important;
+  cursor: pointer;
+}
+
+/* Sneat + circle */
+table.dataTable.dtr-inline.collapsed
+  > tbody
+  > tr:not(.child)
+  > td:first-child::after {
+  content: "+";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+
+  background: #50a9e9;
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  box-shadow: 0 0 0 2px #fff;
+}
+
+/* Expanded state */
+table.dataTable.dtr-inline.collapsed
+  > tbody
+  > tr.dtr-expanded:not(.child)
+  > td:first-child::after {
+  content: "−";
+}
+
+/* ================= DETAILS MODAL ================= */
+
+.details-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #eceef1;
+  font-size: 14px;
+  font-family: "Public Sans", sans-serif;
+  color: #697a8d;
+}
+
+.details-row:last-child {
+  border-bottom: none;
+}
+
+/* Label */
+.details-row span:first-child {
+  width: 180px;
+  font-weight: 600;
+  color: #566a7f;
+}
+
+/* Value */
+.details-row span:last-child {
+  flex: 1;
+}
+
+/* DETAILS MODAL - SNEAT STYLE */
+
+.details-row {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  font-family: "Public Sans", sans-serif;
+  font-size: 14px;
+  border-bottom: 1px solid #eceef1;
+}
+
+.details-row:last-child {
+  border-bottom: none;
+}
+
+/* KEY (Label) */
+.details-row span:first-child {
+  width: 180px;
+  font-weight: 800;
+  color: black;
+}
+
+/* VALUE */
+.details-row span:last-child {
+  flex: 1;
+  color: #697a8d;
+}
+
 /* Force row background */
 table.dataTable tbody td {
   background-color: white !important;
@@ -1401,189 +1393,178 @@ table.dataTable tbody td {
 
 /* Hover color test */
 table.dataTable tbody tr:hover {
-    background-color: #f6f6ff !important;
-    transition: background 0.2s ease;
-  }
+  background-color: #f6f6ff !important;
+  transition: background 0.2s ease;
+}
 
-  .edit-icon,
-  .delete-icon{
-    font-size:16px;
-    padding:6px;
-    border-radius:6px;
-    transition:all 0.2s ease;
-  }
+.edit-icon,
+.delete-icon {
+  font-size: 16px;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
 
 .edit-icon {
-    color:#6366f1;
+  color: #6366f1;
 }
 
 .edit-icon:hover {
-    background:#eef2ff;
+  background: #eef2ff;
 }
 
 .delete-icon {
-    color:#ef4444;
+  color: #ef4444;
 }
 
 .delete-icon:hover {
-    background:#fee2e2;
+  background: #fee2e2;
 }
 
 .btn-delete {
-    background-color: #ff3e1d;
-    border-color: #ff3e1d;
-    color: white;
-  }
-  
-  .btn-delete:hover {
-    background-color: #e6381a;
-    border-color: #e6381a;
-  }
+  background-color: #ff3e1d;
+  border-color: #ff3e1d;
+  color: white;
+}
 
-  .btn-delete {
-    background-color: #ff3e1d;
-    border-color: #ff3e1d;
-    color: white;
-  }
-  
-  .btn-delete:hover {
-    background-color: #e6381a;
-    border-color: #e6381a;
-  }
+.btn-delete:hover {
+  background-color: #e6381a;
+  border-color: #e6381a;
+}
 
-  .datatable-toolbar {
-    padding: 20px 20px 10px 20px;
-  }
+.btn-delete {
+  background-color: #ff3e1d;
+  border-color: #ff3e1d;
+  color: white;
+}
 
-  .table thead th {
-    background-color: #e7e7ff!important;
-    color: #404449 !important;
-    font-weight: 600;
-    border-color: #696cff !important;
-  }
+.btn-delete:hover {
+  background-color: #e6381a;
+  border-color: #e6381a;
+}
 
-  .card-datatable table.dataTable {
-    border: 1px solid #d9dee3;
-    border-radius: 6px;
-    overflow: hidden;
-  }
+.datatable-toolbar {
+  padding: 20px 20px 10px 20px;
+}
 
-  .table tbody tr {
-    border-bottom: 1px solid #eceef1;
-  }
+.table thead th {
+  background-color: #e7e7ff !important;
+  color: #404449 !important;
+  font-weight: 600;
+  border-color: #696cff !important;
+}
 
-  .table thead th {
+.card-datatable table.dataTable {
+  border: 1px solid #d9dee3;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid #eceef1;
+}
+
+.table thead th {
   border-bottom: 2px solid #d9dee3 !important;
 }
 
 .card-datatable table.dataTable {
-    border: 1px solid #d9dee3;
-    border-radius: 6px;
-    overflow: hidden;
-  }
- 
-
-  .card {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 4px;
-    width: 100%;
-    background: linear-gradient(90deg,#50A9E9);
-  }
-
-  .table tbody tr:hover {
-    background: #f0f6ff !important;
-    transform: scale(1.002);
-    transition: all 0.15s ease;
-  }
-
-  .table tbody tr{
-    border-left:3px solid transparent;
-  }
-  
-  .table tbody tr:hover{
-    border-left:4px solid #50A9E9;
-    border-top-left-radius: 2px;
-  }
-
-  .dt-buttons .btn {
-    transition: all 0.2s ease;
-  }
-  
-  .dt-buttons .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(80,169,233,0.35) !important;
-  }
-
-  .dt-buttons .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(80,169,233,0.35) !important;
+  border: 1px solid #d9dee3;
+  border-radius: 6px;
+  overflow: hidden;
 }
-  
-  .datatable-toolbar {
-    margin-top: 6px !important;
+
+.card {
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(90deg, #50a9e9);
+}
+
+.table tbody tr:hover {
+  background: #f0f6ff !important;
+  transform: scale(1.002);
+  transition: all 0.15s ease;
+}
+
+.table tbody tr {
+  border-left: 3px solid transparent;
+}
+
+.table tbody tr:hover {
+  border-left: 4px solid #50a9e9;
+  border-top-left-radius: 2px;
+}
+
+.dt-buttons .btn {
+  transition: all 0.2s ease;
+}
+
+.dt-buttons .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(80, 169, 233, 0.35) !important;
+}
+
+.dt-buttons .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(80, 169, 233, 0.35) !important;
+}
+
+.datatable-toolbar {
+  margin-top: 6px !important;
+}
+
+.btn-update {
+  background: #6366f1;
+  border: none;
+  color: white;
+  padding: 7px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-update:hover {
+  background: #5458e6;
+}
+
+/* slide animation */
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-6px);
+    opacity: 0;
   }
-
-  
-
-  .btn-update {
-    background: #6366f1;
-    border: none;
-    color: white;
-    padding: 7px 16px;
-    border-radius: 6px;
-    cursor: pointer;
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
-  
-  .btn-update:hover {
-    background: #5458e6;
-  }
-
-  
-
-
-  
-  /* slide animation */
-  
-  @keyframes slideDown {
-    from {
-      transform: translateY(-6px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-
-  
+}
 
 /* Datatable buttons container */
 .dt-buttons {
-    display: flex;
-    align-items: center;
-    gap: 10px;   /* space between Export and Column buttons */
-    background: transparent;
-  }
-  
-  /* Individual button style */
- 
-  
-  /* hover */
-  .dt-buttons .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(80,169,233,0.35);
-  }
+  display: flex;
+  align-items: center;
+  gap: 10px; /* space between Export and Column buttons */
+  background: transparent;
+}
 
-  /* Force full rounded buttons */
+/* Individual button style */
 
+/* hover */
+.dt-buttons .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(80, 169, 233, 0.35);
+}
+
+/* Force full rounded buttons */
 
 /* remove grouping effect */
 .dt-buttons .btn:not(:last-child) {
@@ -1592,95 +1573,92 @@ table.dataTable tbody tr:hover {
 
 /* ===== DATATABLE BUTTONS FINAL STYLE ===== */
 
-.dt-buttons{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    background:transparent;
-  }
- 
+.dt-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+}
 
 /* remove group border merging */
 
 .dt-buttons {
-    display: flex;
-    gap: 10px;
-  }
-  
- 
+  display: flex;
+  gap: 10px;
+}
 
-  /* ===== EXPORT BUTTON ===== */
+/* ===== EXPORT BUTTON ===== */
 
-.export-btn{
-    background: #e9f2fb !important;
-    color: #50A9E9 !important;
-    border: 1px solid #50A9E9 !important;
-    border-radius: 8px !important;
-  
-    padding: 7px 14px;
-    font-size: 14px;
-  
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  
-    transition: all 0.2s ease;
-  }
-  
-  /* icon color */
-  .export-btn i{
-    color: #50A9E9;
-  }
-  
-  /* hover / click */
-  .export-btn:hover,
-  .export-btn:focus,
-  .export-btn:active{
-    background: #50A9E9 !important;
-    color: #ffffff !important;
-  }
-  
-  /* icon hover */
-  .export-btn:hover i,
-  .export-btn:focus i,
-  .export-btn:active i{
-    color: #ffffff !important;
-  }
+.export-btn {
+  background: #e9f2fb !important;
+  color: #50a9e9 !important;
+  border: 1px solid #50a9e9 !important;
+  border-radius: 8px !important;
 
-  /* ===== EXPORT BUTTON FINAL FIX ===== */
+  padding: 7px 14px;
+  font-size: 14px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  transition: all 0.2s ease;
+}
+
+/* icon color */
+.export-btn i {
+  color: #50a9e9;
+}
+
+/* hover / click */
+.export-btn:hover,
+.export-btn:focus,
+.export-btn:active {
+  background: #50a9e9 !important;
+  color: #ffffff !important;
+}
+
+/* icon hover */
+.export-btn:hover i,
+.export-btn:focus i,
+.export-btn:active i {
+  color: #ffffff !important;
+}
+
+/* ===== EXPORT BUTTON FINAL FIX ===== */
 
 .dt-buttons .export-btn {
-    background: #e9f2fb !important;
-    color: #50A9E9 !important;
-    border: 1px solid #50A9E9 !important;
-    border-radius: 8px !important;
-  }
-  
-  /* icon */
-  .dt-buttons .export-btn i {
-    color: #50A9E9 !important;
-  }
-  
-  /* hover */
-  .dt-buttons .export-btn:hover {
-    background: #50A9E9 !important;
-    color: #ffffff !important;
-  }
-  
-  /* hover icon */
-  .dt-buttons .export-btn:hover i {
-    color: #ffffff !important;
-  }
+  background: #e9f2fb !important;
+  color: #50a9e9 !important;
+  border: 1px solid #50a9e9 !important;
+  border-radius: 8px !important;
+}
 
-  /* ===== EXPORT DROPDOWN CLEAN STYLE ===== */
+/* icon */
+.dt-buttons .export-btn i {
+  color: #50a9e9 !important;
+}
+
+/* hover */
+.dt-buttons .export-btn:hover {
+  background: #50a9e9 !important;
+  color: #ffffff !important;
+}
+
+/* hover icon */
+.dt-buttons .export-btn:hover i {
+  color: #ffffff !important;
+}
+
+/* ===== EXPORT DROPDOWN CLEAN STYLE ===== */
 
 /* dropdown container */
-  
-  /* dropdown items */
-  
-  /* remove inner blue layer */
-  
-  /* hover effect */
+
+/* dropdown items */
+
+/* remove inner blue layer */
+
+/* hover effect */
 
 /* Remove the small dropdown pointer */
 
@@ -1717,7 +1695,7 @@ table.dataTable tbody tr:hover {
   border-radius: 8px !important;
 }
 
-  /* Fix Export button right corner when dropdown opens */
+/* Fix Export button right corner when dropdown opens */
 
 /* Force Export button radius in all states */
 
@@ -1730,19 +1708,19 @@ table.dataTable tbody tr:hover {
 }
 
 /* Fix Export button right corner when dropdown opens */
-  
-  /* specifically force right corner */
-  .dt-buttons .export-btn {
-    border-top-right-radius: 8px !important;
-    border-bottom-right-radius: 8px !important;
-  }
 
-  /* ===== COLUMN CUSTOMISE BUTTON ===== */
+/* specifically force right corner */
+.dt-buttons .export-btn {
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
+}
 
-.dt-buttons .custom-colvis{
+/* ===== COLUMN CUSTOMISE BUTTON ===== */
+
+.dt-buttons .custom-colvis {
   background: #e9f2fb !important;
-  color: #50A9E9 !important;
-  border: 1px solid #50A9E9 !important;
+  color: #50a9e9 !important;
+  border: 1px solid #50a9e9 !important;
   border-radius: 8px !important;
 
   padding: 7px 14px;
@@ -1757,105 +1735,104 @@ table.dataTable tbody tr:hover {
 }
 
 /* icon inside button */
-.dt-buttons .custom-colvis i{
-  font-size:16px;
-  color:#50A9E9;
+.dt-buttons .custom-colvis i {
+  font-size: 16px;
+  color: #50a9e9;
 }
 
 /* hover effect */
-.dt-buttons .custom-colvis:hover{
-  background:#50A9E9 !important;
-  color:#fff !important;
+.dt-buttons .custom-colvis:hover {
+  background: #50a9e9 !important;
+  color: #fff !important;
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(80,169,233,0.35);
+  box-shadow: 0 6px 14px rgba(80, 169, 233, 0.35);
 }
 
 /* icon hover */
-.dt-buttons .custom-colvis:hover i{
-  color:#fff;
+.dt-buttons .custom-colvis:hover i {
+  color: #fff;
 }
 
 /* ===== COLUMN DROPDOWN MENU ===== */
 
-
 /* ===== COLUMN CUSTOMISE BUTTON ===== */
 
-.dt-buttons .custom-colvis{
-    background: #50A9E9 !important;
-    color: white !important;
-    border: 1px solid #50A9E9 !important;
-    border-radius: 8px !important;
-  
-    padding: 7px 14px;
-    font-size: 14px;
-    font-weight: 500;
-  
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  
-    transition: all 0.2s ease;
-  }
-  
-  /* icon inside button */
-  .dt-buttons .custom-colvis i{
-    font-size:16px;
-    color:white;
-  }
-  
-  /* hover effect */
-  .dt-buttons .custom-colvis:hover{
-    background:#50A9E9 !important;
-    color:#fff !important;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(80,169,233,0.35);
-  }
-  
-  /* icon hover */
-  .dt-buttons .custom-colvis:hover i{
-    color:#fff;
-  }
-  
-  /* ===== COLUMN DROPDOWN MENU ===== */
-  .dt-button-collection .dt-button.buttons-columnVisibility:not(.active):hover {
-    background: #e5e7eb !important; /* keep grey */
-    color: #000 !important;
-    box-shadow: none !important;
-    transform: none !important;
-  }
+.dt-buttons .custom-colvis {
+  background: #50a9e9 !important;
+  color: white !important;
+  border: 1px solid #50a9e9 !important;
+  border-radius: 8px !important;
 
-  /* ===== EXPORT DROPDOWN MENU ===== */
+  padding: 7px 14px;
+  font-size: 14px;
+  font-weight: 500;
 
-.dt-button-collection{
-  background:#ffffff;
-  border:1px solid #d9dee3;
-  border-radius:10px;
-  padding:8px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  transition: all 0.2s ease;
+}
+
+/* icon inside button */
+.dt-buttons .custom-colvis i {
+  font-size: 16px;
+  color: white;
+}
+
+/* hover effect */
+.dt-buttons .custom-colvis:hover {
+  background: #50a9e9 !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(80, 169, 233, 0.35);
+}
+
+/* icon hover */
+.dt-buttons .custom-colvis:hover i {
+  color: #fff;
+}
+
+/* ===== COLUMN DROPDOWN MENU ===== */
+.dt-button-collection .dt-button.buttons-columnVisibility:not(.active):hover {
+  background: #e5e7eb !important; /* keep grey */
+  color: #000 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* ===== EXPORT DROPDOWN MENU ===== */
+
+.dt-button-collection {
+  background: #ffffff;
+  border: 1px solid #d9dee3;
+  border-radius: 10px;
+  padding: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 /* export items */
-.dt-button-collection .dt-button{
-  background:transparent !important;
-  border:none !important;
-  border-radius:6px;
-  color:#566a7f !important;
-  padding:8px 12px;
-  font-size:14px;
-  text-align:left;
-  width:100%;
-  transition:all 0.18s ease;
+.dt-button-collection .dt-button {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 6px;
+  color: #566a7f !important;
+  padding: 8px 12px;
+  font-size: 14px;
+  text-align: left;
+  width: 100%;
+  transition: all 0.18s ease;
 }
 
 /* hover */
-.dt-button-collection .dt-button:hover{
-  background:#e9f2fb !important;
-  color:#50A9E9 !important;
+.dt-button-collection .dt-button:hover {
+  background: #e9f2fb !important;
+  color: #50a9e9 !important;
 }
 
 /* icon spacing */
-.dt-button-collection .dt-button i{
-  margin-right:6px;
+.dt-button-collection .dt-button i {
+  margin-right: 6px;
 }
 
 /* Export dropdown default */
@@ -1869,14 +1846,14 @@ table.dataTable tbody tr:hover {
 /* Hover highlight */
 .dt-button-collection .dt-button:hover {
   background: #e9f2fb !important;
-  color: #50A9E9 !important;
+  color: #50a9e9 !important;
 }
 
 /* Remove bootstrap active/focus tint */
 .dt-button-collection .dt-button:focus,
 .dt-button-collection .dt-button:active {
   background: #e9f2fb !important;
-  color: #50A9E9 !important;
+  color: #50a9e9 !important;
   box-shadow: none !important;
 }
 
@@ -1909,7 +1886,6 @@ table.dataTable tbody tr:hover {
 .dt-buttons .export-btn:active,
 .dt-buttons .export-btn.show,
 .dt-buttons .export-btn.dt-button-active {
-
   border-radius: 8px !important;
 }
 
@@ -1958,7 +1934,7 @@ div.dt-button-background {
 /* also remove active grey highlight */
 
 .dt-button-active {
-  background: #50A9E9 !important;
+  background: #50a9e9 !important;
   color: #fff !important;
 }
 
@@ -2008,53 +1984,53 @@ div.dt-button-background {
 }
 
 /* Keep Export button fully rounded */
-.export-btn{
-  border-radius:8px !important;
+.export-btn {
+  border-radius: 8px !important;
 }
 
 /* Push dropdown slightly down so it doesn't merge */
-.dt-button-collection{
-  margin-top:6px !important;
-  border-radius:10px !important;
+.dt-button-collection {
+  margin-top: 6px !important;
+  border-radius: 10px !important;
 }
 
 /* remove the overlay that causes square corner */
-.dt-button-background{
-  display:none !important;
+.dt-button-background {
+  display: none !important;
 }
 
 /* keep export button rounded */
-.export-btn{
-  border-radius:8px !important;
+.export-btn {
+  border-radius: 8px !important;
 }
 
 /* Fix Bootstrap removing radius in button groups */
 
-.dt-buttons .btn-group .btn{
-  border-radius:8px !important;
+.dt-buttons .btn-group .btn {
+  border-radius: 8px !important;
 }
 
 /* override Bootstrap rule */
-.dt-buttons .btn-group > .btn:not(:first-child){
-  border-top-left-radius:8px !important;
-  border-bottom-left-radius:8px !important;
+.dt-buttons .btn-group > .btn:not(:first-child) {
+  border-top-left-radius: 8px !important;
+  border-bottom-left-radius: 8px !important;
 }
 
-.dt-buttons .btn-group > .btn:not(:last-child){
-  border-top-right-radius:8px !important;
-  border-bottom-right-radius:8px !important;
+.dt-buttons .btn-group > .btn:not(:last-child) {
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
 }
 
 /* keep export button rounded when active */
-.dt-buttons .buttons-collection{
-  border-radius:8px !important;
+.dt-buttons .buttons-collection {
+  border-radius: 8px !important;
 }
 
-.dataTables_scrollBody{
+.dataTables_scrollBody {
   overflow-y: auto !important;
 }
 
-.dataTables_wrapper .dataTables_scroll{
+.dataTables_wrapper .dataTables_scroll {
   border: none;
 }
 
@@ -2126,12 +2102,193 @@ div.dt-button-background {
   border-radius: 8px !important;
 }
 
-/* Style export + column buttons */
-.export-btn,
-.custom-colvis {
-  background: #50A9E9 !important;
-  color: white !important;
-  border: none !important;
-  padding: 8px 16px !important;
+/* COMPANY MODAL */
+
+.company-modal-card{
+  width:600px;
+  max-height:85vh;
+  overflow-y:auto;
+  padding:20px 24px;
 }
 
+
+/* STEPPER */
+
+.company-stepper{
+  position:relative;
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:30px;
+}
+
+.company-step{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:#e5e7eb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:600;
+  position:relative;
+  z-index:2;
+}
+
+.company-step span{
+  position:absolute;
+  top:45px;
+  font-size:12px;
+}
+
+.company-step.active{
+  background:#50a9e9;
+  color:white;
+}
+
+.company-step-progress{
+  position:absolute;
+  height:3px;
+  background:#50a9e9;
+  top:18px;
+  left:0;
+  transition:0.4s;
+  z-index:1;
+}
+
+
+/* MODULE CARDS */
+
+.company-module-card{
+  border:1px solid #e5e7eb;
+  border-radius:10px;
+  padding:20px;
+  text-align:center;
+  cursor:pointer;
+  transition:0.2s;
+  background:white;
+}
+
+.company-module-card:hover{
+  border-color:#50a9e9;
+}
+
+.company-module-card.active{
+  border-color:#50a9e9;
+  background:#f0f8ff;
+}
+
+.company-module-icon{
+  font-size:26px;
+  margin-bottom:10px;
+  color:#50a9e9;
+}
+
+
+/* FORM INPUTS */
+
+.company-form-field{
+  height:34px;
+  padding:4px 10px;
+  font-size:13px;
+}
+
+.company-modal-card{
+  width:900px;
+  max-width:95%;
+  max-height:85vh;
+  overflow-y:auto;
+  padding:20px 24px;
+  background:#ffffff !important;
+  border-radius:8px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.error-text{
+  color:#e63946;
+  font-size:12px;
+  margin-top:4px;
+}
+
+/* input wrapper */
+.input-icon {
+  position: relative;
+  width: 100%;
+}
+
+/* input field */
+.company-form-field {
+  width: 100%;
+  height: 36px;
+  padding: 6px 10px 6px 36px; /* space for icon */
+  font-size: 13px;
+}
+
+/* icon alignment */
+.input-icon-left {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #6c757d;
+  pointer-events: none;
+}
+
+/* error text */
+.error-text {
+  color: #e63946;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.airline-modal{
+  width:850px;
+  max-width:95%;
+}
+
+.label-icon {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+/* Icon inside label */
+.label-icon i {
+  font-size: 16px;
+  color: #6c757d;
+}
+
+/* Section titles inside modal */
+.section-title{
+  font-family: "Poppins", sans-serif;   /* change font */
+  font-size: 14px;
+  font-weight: 600;
+  color: #566a7f;
+  letter-spacing: 0.3px;
+  margin-bottom: 8px;
+}
+
+/* Optional: section container spacing */
+.form-section{
+  margin-top: 16px;
+  padding-top: 10px;
+  border-top: 1px solid #e9ecef;
+}
+
+.form-field{
+  padding-left: 12px;   /* normal input padding */
+}
+
+/* only inputs with icons get extra space */
+.input-icon .form-field{
+  padding-left: 34px;
+}
+
+/* Container page modal width */
+
+.container-modal{
+  max-width: 900px;
+  width: 95%;
+  }

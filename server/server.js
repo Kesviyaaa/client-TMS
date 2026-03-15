@@ -297,6 +297,324 @@ const UnitSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+
+const GlobalChargeSchema = new mongoose.Schema({
+  chargeCode: {
+    type: String,
+    required: true,
+  },
+
+  chargeName: {
+    type: String,
+    required: true,
+  },
+
+  applicableFor: {
+    type: String,
+    required: true,
+  },
+
+  chargeCategory: {
+    type: String,
+    required: true,
+  },
+
+  chargeType: {
+    type: String,
+    required: true,
+  },
+
+  status: {
+    type: Boolean,
+    default: true,
+  },
+
+  createdOn: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const CompanySchema = new mongoose.Schema({
+  companyName: {
+    type: String,
+    required: true,
+  },
+
+  contactPerson: {
+    type: String,
+    required: true,
+  },
+
+  email: {
+    type: String,
+    required: true,
+  },
+
+  password: {
+    type: String,
+    required: true,
+  },
+
+  phone: {
+    type: String,
+    required: true,
+  },
+
+  address1: {
+    type: String,
+    required: true,
+  },
+
+  address2: String,
+
+  country: {
+    type: String,
+    required: true,
+  },
+
+  state: {
+    type: String,
+    required: true,
+  },
+
+  city: {
+    type: String,
+    required: true,
+  },
+
+  timezone: {
+    type: String,
+    required: true,
+  },
+
+  currency: {
+    type: String,
+    required: true,
+  },
+
+  postalCode: {
+    type: String,
+    required: true,
+  },
+
+  webAddress: String,
+
+  companyRegNo: {
+    type: String,
+    required: true,
+  },
+
+  customRegNo: {
+    type: String,
+    required: true,
+  },
+
+  modules: [String],
+
+  status: {
+    type: Boolean,
+    default: true,
+  },
+
+  createdDate: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const AirlineSchema = new mongoose.Schema({
+  airlineName: {
+    type: String,
+    required: true,
+  },
+
+  internationalCode: String,
+
+  awbPrefix: String,
+
+  awbFormat: String,
+
+  checkDigit: {
+    type: Boolean,
+    default: false,
+  },
+
+  domesticCode: String,
+
+  domesticAwbFormat: String,
+
+  domesticAwbPrefix: String,
+
+  domesticCheckDigit: {
+    type: Boolean,
+    default: false,
+  },
+
+  accountNo: String,
+
+  homePageUrl: String,
+
+  trackingUrl: String,
+
+  isIata: {
+    type: Boolean,
+    default: false,
+  },
+
+  status: {
+    type: Boolean,
+    default: true,
+  },
+
+  createdOn: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const ShippingLineSchema = new mongoose.Schema({
+  shippingLineName: {
+    type: String,
+    required: true,
+  },
+
+  alias: String,
+
+  scac: String,
+
+  shortName: String,
+
+  accountNumber: String,
+
+  homePageUrl: String,
+
+  trackingUrl: String,
+
+  blFormat: String,
+
+  nvocc: {
+    type: Boolean,
+    default: false,
+  },
+
+  status: {
+    type: Boolean,
+    default: true,
+  },
+
+  createdOn: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const VesselSchema = new mongoose.Schema({
+  vesselName: {
+    type: String,
+    required: true,
+  },
+
+  imoNumber: String,
+
+  vesselCode: String,
+
+  shippingLine: String,
+
+  vesselType: String,
+
+  countryFlag: String,
+
+  callSign: String,
+
+  lloydsCode: String,
+
+  status: {
+    type: Boolean,
+    default: true,
+  },
+
+  createdOn: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const ContainerSchema = new mongoose.Schema({
+  isoCode: {
+    type: String,
+    required: true,
+  },
+
+  description: String,
+
+  size: String,
+
+  type: String,
+
+  teus: Number,
+
+  isTank: Boolean,
+
+  isTemp: Boolean,
+
+  tareWeight: Number,
+
+  payload: Number,
+
+  cubicCapacity: Number,
+
+  outerLength: Number,
+  outerBreadth: Number,
+  outerHeight: Number,
+
+  innerLength: Number,
+  innerBreadth: Number,
+  innerHeight: Number,
+
+  cgmCode: String,
+
+  createdOn: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const DocumentSchema = new mongoose.Schema({
+  documentType: String,
+  isApplicable: {
+    type: Boolean,
+    default: false
+  },
+  isDefault: {
+    type: Boolean,
+    default: false
+  }
+});
+
+const defaultDocuments = [
+  { documentType: "Agent Purchase" },
+  { documentType: "Airline Purchase" },
+  { documentType: "Bookings - Air Domestic" },
+  { documentType: "Bookings - Air Export" },
+  { documentType: "Bookings - Air Import" },
+  { documentType: "Bookings - Land Domestic" },
+  { documentType: "Bookings - Land Export" },
+  { documentType: "Bookings - Land Import" },
+  { documentType: "Bookings - Sea Domestic" },
+  { documentType: "Bookings - Sea Export" }
+ ];
+
+ async function seedDocuments() {
+
+  const count = await Document.countDocuments();
+
+  if (count === 0) {
+    await Document.insertMany(defaultDocuments);
+    console.log("Default documents inserted");
+  }
+
+}
 /* ============================= */
 /* MODELS */
 /* ============================= */
@@ -310,6 +628,13 @@ const Port = mongoose.model("Port", PortSchema, "ports");
 const Currency = mongoose.model("Currency", CurrencySchema, "currencies");
 const Commodity = mongoose.model("Commodity", CommoditySchema, "commodities");
 const Unit = mongoose.model("Unit", UnitSchema, "units");
+const GlobalCharge = mongoose.model("GlobalCharge",GlobalChargeSchema,"globalcharges");
+const Company = mongoose.model("Company", CompanySchema, "companies");
+const Airline = mongoose.model("Airline", AirlineSchema, "airlines");
+const ShippingLine = mongoose.model( "ShippingLine", ShippingLineSchema, "shippinglines" );
+const Vessel = mongoose.model("Vessel", VesselSchema, "vessels");
+const Container = mongoose.model("Container", ContainerSchema, "containers");
+const Document = mongoose.model("Document", DocumentSchema, "documents");
 /* ============================= */
 /* MENU ROUTES */
 /* ============================= */
@@ -996,11 +1321,9 @@ app.post("/units", async (req, res) => {
 /* UPDATE UNIT */
 app.put("/units/:id", async (req, res) => {
   try {
-    const updatedUnit = await Unit.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
+    const updatedUnit = await Unit.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
 
     res.json({
       success: true,
@@ -1031,9 +1354,510 @@ app.delete("/units/:id", async (req, res) => {
 });
 
 /* ============================= */
+/* GLOBAL CHARGE ROUTES */
+/* ============================= */
+
+/* GET ALL GLOBAL CHARGES */
+app.get("/global-charges", async (req, res) => {
+  try {
+    const charges = await GlobalCharge.find().sort({ createdOn: -1 });
+
+    res.json({
+      success: true,
+      data: charges,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+/* ADD GLOBAL CHARGE */
+app.post("/global-charges", async (req, res) => {
+  try {
+    const newCharge = new GlobalCharge({
+      chargeCode: req.body.chargeCode,
+      chargeName: req.body.chargeName,
+      applicableFor: req.body.applicableFor,
+      chargeCategory: req.body.chargeCategory,
+      chargeType: req.body.chargeType,
+      status: req.body.status,
+    });
+
+    const savedCharge = await newCharge.save();
+
+    res.json({
+      success: true,
+      data: savedCharge,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+/* UPDATE GLOBAL CHARGE */
+app.put("/global-charges/:id", async (req, res) => {
+  try {
+    const updatedCharge = await GlobalCharge.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+
+    res.json({
+      success: true,
+      data: updatedCharge,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+/* DELETE GLOBAL CHARGE */
+app.delete("/global-charges/:id", async (req, res) => {
+  try {
+    await GlobalCharge.findByIdAndDelete(req.params.id);
+
+    res.json({
+      success: true,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+app.get("/company", async (req, res) => {
+  try {
+    const companies = await Company.find().sort({ createdDate: -1 });
+
+    res.json({
+      data: companies,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+app.post("/company", async (req, res) => {
+  try {
+    const {
+      companyName,
+      contactPerson,
+      email,
+      password,
+      phone,
+      address1,
+      address2,
+      country,
+      state,
+      city,
+      timezone,
+      currency,
+      postalCode,
+      webAddress,
+      companyRegNo,
+      customRegNo,
+      modules,
+    } = req.body;
+
+    const newCompany = new Company({
+      companyName,
+      contactPerson,
+      email,
+      password,
+      phone,
+      address1,
+      address2,
+      country,
+      state,
+      city,
+      timezone,
+      currency,
+      postalCode,
+      webAddress,
+      companyRegNo,
+      customRegNo,
+      modules,
+    });
+
+    const savedCompany = await newCompany.save();
+
+    res.json({
+      success: true,
+      data: savedCompany,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+app.put("/company/:id", async (req, res) => {
+  try {
+    const updatedCompany = await Company.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+
+    res.json({
+      success: true,
+      data: updatedCompany,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+app.delete("/company/:id", async (req, res) => {
+  try {
+    await Company.findByIdAndDelete(req.params.id);
+
+    res.json({
+      success: true,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+/* ============================= */
+/* AIRLINE ROUTES */
+/* ============================= */
+
+/* GET ALL AIRLINES */
+app.get("/airlines", async (req, res) => {
+  try {
+    const airlines = await Airline.find().sort({ createdOn: -1 });
+
+    res.json({
+      data: airlines,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+/* ADD AIRLINE */
+app.post("/airlines", async (req, res) => {
+  try {
+    const newAirline = new Airline(req.body);
+
+    const savedAirline = await newAirline.save();
+
+    res.json({
+      success: true,
+      data: savedAirline,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+/* UPDATE AIRLINE */
+app.put("/airlines/:id", async (req, res) => {
+  try {
+    const updatedAirline = await Airline.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+
+    res.json({
+      success: true,
+      data: updatedAirline,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+/* DELETE AIRLINE */
+app.delete("/airlines/:id", async (req, res) => {
+  try {
+    await Airline.findByIdAndDelete(req.params.id);
+
+    res.json({
+      success: true,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+/* ============================= */
+/* SHIPPING LINE ROUTES */
+/* ============================= */
+
+/* GET ALL SHIPPING LINES */
+app.get("/shipping-lines", async (req, res) => {
+  try {
+    const lines = await ShippingLine.find().sort({ createdOn: -1 });
+
+    res.json({
+      data: lines,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+/* ADD SHIPPING LINE */
+app.post("/shipping-lines", async (req, res) => {
+  try {
+    const newLine = new ShippingLine(req.body);
+
+    const savedLine = await newLine.save();
+
+    res.json({
+      success: true,
+      data: savedLine,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+/* UPDATE SHIPPING LINE */
+app.put("/shipping-lines/:id", async (req, res) => {
+  try {
+    const updatedLine = await ShippingLine.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+
+    res.json({
+      success: true,
+      data: updatedLine,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+/* DELETE SHIPPING LINE */
+app.delete("/shipping-lines/:id", async (req, res) => {
+  try {
+    await ShippingLine.findByIdAndDelete(req.params.id);
+
+    res.json({
+      success: true,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+/* ============================= */
+/* VESSEL ROUTES */
+/* ============================= */
+
+/* GET ALL VESSELS */
+app.get("/vessels", async (req, res) => {
+  try {
+    const vessels = await Vessel.find().sort({ createdOn: -1 });
+
+    res.json({
+      data: vessels,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+/* ADD VESSEL */
+app.post("/vessels", async (req, res) => {
+  try {
+    const newVessel = new Vessel(req.body);
+
+    const savedVessel = await newVessel.save();
+
+    res.json({
+      success: true,
+      data: savedVessel,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+/* UPDATE VESSEL */
+app.put("/vessels/:id", async (req, res) => {
+  try {
+    const updatedVessel = await Vessel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+
+    res.json({
+      success: true,
+      data: updatedVessel,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+/* DELETE VESSEL */
+app.delete("/vessels/:id", async (req, res) => {
+  try {
+    await Vessel.findByIdAndDelete(req.params.id);
+
+    res.json({
+      success: true,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+app.get("/containers", async (req, res) => {
+  try {
+    const containers = await Container.find().sort({ createdOn: -1 });
+
+    res.json({
+      data: containers,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+app.post("/containers", async (req, res) => {
+  try {
+    const newContainer = new Container(req.body);
+
+    const savedContainer = await newContainer.save();
+
+    res.json({
+      success: true,
+      data: savedContainer,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+app.put("/containers/:id", async (req, res) => {
+  try {
+    const updatedContainer = await Container.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+
+    res.json({
+      success: true,
+      data: updatedContainer,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+app.delete("/containers/:id", async (req, res) => {
+  try {
+    await Container.findByIdAndDelete(req.params.id);
+
+    res.json({
+      success: true,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+app.get("/documents", async (req, res) => {
+  const docs = await Document.find();
+  res.json({ data: docs });
+});
+
+app.put("/documents/:id", async (req, res) => {
+  const updated = await Document.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true }
+  );
+
+  res.json(updated);
+});
+/* ============================= */
 /* START SERVER */
 /* ============================= */
 
-app.listen(5000, () => {
+app.listen(5000, async () => {
+  await seedDocuments();
   console.log("Server running on port 5000");
 });

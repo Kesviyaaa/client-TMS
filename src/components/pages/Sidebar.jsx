@@ -350,79 +350,82 @@ const Sidebar = ({ collapsed, toggleSidebar, setWrapperHover }) => {
 
         {/* Carrier Masters */}
         <li
-          className={`menu-item 
-            ${openMenu === "carrierMasters" ? "open" : ""}
-            ${
-              location.pathname.startsWith("/airline-master") ||
-              location.pathname.startsWith("/shipping-line-master") ||
-              location.pathname.startsWith("/vessels-master")
-                ? "active"
-                : ""
-            }`}
+  className={`menu-item 
+    ${openMenu === "carrierMasters" ? "open" : ""}
+    ${
+      location.pathname.startsWith("/airline-master") ||
+      location.pathname.startsWith("/shipping-line-master") ||
+      location.pathname.startsWith("/vessels-master")
+        ? "active"
+        : ""
+    }`}
+>
+  <a
+    href="#"
+    className="menu-link menu-toggle text-decoration-none"
+    onClick={(e) => {
+      e.preventDefault();
+      setOpenMenu(openMenu === "carrierMasters" ? null : "carrierMasters");
+    }}
+  >
+    <i className="menu-icon bx bx-package"></i>
+    <div className="menu-text">Carrier Masters</div>
+  </a>
+
+  <ul className="menu-sub">
+
+    {/* Airline Master */}
+    <li
+      className={`menu-item ${
+        location.pathname === "/airline-master" ? "active" : ""
+      }`}
+    >
+      <Link to="/airline-master" className="menu-link">
+        <div className="menu-text">Airline Master</div>
+      </Link>
+    </li>
+
+    {/* Shipping Lines */}
+    <li
+      className={`menu-item 
+        ${openSubMenu === "shippingLine" ? "open" : ""}
+        ${
+          location.pathname.startsWith("/shipping-line-master") ||
+          location.pathname.startsWith("/vessels-master")
+            ? "active"
+            : ""
+        }`}
+    >
+      <Link
+        to="/shipping-line-master"
+        className="menu-link menu-toggle"
+        onClick={() => {
+          setOpenSubMenu(
+            openSubMenu === "shippingLine" ? null : "shippingLine"
+          );
+        }}
+      >
+        <div className="menu-text">Shipping Line Master</div>
+      </Link>
+
+      <ul className="menu-sub">
+
+        {/* Vessels Master */}
+        <li
+          className={`menu-item ${
+            location.pathname === "/vessels-master" ? "active" : ""
+          }`}
         >
-          <a
-            href="#"
-            className="menu-link menu-toggle text-decoration-none"
-            onClick={(e) => {
-              e.preventDefault();
-              setOpenMenu(
-                openMenu === "carrierMasters" ? null : "carrierMasters"
-              );
-            }}
-          >
-            <i className="menu-icon bx bx-package"></i>
-            <div className="menu-text">Carrier Masters</div>
-          </a>
-
-          <ul className="menu-sub">
-            <li
-              className={`menu-item ${
-                location.pathname === "/airline-master" ? "active" : ""
-              }`}
-            >
-              <Link to="/airline-master" className="menu-link">
-                <div className="menu-text">Airline Master</div>
-              </Link>
-            </li>
-
-            <li
-              className={`menu-item 
-              ${openSubMenu === "shippingLine" ? "open" : ""}
-              ${
-                location.pathname.startsWith("/shipping-line-master") ||
-                location.pathname.startsWith("/vessels-master")
-                  ? "active"
-                  : ""
-              }`}
-            >
-              <a
-                href="#"
-                className="menu-link menu-toggle"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setOpenSubMenu(
-                    openSubMenu === "shippingLine" ? null : "shippingLine"
-                  );
-                }}
-              >
-                <i className="bx bx-ship"></i>
-                <div className="menu-text">Shipping Line Master</div>
-              </a>
-
-              <ul className="menu-sub">
-                <li
-                  className={`menu-item ${
-                    location.pathname === "/vessels-master" ? "active" : ""
-                  }`}
-                >
-                  <Link to="/vessels-master" className="menu-link">
-                    <div className="menu-text">Vessels Master</div>
-                  </Link>
-                </li>
-              </ul>
-            </li>
-          </ul>
+          <Link to="/vessels-master" className="menu-link">
+            <div className="menu-text">Vessels Master</div>
+          </Link>
         </li>
+
+      </ul>
+    </li>
+
+  </ul>
+</li>
 
         {/* Finance Masters */}
         <li
