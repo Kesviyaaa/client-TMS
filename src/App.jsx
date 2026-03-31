@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
@@ -96,7 +95,7 @@ function App() {
   };
 
   return (
-    <Router>
+    <>
       <div
         className={`layout-wrapper layout-content-navbar ${collapsed ? "layout-menu-collapsed" : ""
           } ${collapsed && wrapperHover ? "menu-hover" : ""}`}
@@ -250,7 +249,7 @@ function App() {
           </div>
         </div>
       </div>
-    </Router>
+    </>
   );
 }
 
