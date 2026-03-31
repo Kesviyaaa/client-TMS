@@ -2,478 +2,503 @@
    🔹 SIDEBAR HEADER (logo area)
    ================================ */
 
-   body {
-    transition: background 0.25s ease, color 0.25s ease;
-  }
+body {
+  transition: background 0.25s ease, color 0.25s ease;
+}
 
-   .layout-menu-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem;
-    background-color: #fff;
-    border-bottom: 1px solid #e0e0e0;
-  }
-  
-  /* ================================
+.layout-menu-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* ================================
      🔹 SIDEBAR BASE
      ================================ */
-  
-     .layout-menu {
-      position: fixed;
-      width: 250px;
-      height: 100vh;
-    
-      overflow-x: visible;   /* ⭐ allow text to expand */
-      overflow-y: hidden;
-    
-      transition: width 0.12s ease;
-      z-index: 1000;
-    }
-  
-    /* ===== COLLAPSED ===== */
-  .layout-menu-collapsed .layout-menu {
-    width: 78px;
-  }
-  /* ================================
+
+.layout-menu {
+  position: fixed;
+  width: 250px;
+  height: 100vh;
+
+  overflow-x: visible;
+  overflow-y: auto;
+
+  transition: width 0.12s ease;
+  z-index: 1000;
+
+  /* Custom Scrollbar for Sidebar */
+  scrollbar-width: thin;
+  scrollbar-color: #926565;
+}
+
+.layout-menu::-webkit-scrollbar {
+  width: 4px;
+}
+
+.layout-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.layout-menu::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 10px;
+}
+
+/* ===== COLLAPSED ===== */
+.layout-menu-collapsed .layout-menu {
+  width: 78px;
+}
+
+/* ================================
      🔹 COLLAPSED STATE
      ================================ */
-  
-  .layout-menu.layout-menu-collapsed {
-    width: 80px;
-  }
-  
-  /* ================================
+
+.layout-menu.layout-menu-collapsed {
+  width: 80px;
+}
+
+/* ================================
      🔹 HOVER TEMP EXPAND
      (collapsed + hovered)
      ================================ */
-  
-  .layout-menu.layout-menu-collapsed.hovered {
-    z-index: 2000 !important;
-    box-shadow: 0 0 20px rgba(0,0,0,0.08);
-  }
-  
-  /* ================================
-     🔹 MAIN PAGE SHIFT
-     ================================ */
-  
-  .layout-page {
-    padding-left: 250px;
-    position: relative;
-    z-index: 1;
-    transition: padding-left 0.25s ease;
-  
-  }
-  
-  /* ================================
-     🔹 LOGO
-     ================================ */
-  
-  .app-brand a {
-    overflow: visible !important;
-  }
-  
-  .sidebar-logo {
-    height: 40px;
-    width: 180px;
-    object-fit: cover;
-  }
 
-  
-  
-  .app-brand-text {
-    font-size: 18px;
-    font-weight: bold;
-    margin-left: 0.5rem;
-    color: black;
-    transition: opacity 0.25s ease;
-  }
-  
-  /* ================================
-     🔹 MENU SCROLL AREA
-     ================================ */
-  
-     .menu-inner {
-      overflow-y: auto;
-      overflow-x: hidden;
-      height: calc(100vh - 70px);
-      padding-top: 0.5rem;
-    }
-  
-  /* ================================
-     🔹 MENU LINKS
-     ================================ */
-  
-     .menu-link {
-      display: flex;              /* ⭐ REQUIRED for Sneat */
-      align-items: center;
-      white-space: nowrap;
-      cursor: pointer;
-      min-width: 0;
-    }
-  
-  /* ================================
-     🔹 SUBMENU ANIMATION
-     ================================ */
-  
-  .menu-sub {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease;
-  }
-  
-  .menu-item.open > .menu-sub {
-    max-height: 500px;
-  }
-  
-  /* ================================
-     🔹 TEXT VISIBILITY LOGIC
-     ================================ */
-  
-  /* hide text when collapsed */
-  .layout-menu.layout-menu-collapsed .menu-text {
-    display: none;
-    opacity: 0;
-  }
-  
-  /* 🔥 CRITICAL — show text during hover preview */
-  .layout-menu.layout-menu-collapsed.hovered .menu-text,
-  .layout-menu.layout-menu-collapsed.hovered .menu-link div,
-  .layout-menu.layout-menu-collapsed.hovered .menu-link span {
-    display: inline-block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-  
-  /* restore icon spacing on hover expand */
-  .layout-menu.layout-menu-collapsed.hovered .menu-icon {
-    margin-right: 0.5rem !important;
-  }
-  
-  /* ================================
-     🔹 TOGGLE BUTTON
-     ================================ */
-  
-     .layout-menu-toggle {
-      position: absolute;
-      top: 20px;
-      right: -18px;            /* fully outside sidebar */
-      z-index: 3000;           /* above sidebar */
-      
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-    
-      background: #50A9E9;
-      color: #fff;
-    
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    
-      cursor: pointer;
-      pointer-events: auto;
-    
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
-  /* carved border effect */
-  .layout-menu-toggle::before {
-    content: "";
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    width: calc(100% + 6px);
-    height: calc(100% + 6px);
-    border-radius: 50%;
-    border: 3px solid #f5f5f9;
-    z-index: -1;
-  }
-  
-  /* ================================
-     🔹 BUTTON VISIBILITY RULES
-     ================================ */
-  
-  /* ❌ hide button when collapsed (not hovered) */
-  .layout-menu.layout-menu-collapsed:not(.hovered) .layout-menu-toggle {
-    opacity: 0;
-    pointer-events: none;
-  }
-  
-  /* ✅ show button when open OR hover preview */
-  .layout-menu:not(.layout-menu-collapsed) .layout-menu-toggle,
-  .layout-menu.layout-menu-collapsed.hovered .layout-menu-toggle {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  
-  /* hover color */
-  .layout-menu-toggle:hover {
-    background: #5a5cff;
-  }
-  
-  /* ================================
-     🔹 GLOBAL SAFETY
-     ================================ */
-  
-  .layout-menu * {
-    box-sizing: border-box;
-    overflow: visible;
-  }
-  
-  /* ===== TOGGLE BUTTON ===== */
- 
-  
-  /* circle style */
-  .layout-menu-toggle .menu-link {
-    width: 28px;
-    height: 28px;
-    background: #50A9E9;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-  }
-  
-  /* hide when fully collapsed (not hovered) */
-  .layout-menu-collapsed:not(.menu-hover) .layout-menu-toggle {
-    opacity: 0;
-    pointer-events: none;
-  }
-  
-  /* show when hover */
-  .layout-menu-collapsed.menu-hover .layout-menu-toggle {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  
-  .layout-menu {
-    overflow: visible; /* ⭐ allows circle to be fully visible */
-  }
-  
-  .layout-menu-inner {
-    overflow-x: hidden; /* keeps scrollbar gone */
-  }
-  
-  /* hide text when collapsed */
-  .layout-menu-collapsed:not(.menu-hover) .menu-text {
-    opacity: 0;
-    width: 0;
-    overflow: hidden;
-  }
-  
-  /* show text on hover */
-  .layout-menu-collapsed.menu-hover .menu-text {
-    opacity: 1;
-    width: auto;
-  }
-  
-  /* 🔥 TEMP hover expansion pushes page */
-  .layout-wrapper.layout-menu-collapsed.menu-hover .layout-page {
-    padding-left: 250px !important;
-    transition: padding-left 0.25s ease;
-  }
-  
-  /* Normal state */
-  .layout-page {
-    padding-left: 250px;
-    transition: padding-left 0.25s ease;
-  }
-  
-  /* Collapsed state */
-  .layout-wrapper.layout-menu-collapsed .layout-page {
-    padding-left: 80px;
-  }
-  
-  /* =========================================
-     🔥 FORCE SHOW MENU ON HOVER (FINAL FIX)
-     ========================================= */
-  
-  /* expand width when hovering collapsed */
-  .layout-menu.layout-menu-collapsed.hovered {
-    width: 250px !important;
-  }
-  
-  /* 🔥 show ALL text */
-  .layout-menu.layout-menu-collapsed.hovered .menu-text,
-  .layout-menu.layout-menu-collapsed.hovered .menu-link span,
-  .layout-menu.layout-menu-collapsed.hovered .menu-link div {
-    display: inline-block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-  
-  /* restore proper flex layout */
-  .layout-menu.layout-menu-collapsed.hovered .menu-link {
-    justify-content: flex-start !important;
-  }
-  
-  /* restore icon spacing */
-  .layout-menu.layout-menu-collapsed.hovered .menu-icon {
-    margin-right: 0.75rem !important;
-  }
-  
-  /* ========================================
-     🔥 FORCE SHOW MENUS DURING HOVER PREVIEW
-     ======================================== */
-  
-  /* expand sidebar when wrapper is hovered */
-  
-  
-  /* show ALL menu text */
-  
-  .layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-link div,
-  .layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-link span {
-    display: inline-block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    width: auto !important;
-  }
-  
-  /* restore proper alignment */
-  .layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-link {
-    justify-content: flex-start !important;
-  }
-  
-  /* restore icon spacing */
-  .layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-icon {
-    margin-right: 0.5rem !important;
-  }
-  
-  /* ensure Sneat text isn't clipped */
-  .layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-inner {
-    overflow-x: hidden !important;
-  }
-  
-  .layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu {
-    width: 250px !important;
-    z-index: 2000;
-  }
-  
-  .layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-text {
-    display: inline-block !important;
-    opacity: 1 !important;
-    width: auto !important;
-  }
-  
-  /* =========================================
-     🚀 FINAL FORCE FIX — MENU TEXT VISIBILITY
-     ========================================= */
-  
-  /* when collapsed normally → hide text */
-  .layout-wrapper.layout-menu-collapsed:not(.menu-hover)
-  #layout-menu .menu-text {
-    opacity: 0 !important;
-    width: 0 !important;
-    overflow: hidden !important;
-    visibility: hidden !important;
-  }
-  
-  /* 🔥 when hover preview → SHOW TEXT */
-  .layout-wrapper.layout-menu-collapsed.menu-hover
-  #layout-menu .menu-text {
-    opacity: 1 !important;
-    width: auto !important;
-    overflow: visible !important;
-    visibility: visible !important;
-    display: inline !important;
-  }
-  
-  /* ensure menu row expands properly */
-  .layout-wrapper.layout-menu-collapsed.menu-hover
-  #layout-menu .menu-link {
-    justify-content: flex-start !important;
-  }
-  
-  /* fix icon spacing */
-  .layout-wrapper.layout-menu-collapsed.menu-hover
-  #layout-menu .menu-icon {
-    margin-right: 0.75rem !important;
-  }
-  
-  /* 🔥 ensure sidebar is above page */
-  .layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu {
-    z-index: 2000 !important;
-    width: 250px !important;
-  }
-  
-  /* =========================================
-     🔥 FIX: submenu arrow visibility
-     ========================================= */
-  
-  /* make sure arrow always exists in flex row */
-  #layout-menu .menu-link {
-    display: flex;
-    align-items: center;
-  }
-  
-  /* arrow base fix */
-  #layout-menu .menu-arrow {
-    margin-left: auto !important;
-    flex-shrink: 0 !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-  
-  /* 🔥 critical: when collapsed but hover-expanded */
-  .layout-wrapper.layout-menu-collapsed.menu-hover
-  #layout-menu .menu-arrow {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateX(0) !important;
-  }
-  
-  /* prevent clipping */
-  #layout-menu .menu-link {
-    overflow: visible !important;
-  }
-  
-  /* ensure sidebar sits above content */
-  .layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu {
-    z-index: 2000 !important;
-  }
-  
-  
-  
-  /* Blue dot indicator like Sneat */
-.menu-sub .menu-item.active > .menu-link::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #50A9E9;
-  margin-right: 10px;
-  display: inline-block;
+.layout-menu.layout-menu-collapsed.hovered {
+  z-index: 2000 !important;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
 }
 
+/* ================================
+     🔹 MAIN PAGE SHIFT
+     ================================ */
+
+.layout-page {
+  padding-left: 250px;
+  position: relative;
+  z-index: 1;
+  transition: padding-left 0.25s ease;
+
+}
+
+/* ================================
+     🔹 LOGO
+     ================================ */
+
+.app-brand a {
+  overflow: visible !important;
+}
+
+.sidebar-logo {
+  height: 40px;
+  width: 180px;
+  object-fit: cover;
+}
+
+
+
+.app-brand-text {
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 0.5rem;
+  color: black;
+  transition: opacity 0.25s ease;
+}
+
+/* ================================
+     🔹 MENU SCROLL AREA
+     ================================ */
+
+.menu-inner {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: calc(100vh - 70px);
+  padding-top: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: #776f6f transparent;
+}
+
+.menu-inner::-webkit-scrollbar {
+  width: 4px;
+}
+
+.menu-inner::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.menu-inner::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 10px;
+}
+
+/* ================================
+     🔹 MENU LINKS
+     ================================ */
+
+.menu-link {
+  display: flex;
+  /* ⭐ REQUIRED for Sneat */
+  align-items: center;
+  white-space: nowrap;
+  cursor: pointer;
+  min-width: 0;
+}
+
+/* ================================
+     🔹 SUBMENU ANIMATION
+     ================================ */
+
+.menu-sub {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.menu-item.open>.menu-sub {
+  max-height: 500px;
+}
+
+/* ================================
+     🔹 TEXT VISIBILITY LOGIC
+     ================================ */
+
+/* hide text when collapsed */
+.layout-menu.layout-menu-collapsed .menu-text {
+  display: none;
+  opacity: 0;
+}
+
+/* 🔥 CRITICAL — show text during hover preview */
+.layout-menu.layout-menu-collapsed.hovered .menu-text,
+.layout-menu.layout-menu-collapsed.hovered .menu-link div,
+.layout-menu.layout-menu-collapsed.hovered .menu-link span {
+  display: inline-block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* restore icon spacing on hover expand */
+.layout-menu.layout-menu-collapsed.hovered .menu-icon {
+  margin-right: 0.5rem !important;
+}
+
+/* ================================
+     🔹 TOGGLE BUTTON
+     ================================ */
+
+.layout-menu-toggle {
+  position: absolute;
+  top: 20px;
+  right: -18px;
+  /* fully outside sidebar */
+  z-index: 3000;
+  /* above sidebar */
+
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+
+  background: #50A9E9;
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  pointer-events: auto;
+
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* carved border effect */
+.layout-menu-toggle::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+  border-radius: 50%;
+  border: 3px solid #f5f5f9;
+  z-index: -1;
+}
+
+/* ================================
+     🔹 BUTTON VISIBILITY RULES
+     ================================ */
+
+/* ❌ hide button when collapsed (not hovered) */
+.layout-menu.layout-menu-collapsed:not(.hovered) .layout-menu-toggle {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ✅ show button when open OR hover preview */
+.layout-menu:not(.layout-menu-collapsed) .layout-menu-toggle,
+.layout-menu.layout-menu-collapsed.hovered .layout-menu-toggle {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* hover color */
+.layout-menu-toggle:hover {
+  background: #5a5cff;
+}
+
+/* ================================
+     🔹 GLOBAL SAFETY
+     ================================ */
+
+.layout-menu * {
+  box-sizing: border-box;
+}
+
+/* ===== TOGGLE BUTTON ===== */
+
+
+/* circle style */
+.layout-menu-toggle .menu-link {
+  width: 28px;
+  height: 28px;
+  background: #50A9E9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+/* hide when fully collapsed (not hovered) */
+.layout-menu-collapsed:not(.menu-hover) .layout-menu-toggle {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* show when hover */
+.layout-menu-collapsed.menu-hover .layout-menu-toggle {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.layout-menu {
+  overflow: visible;
+  /* ⭐ allows circle to be fully visible */
+}
+
+.layout-menu-inner {
+  overflow-x: hidden;
+  /* keeps scrollbar gone */
+}
+
+/* hide text when collapsed */
+.layout-menu-collapsed:not(.menu-hover) .menu-text {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+/* show text on hover */
+.layout-menu-collapsed.menu-hover .menu-text {
+  opacity: 1;
+  width: auto;
+}
+
+/* 🔥 TEMP hover expansion pushes page */
+.layout-wrapper.layout-menu-collapsed.menu-hover .layout-page {
+  padding-left: 250px !important;
+  transition: padding-left 0.25s ease;
+}
+
+/* Normal state */
+.layout-page {
+  padding-left: 250px;
+  transition: padding-left 0.25s ease;
+}
+
+/* Collapsed state */
+.layout-wrapper.layout-menu-collapsed .layout-page {
+  padding-left: 80px;
+}
+
+/* =========================================
+     🔥 FORCE SHOW MENU ON HOVER (FINAL FIX)
+     ========================================= */
+
+/* expand width when hovering collapsed */
+.layout-menu.layout-menu-collapsed.hovered {
+  width: 250px !important;
+}
+
+/* 🔥 show ALL text */
+.layout-menu.layout-menu-collapsed.hovered .menu-text,
+.layout-menu.layout-menu-collapsed.hovered .menu-link span,
+.layout-menu.layout-menu-collapsed.hovered .menu-link div {
+  display: inline-block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* restore proper flex layout */
+.layout-menu.layout-menu-collapsed.hovered .menu-link {
+  justify-content: flex-start !important;
+}
+
+/* restore icon spacing */
+.layout-menu.layout-menu-collapsed.hovered .menu-icon {
+  margin-right: 0.75rem !important;
+}
+
+/* ========================================
+     🔥 FORCE SHOW MENUS DURING HOVER PREVIEW
+     ======================================== */
+
+/* expand sidebar when wrapper is hovered */
+
+
+/* show ALL menu text */
+
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-link div,
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-link span {
+  display: inline-block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  width: auto !important;
+}
+
+/* restore proper alignment */
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-link {
+  justify-content: flex-start !important;
+}
+
+/* restore icon spacing */
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-icon {
+  margin-right: 0.5rem !important;
+}
+
+/* ensure Sneat text isn't clipped */
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-inner {
+  overflow-x: hidden !important;
+}
+
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu {
+  width: 250px !important;
+  z-index: 2000;
+}
+
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-text {
+  display: inline-block !important;
+  opacity: 1 !important;
+  width: auto !important;
+}
+
+/* =========================================
+     🚀 FINAL FORCE FIX — MENU TEXT VISIBILITY
+     ========================================= */
+
+/* when collapsed normally → hide text */
+.layout-wrapper.layout-menu-collapsed:not(.menu-hover) #layout-menu .menu-text {
+  opacity: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+}
+
+/* 🔥 when hover preview → SHOW TEXT */
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-text {
+  opacity: 1 !important;
+  width: auto !important;
+  overflow: visible !important;
+  visibility: visible !important;
+  display: inline !important;
+}
+
+/* ensure menu row expands properly */
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-link {
+  justify-content: flex-start !important;
+}
+
+/* fix icon spacing */
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-icon {
+  margin-right: 0.75rem !important;
+}
+
+/* 🔥 ensure sidebar is above page */
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu {
+  z-index: 2000 !important;
+  width: 250px !important;
+}
+
+/* =========================================
+     🔥 FIX: submenu arrow visibility
+     ========================================= */
+
+/* make sure arrow always exists in flex row */
+#layout-menu .menu-link {
+  display: flex;
+  align-items: center;
+}
+
+/* arrow base fix */
+#layout-menu .menu-arrow {
+  margin-left: auto !important;
+  flex-shrink: 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* 🔥 critical: when collapsed but hover-expanded */
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-arrow {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateX(0) !important;
+}
+
+/* prevent clipping */
+#layout-menu .menu-link {
+  overflow: visible !important;
+}
+
+/* ensure sidebar sits above content */
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu {
+  z-index: 2000 !important;
+}
+
+
+
+/* Blue dot indicator like Sneat */
+
+
 /* highlight ONLY top-level menu items */
-#layout-menu > .menu-inner > .menu-item.active > .menu-link{
-  background-color: rgba(80,169,233,0.15);
+#layout-menu>.menu-inner>.menu-item.active>.menu-link {
+  background-color: rgba(80, 169, 233, 0.15);
   color: #50A9E9;
   border-radius: 6px;
 }
 
 /* icon color */
-#layout-menu > .menu-inner > .menu-item.active > .menu-link .menu-icon{
+#layout-menu>.menu-inner>.menu-item.active>.menu-link .menu-icon {
   color: #50A9E9;
 }
 
 
-#layout-menu .menu-item:not(.active) > .menu-link:hover{
-  background-color: rgba(80,169,233,0.08);
+#layout-menu .menu-item:not(.active)>.menu-link:hover {
+  background-color: rgba(80, 169, 233, 0.08);
 }
 
 /* icon color */
-#layout-menu .menu-item.active > .menu-link .menu-icon{
+#layout-menu .menu-item.active>.menu-link .menu-icon {
   color: #50A9E9;
 }
 
 /* text color */
-#layout-menu .menu-item.active > .menu-link .menu-text{
+#layout-menu .menu-item.active>.menu-link .menu-text {
   color: #50A9E9;
 }
 
@@ -482,31 +507,27 @@
    FIX: Active highlight during hover expand
    ========================================= */
 
-   .layout-wrapper.layout-menu-collapsed.menu-hover
-   #layout-menu .menu-item.active > .menu-link{
-     background-color: rgba(105,108,255,0.16) !important;
-     color: #50A9E9 !important;
-     border-radius: 6px;
-   }
-   
-   /* ensure text gets violet color */
-   .layout-wrapper.layout-menu-collapsed.menu-hover
-   #layout-menu .menu-item.active > .menu-link .menu-text{
-     color: #50A9E9 !important;
-   }
-   
-   /* keep icon violet too */
-   .layout-wrapper.layout-menu-collapsed.menu-hover
-   #layout-menu .menu-item.active > .menu-link .menu-icon{
-     color: #50A9E9 !important;
-   }
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-item.active>.menu-link {
+  background-color: rgba(105, 108, 255, 0.16) !important;
+  color: #50A9E9 !important;
+  border-radius: 6px;
+}
 
-   /* =========================================
+/* ensure text gets violet color */
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-item.active>.menu-link .menu-text {
+  color: #50A9E9 !important;
+}
+
+/* keep icon violet too */
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-item.active>.menu-link .menu-icon {
+  color: #50A9E9 !important;
+}
+
+/* =========================================
    KEEP DROPDOWN OPEN DURING HOVER PREVIEW
    ========================================= */
 
-.layout-wrapper.layout-menu-collapsed.menu-hover 
-#layout-menu .menu-item.open > .menu-sub {
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-item.open>.menu-sub {
   max-height: 500px !important;
   overflow: visible !important;
   display: block !important;
@@ -514,14 +535,12 @@
 
 
 
-.layout-wrapper.layout-menu-collapsed.menu-hover 
-#layout-menu .menu-sub .menu-link:hover {
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-sub .menu-link:hover {
   background-color: transparent !important;
 }
 
 /* also prevent active submenu from getting row highlight */
-.layout-wrapper.layout-menu-collapsed.menu-hover 
-#layout-menu .menu-sub .menu-item.active > .menu-link {
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu .menu-sub .menu-item.active>.menu-link {
   background-color: transparent !important;
 }
 
@@ -529,44 +548,103 @@
    FIX: Full highlight when collapsed sidebar is hover-expanded
    ========================================= */
 
-   .layout-wrapper.layout-menu-collapsed.menu-hover 
-   #layout-menu > .menu-inner > .menu-item.active > .menu-link {
-     display: flex;
-     align-items: center;
-     width: 100%;
-     background-color: rgba(80,169,233,0.15) !important;
-     color: #50A9E9 !important;
-   }
-   
-   /* keep icon violet */
-   .layout-wrapper.layout-menu-collapsed.menu-hover 
-   #layout-menu > .menu-inner > .menu-item.active > .menu-link .menu-icon {
-     color: #50A9E9 !important;
-   }
-   
-   /* keep text violet */
-   .layout-wrapper.layout-menu-collapsed.menu-hover 
-   #layout-menu > .menu-inner > .menu-item.active > .menu-link .menu-text {
-     color: #50A9E9 !important;
-   }
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu>.menu-inner>.menu-item.active>.menu-link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: rgba(80, 169, 233, 0.15) !important;
+  color: #50A9E9 !important;
+}
 
-   .sidebar-menu li {
-    width: 100%;
-  }
-  
-  .sidebar-menu li a {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 12px 16px;
-  }
-  
-  .sidebar-menu li:hover {
-    background-color: #f0f2f5; /* highlight color */
-  }
+/* keep icon violet */
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu>.menu-inner>.menu-item.active>.menu-link .menu-icon {
+  color: #50A9E9 !important;
+}
 
-  
+/* keep text violet */
+.layout-wrapper.layout-menu-collapsed.menu-hover #layout-menu>.menu-inner>.menu-item.active>.menu-link .menu-text {
+  color: #50A9E9 !important;
+}
 
-  #layout-menu .menu-item.active > .menu-link::before {
-    background-color: #50A9E9 !important; /* your cargo blue */
-  }
+.sidebar-menu li {
+  width: 100%;
+}
+
+.sidebar-menu li a {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 16px;
+}
+
+.sidebar-menu li:hover {
+  background-color: #f0f2f5;
+  /* highlight color */
+}
+
+
+
+#layout-menu .menu-item.active>.menu-link::before {
+  background-color: #50A9E9 !important;
+  /* your cargo blue */
+}
+
+#layout-menu>.menu-inner>.menu-item.active-top>.menu-link {
+  background-color: rgba(80, 169, 233, 0.15);
+  color: #50A9E9;
+  border-radius: 6px;
+}
+
+#layout-menu>.menu-inner>.menu-item.active-top .menu-icon {
+  color: #50A9E9;
+}
+
+#layout-menu .menu-item.active-section>.menu-link {
+  background: transparent !important;
+  color: #50A9E9;
+}
+
+#layout-menu .menu-item.active-section>.menu-link .menu-icon {
+  color: #50A9E9;
+}
+
+#layout-menu .menu-sub .menu-item.active>.menu-link {
+  background: transparent !important;
+  color: #50A9E9;
+  font-weight: 500;
+}
+
+/* your dot stays */
+
+#layout-menu .menu-text {
+  font-size: 13px;
+}
+
+#layout-menu .menu-sub .menu-text {
+  font-size: 12px;
+}
+
+/* ONLY apply indicator for deeper levels */
+#layout-menu .menu-item>.menu-link::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* ✅ LINE INDICATOR FOR ALL SUBMENUS */
+.menu-sub .menu-item.active>.menu-link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: #50A9E9;
+  border-radius: 2px;
+}
+
+
+
+.menu-link {
+  position: relative;
+}

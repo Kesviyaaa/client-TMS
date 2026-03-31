@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../css/navbar.css";
 
-const Navbar = ({ collapsed, hovered }) => {
+const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [langOpen, setLangOpen] = useState(false);
   const langRef = useRef(null);
@@ -18,11 +18,20 @@ const Navbar = ({ collapsed, hovered }) => {
   const [results, setResults] = useState([]);
   const searchInputRef = useRef(null);
   const [theme, setTheme] = useState("light");
+  const [recent, setRecent] = useState([]);
 
   const closeSearch = () => {
     setSearchOpen(false);
     setSearchQuery("");
     setResults([]);
+  };
+  const handleClick = (item) => {
+    const updated = [item, ...recent.filter(p => p.path !== item.path)].slice(0, 5);
+  
+    setRecent(updated);
+    localStorage.setItem("recentSearches", JSON.stringify(updated));
+  
+    closeSearch();
   };
 
   useEffect(() => {
@@ -33,6 +42,12 @@ const Navbar = ({ collapsed, hovered }) => {
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+  useEffect(() => {
+    const stored = localStorage.getItem("recentSearches");
+    if (stored) {
+      setRecent(JSON.parse(stored));
+    }
   }, []);
 
   const notifications = [
@@ -155,117 +170,87 @@ const Navbar = ({ collapsed, hovered }) => {
     setTheme(savedTheme);
   }, []);
 
-  const pages = [
-    {
-      name: "Dashboard",
-      path: "/dashboard",
-      category: "Dashboard",
-      icon: "bx bx-home",
-    },
-
-    {
-      name: "Parent Menu",
-      path: "/parent-menu",
-      category: "Menu",
-      icon: "bx bx-layer",
-    },
-    {
-      name: "Sub Menu",
-      path: "/sub-menu",
-      category: "Menu",
-      icon: "bx bx-menu",
-    },
-    { name: "Modules", path: "/modules", category: "Menu", icon: "bx bx-grid" },
-
-    {
-      name: "Regions",
-      path: "/regions",
-      category: "Global Masters",
-      icon: "bx bx-map",
-    },
-    {
-      name: "Countries",
-      path: "/countries",
-      category: "Global Masters",
-      icon: "bx bx-world",
-    },
-    {
-      name: "Ports",
-      path: "/ports",
-      category: "Global Masters",
-      icon: "bx bx-anchor",
-    },
-    {
-      name: "Currencies",
-      path: "/currencies",
-      category: "Global Masters",
-      icon: "bx bx-dollar-circle",
-    },
-    {
-      name: "Commodities",
-      path: "/commodities",
-      category: "Global Masters",
-      icon: "bx bx-package",
-    },
-    {
-      name: "Units of Measurements",
-      path: "/units-of-measurements",
-      category: "Global Masters",
-      icon: "bx bx-ruler",
-    },
-    {
-      name: "Container Types",
-      path: "/container-types",
-      category: "Global Masters",
-      icon: "bx bx-cube",
-    },
-    {
-      name: "Document Types",
-      path: "/document-types",
-      category: "Global Masters",
-      icon: "bx bx-file",
-    },
-
-    {
-      name: "Airline Master",
-      path: "/airline-master",
-      category: "Carrier Masters",
-      icon: "bx bxs-plane",
-    },
-    {
-      name: "Shipping Line Master",
-      path: "/shipping-line-master",
-      category: "Carrier Masters",
-      icon: "bx bxs-ship",
-    },
-    {
-      name: "Vessels Master",
-      path: "/vessels-master",
-      category: "Carrier Masters",
-      icon: "bx bx-anchor",
-    },
-
-    {
-      name: "Global Charge Codes",
-      path: "/global-charge-codes",
-      category: "Finance Masters",
-      icon: "bx bx-receipt",
-    },
-
-    {
-      name: "Company Creations",
-      path: "/company-creations",
-      category: "System Masters",
-      icon: "bx bx-buildings",
-    },
-
-    {
-      name: "Charts of Accounts",
-      path: "/charts-of-accounts",
-      category: "Accounts",
-      icon: "bx bx-list-ul",
-    },
-  ];
+  const buildSearchData = () => {
+    const data = [];
+  
+    // 🔹 FORWARDING
+    data.push(
+      { name: "Quotations", path: "/quotations", category: "FORWARDING", icon: "bx bx-file" },
+      { name: "Bookings", path: "/bookings", category: "FORWARDING", icon: "bx bx-book" },
+      { name: "Air Export Shipment", path: "/forwarding/shipments/air-exports/shipment", category: "FORWARDING", icon: "bx bxs-plane" },
+      { name: "Air Export Consol", path: "/forwarding/shipments/air-exports/consol", category: "FORWARDING", icon: "bx bx-layer" },
+      { name: "Air Import Shipment", path: "/forwarding/shipments/air-imports/shipment", category: "FORWARDING", icon: "bx bxs-plane" },
+      { name: "Air Import Consol", path: "/forwarding/shipments/air-imports/consol", category: "FORWARDING", icon: "bx bx-layer" },
+      { name: "Sea Export Shipment", path: "/forwarding/shipments/sea-exports/shipment", category: "FORWARDING", icon: "bx bxs-ship" },
+      { name: "Sea Import Shipment", path: "/forwarding/shipments/sea-imports/shipment", category: "FORWARDING", icon: "bx bxs-ship" },
+      { name: "Land Export Shipment", path: "/forwarding/shipments/land-exports/shipment", category: "FORWARDING", icon: "bx bxs-truck" },
+      { name: "Land Import Shipment", path: "/forwarding/shipments/land-imports/shipment", category: "FORWARDING", icon: "bx bxs-truck" },
+      { name: "Carrier Tariff", path: "/carrier-tariff", category: "FORWARDING", icon: "bx bx-line-chart" },
+      { name: "Carrier Contract", path: "/carrier-contract", category: "FORWARDING", icon: "bx bx-file" },
+      { name: "Airline Charges", path: "/airline-charges", category: "FORWARDING", icon: "bx bx-money" },
+      { name: "Company Tariff Freight", path: "/company-tariff-freight", category: "FORWARDING", icon: "bx bx-dollar" },
+    );
+  
+    // 🔹 TRACKING
+    data.push(
+      { name: "Tracking Dashboard", path: "/tracking-dashboard", category: "TRACKING", icon: "bx bx-home" },
+      { name: "Ocean Shipment", path: "/ocean-shipment", category: "TRACKING", icon: "bx bxs-ship" },
+      { name: "Airline Shipment", path: "/airline-shipment", category: "TRACKING", icon: "bx bxs-plane" },
+      { name: "Client Details", path: "/client-details", category: "TRACKING", icon: "bx bx-user" },
+      { name: "Document Upload", path: "/document-upload", category: "TRACKING", icon: "bx bx-upload" },
+      { name: "Ocean Calendar", path: "/ocean-calendar", category: "TRACKING", icon: "bx bx-calendar" },
+      { name: "Air Calendar", path: "/air-calendar", category: "TRACKING", icon: "bx bx-calendar-event" },
+    );
+  
+    // 🔹 PERFORMANCE
+    data.push(
+      { name: "Air Import Dashboard", path: "/performance/air-import/dashboard", category: "PERFORMANCE", icon: "bx bxs-plane" },
+      { name: "Air Export Dashboard", path: "/performance/air-export/dashboard", category: "PERFORMANCE", icon: "bx bxs-plane-take-off" },
+      { name: "Ocean Import Dashboard", path: "/performance/ocean-import/dashboard", category: "PERFORMANCE", icon: "bx bx-anchor" },
+      { name: "Ocean Export Dashboard", path: "/performance/ocean-export/dashboard", category: "PERFORMANCE", icon: "bx bxs-ship" },
+      { name: "Sales Performance (AI)", path: "/performance/air-import/sales", category: "PERFORMANCE", icon: "bx bx-trending-up" },
+      { name: "Sales Performance (AE)", path: "/performance/air-export/sales", category: "PERFORMANCE", icon: "bx bx-trending-up" },
+      { name: "Variation Report", path: "/performance/variation", category: "PERFORMANCE", icon: "bx bx-line-chart" },
+    );
+  
+    // 🔹 GLOBAL MASTERS
+    data.push(
+      { name: "Ports", path: "/global-masters/ports", category: "GLOBAL MASTERS", icon: "bx bxs-map" },
+      { name: "Commodities", path: "/global-masters/commodities", category: "GLOBAL MASTERS", icon: "bx bx-category" },
+      { name: "Units of Measurements", path: "/global-masters/uom", category: "GLOBAL MASTERS", icon: "bx bx-ruler" },
+      { name: "Container Types", path: "/global-masters/container-types", category: "GLOBAL MASTERS", icon: "bx bx-package" },
+      { name: "Document Type", path: "/global-masters/document-types", category: "GLOBAL MASTERS", icon: "bx bx-file" },
+      { name: "Terminal Operator", path: "/global-masters/terminal-operator", category: "GLOBAL MASTERS", icon: "bx bx-git-branch" },
+      { name: "CFS / Yard", path: "/global-masters/cfs-yard", category: "GLOBAL MASTERS", icon: "bx bx-building-house" },
+    );
+  
+    // 🔹 CARRIER MASTERS
+    data.push(
+      { name: "Airline Master", path: "/carrier-masters/airline", category: "CARRIER MASTERS", icon: "bx bxs-plane" },
+      { name: "Shipping Line Master", path: "/carrier-masters/shipping-line", category: "CARRIER MASTERS", icon: "bx bxs-ship" },
+      { name: "BL / WB Clause", path: "/carrier-masters/bl-clause", category: "CARRIER MASTERS", icon: "bx bx-file" },
+      { name: "Vessels Master", path: "/carrier-masters/vessels", category: "CARRIER MASTERS", icon: "bx bx-anchor" },
+    );
+  
+    // 🔹 FINANCE MASTERS
+    data.push(
+      { name: "Global Charge Codes", path: "/finance-masters/charge-codes", category: "FINANCE MASTERS", icon: "bx bx-money" },
+      { name: "Airline Commission", path: "/finance-masters/airline-commission", category: "FINANCE MASTERS", icon: "bx bx-line-chart" },
+      { name: "Shipping Line Brokerage", path: "/finance-masters/shipping-brokerage", category: "FINANCE MASTERS", icon: "bx bx-trending-up" },
+    );
+  
+    // 🔹 SYSTEM MASTERS
+    data.push(
+      { name: "Organisation Details", path: "/system-master/org-details", category: "SYSTEM MASTERS", icon: "bx bx-buildings" },
+      { name: "Branch Creation", path: "/system-master/branch", category: "SYSTEM MASTERS", icon: "bx bx-git-branch" },
+      { name: "User Creation", path: "/system-master/user", category: "SYSTEM MASTERS", icon: "bx bx-user" },
+      { name: "User Role", path: "/system-master/user-role", category: "SYSTEM MASTERS", icon: "bx bx-id-card" },
+    );
+  
+    return data;
+  };
+  
+  const pages = buildSearchData();
 
   useEffect(() => {
     const handleKey = (e) => {
@@ -284,11 +269,13 @@ const Navbar = ({ collapsed, hovered }) => {
 
   const handleSearch = (value) => {
     setSearchQuery(value);
-
+  
     const filtered = pages.filter((p) =>
-      p.name.toLowerCase().includes(value.toLowerCase())
+      (p.name + " " + p.category)
+        .toLowerCase()
+        .includes(value.toLowerCase())
     );
-
+  
     setResults(filtered);
   };
 
@@ -332,7 +319,14 @@ const Navbar = ({ collapsed, hovered }) => {
     >
       {/* Left menu toggle */}
       <div className="layout-menu-toggle navbar-nav align-items-center me-4 me-xl-0 d-xl-none">
-        <a className="nav-item nav-link px-0 me-xl-6" href="#">
+        <a 
+          className="nav-item nav-link px-0 me-xl-6" 
+          href="#!"
+          onClick={(e) => {
+            e.preventDefault();
+            toggleMobileMenu();
+          }}
+        >
           <i className="icon-base bx bx-menu icon-md"></i>
         </a>
       </div>
@@ -741,112 +735,106 @@ const Navbar = ({ collapsed, hovered }) => {
       {searchOpen && (
         <div className="search-modal-overlay">
           <div className="search-modal">
-            <div className="search-header">
-              <i className="bx bx-search"></i>
+          <div className="search-header modern">
+  <i className="bx bx-search search-icon"></i>
 
-              <input
-                ref={searchInputRef}
-                type="text"
-                placeholder="Search[Ctrl+K]"
-                value={searchQuery}
-                onChange={(e) => handleSearch(e.target.value)}
-                autoFocus
-              />
+  <input
+    type="text"
+    placeholder="Search anything (Ctrl + K)"
+    value={searchQuery}
+    onChange={(e) => handleSearch(e.target.value)}
+    autoFocus
+  />
 
-              <div className="search-actions">
-                <span className="esc">esc</span>
-
-                <span
-                  className="search-close"
-                  onClick={closeSearch}                >
-                  x
-                </span>
-              </div>
-            </div>
+  <div className="search-actions">
+    <i className="bx bx-x fs-4 me-2" onClick={closeSearch} style={{ cursor: 'pointer', color: '#6b7280' }}></i>
+    <kbd>ESC</kbd>
+  </div>
+</div>
 
             <div className="search-results">
               {/* DEFAULT VIEW */}
               {searchQuery === "" && (
-  <div className="search-default two-column-search">
+                <div className="search-empty-state modern">
+                  <div className="search-grid-container">
+                    {/* COLUMN 1 */}
+                    <div className="search-grid-column">
+                      <div className="search-category-section">
+                        <div className="search-category-header">FORWARDING</div>
+                        {pages.filter(p => p.category === "FORWARDING").map((item, i) => (
+                          <Link key={i} to={item.path} className="search-grid-item" onClick={() => handleClick(item)}>
+                            <i className={item.icon}></i>
+                            <span>{item.name}</span>
+                          </Link>
+                        ))}
+                      </div>
 
-    {/* LEFT COLUMN */}
-    <div className="search-column">
+                      <div className="search-category-section">
+                        <div className="search-category-header">TRACKING</div>
+                        {pages.filter(p => p.category === "TRACKING").map((item, i) => (
+                          <Link key={i} to={item.path} className="search-grid-item" onClick={() => handleClick(item)}>
+                            <i className={item.icon}></i>
+                            <span>{item.name}</span>
+                          </Link>
+                        ))}
+                      </div>
 
-      {/* MENU */}
-      <div className="search-group">
-        <div className="search-group-title">MENU</div>
-        {pages.filter(p => p.category === "Menu").map((item,i)=>(
-          <Link key={i} to={item.path} className="search-result-item" onClick={()=>setSearchOpen(false)}>
-            <i className={item.icon}></i>
-            <span>{item.name}</span>
-          </Link>
-        ))}
-      </div>
+                      <div className="search-category-section">
+                        <div className="search-category-header">PERFORMANCE</div>
+                        {pages.filter(p => p.category === "PERFORMANCE").map((item, i) => (
+                          <Link key={i} to={item.path} className="search-grid-item" onClick={() => handleClick(item)}>
+                            <i className={item.icon}></i>
+                            <span>{item.name}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
 
-      {/* GLOBAL MASTERS */}
-      <div className="search-group">
-        <div className="search-group-title">GLOBAL MASTERS</div>
-        {pages.filter(p => p.category === "Global Masters").map((item,i)=>(
-          <Link key={i} to={item.path} className="search-result-item" onClick={()=>setSearchOpen(false)}>
-            <i className={item.icon}></i>
-            <span>{item.name}</span>
-          </Link>
-        ))}
-      </div>
+                    {/* COLUMN 2 */}
+                    <div className="search-grid-column">
+                      <div className="search-category-section">
+                        <div className="search-category-header">GLOBAL MASTERS</div>
+                        {pages.filter(p => p.category === "GLOBAL MASTERS").map((item, i) => (
+                          <Link key={i} to={item.path} className="search-grid-item" onClick={() => handleClick(item)}>
+                            <i className={item.icon}></i>
+                            <span>{item.name}</span>
+                          </Link>
+                        ))}
+                      </div>
 
-    </div>
+                      <div className="search-category-section">
+                        <div className="search-category-header">CARRIER MASTERS</div>
+                        {pages.filter(p => p.category === "CARRIER MASTERS").map((item, i) => (
+                          <Link key={i} to={item.path} className="search-grid-item" onClick={() => handleClick(item)}>
+                            <i className={item.icon}></i>
+                            <span>{item.name}</span>
+                          </Link>
+                        ))}
+                      </div>
 
-    {/* RIGHT COLUMN */}
-    <div className="search-column">
+                      <div className="search-category-section">
+                        <div className="search-category-header">FINANCE MASTERS</div>
+                        {pages.filter(p => p.category === "FINANCE MASTERS").map((item, i) => (
+                          <Link key={i} to={item.path} className="search-grid-item" onClick={() => handleClick(item)}>
+                            <i className={item.icon}></i>
+                            <span>{item.name}</span>
+                          </Link>
+                        ))}
+                      </div>
 
-      {/* CARRIER MASTERS */}
-      <div className="search-group">
-        <div className="search-group-title">CARRIER MASTERS</div>
-        {pages.filter(p => p.category === "Carrier Masters").map((item,i)=>(
-          <Link key={i} to={item.path} className="search-result-item" onClick={()=>setSearchOpen(false)}>
-            <i className={item.icon}></i>
-            <span>{item.name}</span>
-          </Link>
-        ))}
-      </div>
-
-      {/* FINANCE MASTERS */}
-      <div className="search-group">
-        <div className="search-group-title">FINANCE MASTERS</div>
-        {pages.filter(p => p.category === "Finance Masters").map((item,i)=>(
-          <Link key={i} to={item.path} className="search-result-item" onClick={()=>setSearchOpen(false)}>
-            <i className={item.icon}></i>
-            <span>{item.name}</span>
-          </Link>
-        ))}
-      </div>
-
-      {/* SYSTEM MASTERS */}
-      <div className="search-group">
-        <div className="search-group-title">SYSTEM MASTERS</div>
-        {pages.filter(p => p.category === "System Masters").map((item,i)=>(
-          <Link key={i} to={item.path} className="search-result-item" onClick={()=>setSearchOpen(false)}>
-            <i className={item.icon}></i>
-            <span>{item.name}</span>
-          </Link>
-        ))}
-      </div>
-
-      {/* ACCOUNTS */}
-      <div className="search-group">
-        <div className="search-group-title">ACCOUNTS</div>
-        {pages.filter(p => p.category === "Accounts").map((item,i)=>(
-          <Link key={i} to={item.path} className="search-result-item" onClick={()=>setSearchOpen(false)}>
-            <i className={item.icon}></i>
-            <span>{item.name}</span>
-          </Link>
-        ))}
-      </div>
-
-    </div>
-
-  </div>
-)}
+                      <div className="search-category-section">
+                        <div className="search-category-header">SYSTEM MASTERS</div>
+                        {pages.filter(p => p.category === "SYSTEM MASTERS").map((item, i) => (
+                          <Link key={i} to={item.path} className="search-grid-item" onClick={() => handleClick(item)}>
+                            <i className={item.icon}></i>
+                            <span>{item.name}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* SEARCH RESULTS */}
               {searchQuery !== "" && results.length === 0 && (
@@ -856,20 +844,40 @@ const Navbar = ({ collapsed, hovered }) => {
                 </div>
               )}
 
-              {searchQuery !== "" &&
-                results.map((item, i) => (
-                  <Link
-                    key={i}
-                    to={item.path}
-                    className="search-result-item"
-                    onClick={closeSearch}                  >
-                    <i className={item.icon}></i>
-                    <div>
-                      <div className="search-category">{item.category}</div>
-                      <div className="search-name">{item.name}</div>
-                    </div>
-                  </Link>
-                ))}
+{searchQuery !== "" &&
+  Object.entries(
+    results.reduce((acc, item) => {
+      if (!acc[item.category]) acc[item.category] = [];
+      acc[item.category].push(item);
+      return acc;
+    }, {})
+  ).map(([category, items]) => (
+    <div key={category} className="search-group">
+      <div className="search-group-title">{category}</div>
+
+      {items.map((item, i) => (
+  <Link
+    key={i}
+    to={item.path}
+    className="search-result modern"
+    onClick={() => handleClick(item)}
+  >
+    <div className="left">
+      <i className={item.icon}></i>
+    </div>
+
+    <div className="center">
+      <div className="title">{item.name}</div>
+      <div className="meta">{category}</div>
+    </div>
+
+    <div className="right">
+      <span>↵</span>
+    </div>
+  </Link>
+))}
+    </div>
+  ))}
             </div>
           </div>
         </div>

@@ -1,0 +1,420 @@
+/* ===================================================== */
+/* ================= DASHBOARD PAGE ==================== */
+/* ===================================================== */
+
+.dashboard-page {
+  padding-bottom: 60px;
+}
+
+/* ===== PAGE TITLE ===== */
+.dashboard-title {
+  font-family: "Public Sans", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #566a7f;
+  margin-bottom: 20px;
+}
+
+/* ===== DATE FILTER ROW ===== */
+.dashboard-filter-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filter-group label {
+  font-family: "Public Sans", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #566a7f;
+}
+
+.filter-select {
+  height: 38px;
+  min-width: 200px;
+  border: 1px solid #d9dee3;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.875rem;
+  font-family: "Public Sans", sans-serif;
+  color: #697a8d;
+  background-color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+
+.filter-select:focus {
+  border-color: #50a9e9;
+}
+
+.date-range-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.date-input {
+  height: 38px;
+  min-width: 140px;
+  border: 1px solid #d9dee3;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.875rem;
+  font-family: "Public Sans", sans-serif;
+  color: #697a8d;
+  background-color: #fff;
+  outline: none;
+}
+
+.date-input:focus {
+  border-color: #50a9e9;
+}
+
+.date-separator {
+  font-family: "Public Sans", sans-serif;
+  font-size: 0.875rem;
+  color: #697a8d;
+  font-weight: 500;
+}
+
+/* ===== TOP STAT CARDS ===== */
+.stat-cards-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  border-radius: 10px;
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 90px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: default;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(161, 172, 184, 0.25);
+}
+
+.stat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-card-label {
+  font-family: "Public Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #566a7f;
+}
+
+.stat-card-value {
+  font-family: "Public Sans", sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #566a7f;
+}
+
+/* ===== CIRCULAR ICON CONTAINER ===== */
+.icon-circle {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+/* Stat card icon circles */
+.icon-circle.quotes-icon {
+  background: rgba(80, 169, 233, 0.18);
+}
+
+.icon-circle.bookings-icon {
+  background: rgba(40, 167, 69, 0.15);
+}
+
+.icon-circle.shipments-icon {
+  background: rgba(235, 120, 70, 0.15);
+}
+
+.stat-card-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  opacity: 0.7;
+}
+
+/* Quotes card - light blue */
+.stat-card.quotes {
+  background: linear-gradient(135deg, #e0f4ff, #c7ecff);
+}
+
+/* Bookings card - light green */
+.stat-card.bookings {
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+}
+
+/* Shipments card - light pink/peach */
+.stat-card.shipments {
+  background: linear-gradient(135deg, #fef0e6, #fde0cc);
+}
+
+.shipment-sub-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 12px;
+  font-family: "Public Sans", sans-serif;
+  font-size: 0.75rem;
+  color: #697a8d;
+}
+
+.shipment-sub-stat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.shipment-sub-stat .sub-icon {
+  font-size: 0.85rem;
+}
+
+.shipment-sub-stat .sub-value {
+  font-weight: 600;
+  color: #50a9e9;
+}
+
+/* ===== TRANSPORT MODE SECTION ===== */
+.transport-section {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0.125rem 0.375rem rgba(161, 172, 184, 0.12);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.transport-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 1fr 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #eceef1;
+}
+
+.transport-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.transport-row:first-child {
+  padding-top: 0;
+}
+
+.transport-mode-label {
+  font-family: "Public Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #566a7f;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.transport-mode-label .mode-emoji {
+  font-size: 1.1rem;
+}
+
+/* Transport stat cards */
+.transport-stat-card {
+  border-radius: 8px;
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 70px;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: default;
+}
+
+.transport-stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(161, 172, 184, 0.22);
+}
+
+.transport-stat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.transport-stat-label {
+  font-family: "Public Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #d4380d;
+}
+
+.transport-stat-value {
+  font-family: "Public Sans", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #566a7f;
+}
+
+/* Transport icon circles */
+.icon-circle.air-icon {
+  background: rgba(46, 125, 50, 0.12);
+}
+
+.icon-circle.sea-icon {
+  background: rgba(21, 101, 192, 0.12);
+}
+
+.icon-circle.road-icon {
+  background: rgba(46, 125, 50, 0.12);
+}
+
+.icon-circle.rail-icon {
+  background: rgba(198, 40, 40, 0.12);
+}
+
+.transport-stat-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  opacity: 0.6;
+}
+
+/* AIR mode - light green/mint */
+.transport-stat-card.air {
+  background: linear-gradient(135deg, #e6f9ee, #d1f5df);
+}
+.transport-stat-card.air .transport-stat-label {
+  color: #2e7d32;
+}
+
+/* SEA mode - light blue */
+.transport-stat-card.sea {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+}
+.transport-stat-card.sea .transport-stat-label {
+  color: #1565c0;
+}
+
+/* ROAD mode - light green */
+.transport-stat-card.road {
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+}
+.transport-stat-card.road .transport-stat-label {
+  color: #2e7d32;
+}
+
+/* RAIL mode - light pink */
+.transport-stat-card.rail {
+  background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+}
+.transport-stat-card.rail .transport-stat-label {
+  color: #c62828;
+}
+
+/* ===== CHARTS SECTION ===== */
+.charts-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.chart-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0.125rem 0.375rem rgba(161, 172, 184, 0.12);
+  padding: 24px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.chart-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(161, 172, 184, 0.2);
+}
+
+.chart-title {
+  font-family: "Public Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #566a7f;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  min-height: 280px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+  .stat-cards-row {
+    grid-template-columns: 1fr;
+  }
+
+  .transport-row {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .transport-mode-label {
+    justify-content: center;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eceef1;
+  }
+
+  .charts-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-filter-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .filter-select,
+  .date-input {
+    min-width: 100%;
+  }
+
+  .date-range-group {
+    flex-wrap: wrap;
+  }
+}

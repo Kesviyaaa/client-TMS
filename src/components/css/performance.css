@@ -1,0 +1,186 @@
+/* ───── Performance Dashboards Styling (Shared) ───── */
+
+.bracket-card {
+    position: relative;
+    background-color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(161, 172, 184, 0.4);
+}
+
+.bracket-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(161, 172, 184, 0.45) !important;
+}
+
+/* Corner Brackets */
+.br-tl, .br-tr, .br-bl, .br-br {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-color: #a1acb8;
+}
+
+.br-tl { top: 0; left: 0; border-top: 2px solid; border-left: 2px solid; }
+.br-tr { top: 0; right: 0; border-top: 2px solid; border-right: 2px solid; }
+.br-bl { bottom: 0; left: 0; border-bottom: 2px solid; border-left: 2px solid; }
+.br-br { bottom: 0; right: 0; border-bottom: 2px solid; border-right: 2px solid; }
+
+/* KPI Styling */
+.kpi-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #566a7f;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+}
+
+.kpi-text {
+    font-size: 13px;
+    color: #a1acb8;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Header & Filters */
+.perf-header-title {
+    font-weight: bold;
+    margin: 0;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+.perf-header-title span {
+    color: #566a7f;
+}
+
+.perf-air-export {
+    color: #3bafda !important; /* Blue for Export */
+}
+
+.perf-air-import {
+    color: #2E8B57 !important; /* Green for Import */
+}
+
+.perf-ocean-export {
+    color: #696cff !important; /* Purple for Ocean Export */
+}
+
+.perf-ocean-import {
+    color: #ffab00 !important; /* Orange for Ocean Import */
+}
+
+.header-filter-input {
+    font-size: 13px;
+    border: 1px solid #d9dee3;
+    border-radius: 4px;
+    padding: 6px 10px;
+    color: #697a8d;
+    background-color: #fff;
+    outline: none;
+    height: 32px;
+}
+
+.header-filter-input:focus {
+    border-color: #696cff;
+}
+
+/* View Toggles */
+.view-toggle-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.view-toggle-btn.active {
+    background-color: #50a9e9;
+    color: white;
+}
+
+.view-toggle-btn.inactive {
+    background-color: #e8f4fc;
+    color: #50a9e9;
+}
+
+/* Tabs */
+.perf-tab {
+    font-weight: bold;
+    padding-bottom: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.perf-tab.active {
+    color: #50a9e9;
+    border-bottom: 2px solid #50a9e9;
+}
+
+.perf-tab.inactive {
+    color: #a1acb8;
+}
+
+.width-33 {
+    width: 33.33% !important;
+}
+
+.text-heading {
+    color: #32475c !important;
+}
+
+/* DataTable Customizations */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+.export-btn, .export-btn i {
+    color: white !important;
+}
+
+.export-btn {
+    height: 32px !important;
+    font-size: 11.5px !important;
+    font-weight: 600 !important;
+    padding: 0 16px !important;
+    background-color: #50a9e9 !important;
+    border: none !important;
+    border-radius: 6px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: background 0.2s ease !important;
+}
+
+.export-btn:hover {
+    background-color: #4098d8 !important;
+}
+
+.custom-colvis {
+    height: 32px !important;
+    font-size: 11.5px !important;
+    font-weight: 600 !important;
+    padding: 0 16px !important;
+    background-color: #fff !important;
+    color: #50a9e9 !important;
+    border: 1px solid #50a9e9 !important;
+    border-radius: 6px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.custom-colvis:hover {
+    background-color: #f0f9ff !important;
+}
