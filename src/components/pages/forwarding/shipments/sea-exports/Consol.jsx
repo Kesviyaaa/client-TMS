@@ -5,12 +5,12 @@ import "datatables.net-buttons-bs5";
 import "datatables.net-buttons/js/buttons.html5.mjs";
 import "datatables.net-buttons/js/buttons.print.mjs";
 import "datatables.net-responsive-bs5";
-import * as pdfMake from "pdfmake/build/pdfmake";
-import * as pdfFonts from "pdfmake/build/vfs_fonts";
+import pdfMake from "pdfmake/build/pdfmake"
+import pdfFonts from "pdfmake/build/vfs_fonts"
 
 import JSZip from "jszip";
 window.JSZip = JSZip;
-pdfMake.vfs = pdfFonts.vfs;
+pdfMake.vfs = pdfFonts.vfs
 
 import "../../../../../App.css";
 

@@ -3,6 +3,8 @@ import react from "@vitejs/plugin-react"
 import purgeCss from "vite-plugin-purgecss"
 
 export default defineConfig({
+  base: "/TMS-client/",
+
   plugins: [
     react(),
     purgeCss({

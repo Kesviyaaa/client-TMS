@@ -116,7 +116,6 @@ const TerminalOperator = () => {
                     columns: ":not(.no-export)",
                 },
             ],
-            language: { lengthMenu: "Show _MENU_ Entries" },
             pageLength: 10,
 
             columns: [

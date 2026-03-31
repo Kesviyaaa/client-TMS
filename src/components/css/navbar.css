@@ -711,18 +711,15 @@ body {
 }
 
 .search-modal {
-  width: 850px;
-  /* increase width for 2-column layout */
+  width: 600px;
   max-width: 95%;
   background: #fff;
   border-radius: 8px;
   padding: 0;
-  /* remove padding so header/results can be full width */
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  max-height: 85vh;
-  /* fit to screen */
+  max-height: 55vh;
 }
 
 .search-header {
@@ -848,8 +845,8 @@ body.navbar-search-show .layout-navbar {
 }
 
 .search-modal-card {
-  width: 850px;
-  max-height: 85vh;
+  width: 600px;
+  max-height: 55vh;
   background: white;
   border-radius: 10px;
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
@@ -1337,5 +1334,5 @@ kbd {
 
 .search-modal-card {
   height: auto !important;
-  max-height: 80vh !important;
+  max-height: 55vh !important;
 }
