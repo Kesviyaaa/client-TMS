@@ -21,7 +21,7 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 window.JSZip = JSZip;
 pdfMake.vfs = pdfFonts.vfs;
 
-import "../../../App.css";
+import "../../css/global.css";
 
 const DocumentTypes = ({ initialView = "table" }) => {
     const tableRef = useRef(null);
@@ -46,7 +46,7 @@ const DocumentTypes = ({ initialView = "table" }) => {
     /* ───── Switch View ───── */
     const switchToForm = () => {
         if (dtRef.current) {
-            dtRef.current.destroy();
+            dtRef.current.destroy(true);
             dtRef.current = null;
         }
         setView("form");
@@ -130,7 +130,7 @@ const DocumentTypes = ({ initialView = "table" }) => {
 
         return () => {
             if (dtRef.current) {
-                dtRef.current.destroy();
+                dtRef.current.destroy(true);
                 dtRef.current = null;
             }
         };
@@ -141,33 +141,32 @@ const DocumentTypes = ({ initialView = "table" }) => {
     ═══════════════════════════════════════ */
     if (view === "table") {
         return (
-            <div className="container-xxl flex-grow-1 container-p-y pb-5">
+            <div className="container-xxl container-p-y pb-5">
+                
+                <h4 className="table-title mb-4">Document Type Details</h4>
 
-                <div className="card">
-                    <div className="datatable-toolbar d-flex justify-content-between align-items-start p-3">
-                        <div className="title-section">
-                            <h5 className="table-title">Document Types</h5>
-                        </div>
-
-                        {/* ✅ CREATE BUTTON TOP RIGHT */}
-                        <button
-                            className="btn-add-record btn-primary-custom"
-                            onClick={switchToForm}
-                        >
-                            <i className="bx bx-plus"></i> Create
+                <div className="ocean-card">
+                    <div className="ocean-title">
+                        <span className="bk-section-title">
+                            <div className="bk-icon-circle"><i className="bx bx-file"></i></div> Document Type List
+                        </span>
+                        <button className="btn-primary-custom" onClick={switchToForm}>
+                            <i className="bx bx-plus"></i> Create Type
                         </button>
                     </div>
 
                     <div className="card-datatable p-3">
-                        <table ref={tableRef} className="table dataTable dtr-inline w-100">
-                            <thead>
-                                <tr>
-                                    <th>Document Type</th>
-                                    <th>Is Applicable</th>
-                                    <th>Is Default</th>
-                                </tr>
-                            </thead>
-                        </table>
+                        <div className="table-responsive">
+                            <table ref={tableRef} className="table dataTable dtr-inline w-100 shadow-none">
+                                <thead>
+                                    <tr>
+                                        <th>Document Type</th>
+                                        <th>Is Applicable</th>
+                                        <th>Is Default</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -178,7 +177,18 @@ const DocumentTypes = ({ initialView = "table" }) => {
        FORM VIEW (CREATE)
     ═══════════════════════════════════════ */
     return (
-        <></>
+        <div className="container-xxl flex-grow-1 container-p-y pb-5">
+            <div className="d-flex justify-content-between align-items-center mb-4">
+                <h4 className="table-title mb-0">Create Document Type</h4>
+            </div>
+            <div className="ocean-card p-4">
+                <div className="d-flex justify-content-end">
+                     <button className="btn-secondary-custom" onClick={() => setView("table")}>
+                        <i className="bx bx-arrow-back me-1"></i> Back
+                    </button>
+                </div>
+            </div>
+        </div>
     );
 };
 

@@ -21,7 +21,7 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 window.JSZip = JSZip;
 pdfMake.vfs = pdfFonts.vfs;
 
-import "../../../App.css";
+import "../../css/global.css";
 
 const Units = () => {
     const tableRef1 = useRef(null);
@@ -248,8 +248,10 @@ const Units = () => {
         });
 
         return () => {
-            if (dtRef1.current) dtRef1.current.destroy();
-            if (dtRef2.current) dtRef2.current.destroy();
+            if (dtRef1.current) dtRef1.current.destroy(true);
+            if (dtRef2.current) dtRef2.current.destroy(true);
+            dtRef1.current = null;
+            dtRef2.current = null;
         };
     }, []);
 
@@ -258,36 +260,7 @@ const Units = () => {
     ════════════════════════════════════════════════════ */
     return (
         <div className="container-xxl flex-grow-1 container-p-y pb-5">
-            <style>{`
-                .ocean-card {
-                    background: #fff;
-                    border-radius: 8px;
-                    box-shadow: 0 0.125rem 0.25rem rgba(161,172,184,0.4);
-                    transition: transform 0.3s ease, box-shadow 0.3s ease;
-                    margin-bottom: 20px;
-                }
-                .ocean-card:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 0.25rem 0.5rem rgba(161,172,184,0.6);
-                }
-                .ocean-title {
-                    color: #566a7f;
-                    font-size: 1.125rem;
-                    font-weight: 600;
-                    padding: 1.25rem;
-                    margin-bottom: 0;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                }
-                .dataTables_wrapper .dataTables_paginate .paginate_button {
-                    padding: 0 !important;
-                    margin: 0 !important;
-                    border: none !important;
-                    background: transparent !important;
-                }
-            `}</style>
-
+            
             {/* Page header */}
             <div className="d-flex justify-content-between align-items-start mb-4">
                 <h4 className="table-title">Unit Master</h4>
@@ -302,7 +275,7 @@ const Units = () => {
                     </span>
                 </div>
                 <div className="card-datatable pb-1">
-                    <table ref={tableRef1} className="table dataTable dtr-inline w-100">
+                    <table ref={tableRef1} className="table dataTable dtr-inline w-100 shadow-none">
                         <thead>
                             <tr>
                                 <th>Description</th>
@@ -328,7 +301,7 @@ const Units = () => {
                     </button>
                 </div>
                 <div className="card-datatable pb-1">
-                    <table ref={tableRef2} className="table dataTable dtr-inline w-100">
+                    <table ref={tableRef2} className="table dataTable dtr-inline w-100 shadow-none">
                         <thead>
                             <tr>
                                 <th>Description</th>
@@ -346,9 +319,11 @@ const Units = () => {
             {/* ───── CREATE MODAL ───── */}
             {showCreateModal && (
                 <div className="custom-modal-backdrop">
-                    <div className="custom-modal-card">
-                        <button className="custom-close" onClick={handleCreateClose}>×</button>
-                        <h5 className="modal-title">Create Unit Master</h5>
+                    <div className="custom-modal-card" style={{ maxWidth: "700px" }}>
+                        <div className="d-flex justify-content-between align-items-center">
+                            <h5 className="modal-title">Create Unit Master</h5>
+                            <button className="custom-close" onClick={handleCreateClose}>×</button>
+                        </div>
                         <hr className="modal-divider" />
 
                         <div className="row g-3">
@@ -360,7 +335,7 @@ const Units = () => {
                                         <input
                                             type="text"
                                             name="description"
-                                            className="qt-input"
+                                            className="form-control qt-input"
                                             value={createFormData.description}
                                             onChange={handleCreateChange}
                                             placeholder="Enter Description"
@@ -376,7 +351,7 @@ const Units = () => {
                                         <input
                                             type="text"
                                             name="uneceCode"
-                                            className="qt-input"
+                                            className="form-control qt-input"
                                             value={createFormData.uneceCode}
                                             onChange={handleCreateChange}
                                             placeholder="Enter UNECE Code"
@@ -392,7 +367,7 @@ const Units = () => {
                                         <input
                                             type="text"
                                             name="code"
-                                            className="qt-input"
+                                            className="form-control qt-input"
                                             value={createFormData.code}
                                             onChange={handleCreateChange}
                                             placeholder="Enter Code"
@@ -407,7 +382,7 @@ const Units = () => {
                                         <i className="bx bx-list-ul input-icon-left"></i>
                                         <select
                                             name="type"
-                                            className="qt-input"
+                                            className="form-control qt-input"
                                             value={createFormData.type}
                                             onChange={handleCreateChange}
                                         >
@@ -428,7 +403,7 @@ const Units = () => {
                                         <input
                                             type="text"
                                             name="plural"
-                                            className="qt-input"
+                                            className="form-control qt-input"
                                             value={createFormData.plural}
                                             onChange={handleCreateChange}
                                             placeholder="Enter Plural"
@@ -444,7 +419,7 @@ const Units = () => {
                                         <input
                                             type="number"
                                             name="noOfDecimals"
-                                            className="qt-input"
+                                            className="form-control qt-input"
                                             value={createFormData.noOfDecimals}
                                             onChange={handleCreateChange}
                                             placeholder="Enter Number of Decimals"
@@ -460,14 +435,14 @@ const Units = () => {
                                     <input
                                         type="number"
                                         name="conversionFactorValue"
-                                        className="qt-input"
+                                        className="form-control qt-input"
                                         style={{ width: "120px" }}
                                         value={createFormData.conversionFactorValue}
                                         onChange={handleCreateChange}
                                     />
                                     <select
                                         name="conversionFactorUnit"
-                                        className="qt-input"
+                                        className="form-control qt-input"
                                         style={{ width: "150px" }}
                                         value={createFormData.conversionFactorUnit}
                                         onChange={handleCreateChange}
@@ -510,9 +485,11 @@ const Units = () => {
                             </div>
                         </div>
 
+                        <hr className="modal-divider" />
+
                         <div className="modal-buttons mt-4">
-                            <button className="btn-secondary-custom px-4" onClick={handleCreateClose}>Close</button>
-                            <button className="btn-primary-custom px-4">Create</button>
+                            <button className="btn-secondary-custom px-4" onClick={handleCreateClose}>Cancel</button>
+                            <button className="btn-primary-custom px-4" onClick={handleCreateClose}>Create</button>
                         </div>
                     </div>
                 </div>

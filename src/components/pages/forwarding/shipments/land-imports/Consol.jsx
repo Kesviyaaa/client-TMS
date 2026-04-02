@@ -22,11 +22,12 @@ window.JSZip = JSZip;
 pdfMake.vfs = pdfFonts.vfs;
 
 import "../../../../../App.css";
+import "../../../../css/forwarding.css";
 
 /* ───── dummy data ───── */
 const dummyConsols = [
-  { 
-    _id: "1", 
+  {
+    _id: "1",
     consolNo: "LIC-001",
     consolDate: "2026-03-25",
     consolType: "Direct",
@@ -36,8 +37,8 @@ const dummyConsols = [
     carrier: "Emirates Logistics",
     vehicleNo: "DXB-7890"
   },
-  { 
-    _id: "2", 
+  {
+    _id: "2",
     consolNo: "LIC-002",
     consolDate: "2026-03-26",
     consolType: "Consol",
@@ -178,10 +179,15 @@ const LandImportConsol = ({ initialView = "table" }) => {
 
   if (view === "table") {
     return (
-      <div className="container-xxl flex-grow-1 container-p-y pb-5">
-        <div className="card">
-          <div className="datatable-toolbar d-flex justify-content-between align-items-middle p-3">
-            <h5 className="table-title mb-0">LI Consols</h5>
+      <div className="container-xxl container-p-y pb-5">
+
+        <h4 className="table-title mb-4">LI Consols</h4>
+
+        <div className="ocean-card">
+          <div className="ocean-title">
+            <span className="bk-section-title">
+              <div className="bk-icon-circle"><i className="bx bx-layer"></i></div> Consol List
+            </span>
             <button className="btn-primary-custom" onClick={switchToForm}>
               <i className="bx bx-plus"></i> Create Consol
             </button>
@@ -220,10 +226,9 @@ const LandImportConsol = ({ initialView = "table" }) => {
   return (
     <div className="container-xxl flex-grow-1 container-p-y pb-5">
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h5 className="mb-0" style={{ fontWeight: "700", color: "#566a7f" }}>Land Import Consol Details</h5>
+        <h5 className="bk-form-heading mb-0" style={{ color: "#566a7f", fontSize: "1.125rem", fontWeight: 600 }}>Land Import Consol Details</h5>
         <div className="d-flex gap-2">
-            <button className="btn-secondary-custom" onClick={() => setView("table")}><i className="bx bx-arrow-back me-1"></i> Back to List</button>
-            <button className="btn-primary-custom">Save Consol</button>
+          <button className="btn-secondary-custom" onClick={() => setView("table")}><i className="bx bx-arrow-back me-1"></i> Back to List</button>
         </div>
       </div>
 
@@ -261,16 +266,16 @@ const LandImportConsol = ({ initialView = "table" }) => {
               <div className="col-md-3"><label className="qt-label">Origin Agent <span className="text-danger">*</span></label><select className="form-field qt-input"><option>Select</option></select></div>
               <div className="col-md-3"><label className="qt-label">Destination Agent <span className="text-danger">*</span></label><select className="form-field qt-input"><option>Select</option></select></div>
               <div className="col-md-3"><label className="qt-label">Selling Agent</label><select className="form-field qt-input"><option>Select</option></select></div>
-              <div className="col-md-3"><label className="qt-label">Ship To</label><div className="d-flex gap-1"><select className="form-field qt-input w-75"><option>Select</option></select><button className="btn btn-sm btn-outline-primary">Enter Ship</button></div></div>
+              <div className="col-md-3"><label className="qt-label">Ship To</label><div className="d-flex gap-1"><select className="form-field qt-input w-50"><option>Select</option></select><input className="form-field qt-input w-50" placeholder="Enter Ship" /></div></div>
             </div>
             <div className="row g-3 mb-3">
-              <div className="col-md-3"><label className="qt-label">Importer</label><div className="d-flex gap-1"><select className="form-field qt-input w-75"><option>Select</option></select><button className="btn btn-sm btn-outline-primary">Enter Imp</button></div></div>
-              <div className="col-md-3"><label className="qt-label">Booking Party</label><div className="d-flex gap-1"><select className="form-field qt-input w-75"><option>Select</option></select><button className="btn btn-sm btn-outline-primary">Enter Book</button></div></div>
-              <div className="col-md-3"><label className="qt-label">Seller</label><div className="d-flex gap-1"><select className="form-field qt-input w-75"><option>Select</option></select><button className="btn btn-sm btn-outline-primary">Enter Selle</button></div></div>
-              <div className="col-md-3"><label className="qt-label">Buyer</label><div className="d-flex gap-1"><select className="form-field qt-input w-75"><option>Select</option></select><button className="btn btn-sm btn-outline-primary">Enter Buye</button></div></div>
+              <div className="col-md-3"><label className="qt-label">Importer</label><div className="d-flex gap-1"><select className="form-field qt-input w-50"><option>Select</option></select><input className="form-field qt-input w-50" placeholder="Enter Imp" /></div></div>
+              <div className="col-md-3"><label className="qt-label">Booking Party</label><div className="d-flex gap-1"><select className="form-field qt-input w-50"><option>Select</option></select><input className="form-field qt-input w-50" placeholder="Enter Book" /></div></div>
+              <div className="col-md-3"><label className="qt-label">Seller</label><div className="d-flex gap-1"><select className="form-field qt-input w-50"><option>Select</option></select><input className="form-field qt-input w-50" placeholder="Enter Seller" /></div></div>
+              <div className="col-md-3"><label className="qt-label">Buyer</label><div className="d-flex gap-1"><select className="form-field qt-input w-50"><option>Select</option></select><input className="form-field qt-input w-50" placeholder="Enter Buyer" /></div></div>
             </div>
             <div className="row g-3">
-              <div className="col-md-3"><label className="qt-label">Transporter</label><div className="d-flex gap-1"><select className="form-field qt-input w-75"><option>Select</option></select><button className="btn btn-sm btn-outline-primary">Enter Tra</button></div></div>
+              <div className="col-md-3"><label className="qt-label">Transporter</label><div className="d-flex gap-1"><select className="form-field qt-input w-50"><option>Select</option></select><input className="form-field qt-input w-50" placeholder="Enter Trans" /></div></div>
             </div>
           </div>
         )}
@@ -307,6 +312,29 @@ const LandImportConsol = ({ initialView = "table" }) => {
               <div className="col-md-3"><label className="qt-label">Transporter / Carrier</label><select className="form-field qt-input"><option>Select Transporter / Carrier</option></select></div>
               <div className="col-md-3"><label className="qt-label">Vehicle / Rail No.</label><input className="form-field qt-input" placeholder="Enter Vehicle / Rail No." /></div>
             </div>
+            <div className="row g-3 mb-3">
+              <div className="col-md-3"><label className="qt-label">Trade Lane</label><select className="form-field qt-input"><option>Select Trade Lane</option></select></div>
+              <div className="col-md-3"><label className="qt-label">De-stuffing At</label><select className="form-field qt-input"><option>Select De-stuffing At</option></select></div>
+              <div className="col-md-3"><label className="qt-label">Cont. Return Location</label><select className="form-field qt-input"><option>Select Cont. Return Location</option></select></div>
+              <div className="col-md-3"><label className="qt-label">Orig. Agent Ref.</label><input className="form-field qt-input" placeholder="Enter Orig. Agent Ref." /></div>
+            </div>
+            <div className="row g-3 mb-3">
+              <div className="col-md-3"><label className="qt-label">AMS No.</label><input className="form-field qt-input" placeholder="Enter AMS No." /></div>
+              <div className="col-md-3"><label className="qt-label">G.O. Date</label><input type="date" className="form-field qt-input" /></div>
+              <div className="col-md-3"><label className="qt-label">Last Free Date</label><input type="date" className="form-field qt-input" /></div>
+              <div className="col-md-3">
+                <label className="qt-label">Co-Load Type</label>
+                <select className="form-field qt-input">
+                  <option>-- Not Applicable --</option>
+                  <option>Applicable</option>
+                </select>
+              </div>
+            </div>
+            <div className="row g-3">
+              <div className="col-md-3"><label className="qt-label">Agent Name</label><select className="form-field qt-input"><option>Select Agent Name</option></select></div>
+              <div className="col-md-3"><label className="qt-label">Agent CNote No</label><input className="form-field qt-input" placeholder="Enter Agent CNote No" /></div>
+              <div className="col-md-3"><label className="qt-label">Agent Date</label><input type="date" className="form-field qt-input" /></div>
+            </div>
           </div>
         )}
       </div>
@@ -325,7 +353,7 @@ const LandImportConsol = ({ initialView = "table" }) => {
             <div className="bk-dynamic-table-wrapper">
               <table className="bk-dynamic-table">
                 <thead><tr><th>Transport Mode</th><th>Type</th><th>From</th><th>To</th><th>ETD</th><th>ETA(Dest.)</th><th>Carrier</th><th>Flight/Vessel</th><th>Voyage No</th><th>Remarks</th></tr></thead>
-                <tbody>{routeRows.map(row => (<tr key={row.id}><td><select className="form-field qt-input" style={{height: 32}}><option>Select</option></select></td><td><input className="form-field qt-input" style={{height: 32}}/></td><td><select className="form-field qt-input" style={{height: 32}}><option>Select</option></select></td><td><select className="form-field qt-input" style={{height: 32}}><option>Select</option></select></td><td><input type="date" className="form-field qt-input" style={{height: 32}}/></td><td><input type="date" className="form-field qt-input" style={{height: 32}}/></td><td><input className="form-field qt-input" style={{height: 32}}/></td><td><input className="form-field qt-input" style={{height: 32}}/></td><td><input className="form-field qt-input" style={{height: 32}}/></td><td><input className="form-field qt-input" style={{height: 32}}/></td></tr>))}</tbody>
+                <tbody>{routeRows.map(row => (<tr key={row.id}><td><select className="form-field qt-input" style={{ height: 32 }}><option>Select</option></select></td><td><input className="form-field qt-input" style={{ height: 32 }} /></td><td><select className="form-field qt-input" style={{ height: 32 }}><option>Select</option></select></td><td><select className="form-field qt-input" style={{ height: 32 }}><option>Select</option></select></td><td><input type="date" className="form-field qt-input" style={{ height: 32 }} /></td><td><input type="date" className="form-field qt-input" style={{ height: 32 }} /></td><td><input className="form-field qt-input" style={{ height: 32 }} /></td><td><input className="form-field qt-input" style={{ height: 32 }} /></td><td><input className="form-field qt-input" style={{ height: 32 }} /></td><td><input className="form-field qt-input" style={{ height: 32 }} /></td></tr>))}</tbody>
               </table>
             </div>
           </div>
@@ -335,39 +363,59 @@ const LandImportConsol = ({ initialView = "table" }) => {
       {/* 5. DI */}
       <div className="qt-section-card">
         <div className="bk-section-header" onClick={() => toggleSection("diDetails")}>
-            <div className="bk-section-title"><div className="bk-icon-circle"><i className="bx bx-file"></i></div> DI</div>
-            <i className={`bx ${openSections.diDetails ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
+          <div className="bk-section-title"><div className="bk-icon-circle"><i className="bx bx-file"></i></div> DI</div>
+          <i className={`bx ${openSections.diDetails ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
         </div>
         {openSections.diDetails && (
-            <div className="qt-section-body">
-                <div className="row g-3 mb-3">
-                    <div className="col-md-4"><label className="qt-label">Type</label><select className="form-field qt-input"><option>Select Type</option></select></div>
-                    <div className="col-md-4"><label className="qt-label">Pickup From</label><select className="form-field qt-input"><option>Select Pickup From</option></select></div>
-                    <div className="col-md-4"><label className="qt-label">Pickup Address</label><textarea className="form-field qt-input" rows="2" placeholder="Enter Pickup Address"></textarea></div>
-                </div>
-                <div className="row g-3">
-                    <div className="col-md-4"><label className="qt-label">EST Date & Time</label><input type="datetime-local" className="form-field qt-input" /></div>
-                </div>
+          <div className="qt-section-body">
+            <div className="row g-3 mb-3">
+              <div className="col-md-4"><label className="qt-label">Type <span className="text-danger">*</span></label><select className="form-field qt-input"><option>Select Type</option></select></div>
+              <div className="col-md-4"><label className="qt-label">Pickup From</label><select className="form-field qt-input"><option>Select Pickup From</option></select></div>
+              <div className="col-md-4"><label className="qt-label">Pickup Address</label><textarea className="form-field qt-input" rows="2" placeholder="Enter Pickup Address"></textarea></div>
             </div>
+            <div className="row g-3 mb-3">
+              <div className="col-md-4"><label className="qt-label">EST Date & Time</label><input type="datetime-local" className="form-field qt-input" /></div>
+              <div className="col-md-4"><label className="qt-label">Delivery Transporter</label><select className="form-field qt-input"><option>Select Delivery Transporter</option></select></div>
+              <div className="col-md-4"><label className="qt-label">Transporter Ref No</label><input className="form-field qt-input" placeholder="Enter Transporter Ref No" /></div>
+            </div>
+            <div className="row g-3 mb-3">
+              <div className="col-md-4"><label className="qt-label">Vehicle No</label><input className="form-field qt-input" placeholder="Enter Vehicle No" /></div>
+              <div className="col-md-4"><label className="qt-label">Driver Name</label><input className="form-field qt-input" placeholder="Enter Driver Name" /></div>
+              <div className="col-md-4"><label className="qt-label">Charge Type</label><select className="form-field qt-input"><option>Select Charge Type</option></select></div>
+            </div>
+            <div className="row g-3 mb-3">
+              <div className="col-md-4"><label className="qt-label">Date</label><input type="date" className="form-field qt-input" /></div>
+              <div className="col-md-4"><label className="qt-label">Deliver To</label><select className="form-field qt-input"><option>Select Deliver To</option></select></div>
+              <div className="col-md-4"><label className="qt-label">Delivery Address</label><textarea className="form-field qt-input" rows="2" placeholder="Enter Delivery Address"></textarea></div>
+            </div>
+            <div className="row g-3 mb-3">
+              <div className="col-md-4"><label className="qt-label">EST Date & Time (Delivery)</label><input type="datetime-local" className="form-field qt-input" /></div>
+              <div className="col-md-4"><label className="qt-label">Container No.</label><input className="form-field qt-input" placeholder="Enter Container No." /></div>
+              <div className="col-md-4"><label className="qt-label">Total Weight</label><input className="form-field qt-input" value="0" /></div>
+            </div>
+            <div className="row g-3">
+              <div className="col-md-12"><label className="qt-label">Remark</label><textarea className="form-field qt-input" rows="2" placeholder="Enter Remark"></textarea></div>
+            </div>
+          </div>
         )}
       </div>
 
       {/* 6. ATTACHED HOUSE */}
       <div className="qt-section-card">
         <div className="bk-section-header" onClick={() => toggleSection("attachedHouse")}>
-          <div className="d-flex align-items-center gap-3">
-            <div className="bk-section-title"><div className="bk-icon-circle"><i className="bx bx-link"></i></div> Attached House</div>
-            <button className="btn btn-sm btn-info text-white"><i className="bx bx-paperclip"></i> Attach Shipment</button>
-            <button className="btn btn-sm btn-success"><i className="bx bx-plus"></i> New Shipment</button>
-            <button className="btn btn-sm btn-danger"><i className="bx bx-trash"></i> Detach</button>
+          <div className="bk-section-title"><div className="bk-icon-circle"><i className="bx bx-link"></i></div> Attached House</div>
+          <div className="ms-auto d-flex gap-2">
+            <button className="btn btn-sm btn-info text-white" style={{ fontSize: '13px', padding: '4px 12px' }}><i className="bx bx-paperclip"></i> Attach Shipment</button>
+            <button className="btn btn-sm btn-success" style={{ fontSize: '13px', padding: '4px 12px' }}><i className="bx bx-plus"></i> New Shipment</button>
+            <button className="btn btn-sm btn-danger" style={{ fontSize: '13px', padding: '4px 12px' }}><i className="bx bx-trash"></i> Detach</button>
           </div>
-          <i className={`bx ${openSections.attachedHouse ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
+          <i className={`bx ${openSections.attachedHouse ? "bx-chevron-up" : "bx-chevron-down"} ms-2`}></i>
         </div>
         {openSections.attachedHouse && (
           <div className="qt-section-body">
             <div className="table-responsive">
               <table className="table table-bordered table-sm text-center">
-                <thead className="table-light"><tr><th>Date</th><th>Shipment No</th><th>Shipper</th><th>Consignee</th><th>Cargo Type</th><th>Packages</th><th>Volume</th><th>Gross Wt</th><th>Charge Wt</th></tr></thead>
+                <thead className="table-light"><tr><th>Date</th><th>Shipment No</th><th>Cargo Type</th><th>Gross Wt</th><th>Charge Wt</th><th>Shipper</th><th>Consignee</th><th>Packages</th><th>Volume</th></tr></thead>
                 <tbody><tr><td colSpan="9" className="text-muted py-3">No data available</td></tr></tbody>
               </table>
             </div>
@@ -386,19 +434,24 @@ const LandImportConsol = ({ initialView = "table" }) => {
             <div className="row g-4">
               <div className="col-md-6">
                 <div className="qt-charge-card">
-                  <div className="qt-charge-header qt-charge-revenue">Revenue Details <button className="btn btn-sm btn-light">Add +</button></div>
+                  <div className="qt-charge-header qt-charge-revenue">
+                    <span>Revenue Details</span>
+                    <button className="legacy-add-btn-rev" onClick={() => setShowRevenueModal(true)}>Add +</button>
+                  </div>
                   <div className="table-responsive"><table className="table table-sm text-center"><thead><tr><th>Charge Name</th><th>Rate</th><th>Currency</th><th>Edit</th><th>Del</th></tr></thead><tbody><tr><td colSpan="5" className="text-muted py-2">No revenue charges</td></tr></tbody></table></div>
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="qt-charge-card">
-                  <div className="qt-charge-header qt-charge-cost">Cost Details <button className="btn btn-sm btn-light">Add +</button></div>
+                  <div className="qt-charge-header qt-charge-cost">
+                    <span>Cost Details</span>
+                    <button className="legacy-add-btn-cost" onClick={() => setShowCostModal(true)}>Add +</button>
+                  </div>
                   <div className="table-responsive"><table className="table table-sm text-center"><thead><tr><th>Charge Name</th><th>Rate</th><th>Currency</th><th>Edit</th><th>Del</th></tr></thead><tbody><tr><td colSpan="5" className="text-muted py-2">No cost charges</td></tr></tbody></table></div>
                 </div>
               </div>
             </div>
             <div className="qt-summary-wrapper mt-4">
-              <h6 className="mb-3">Shipment Summary</h6>
               <div className="table-responsive">
                 <table className="table table-bordered qt-summary-table text-center">
                   <thead>
@@ -434,8 +487,8 @@ const LandImportConsol = ({ initialView = "table" }) => {
       </div>
 
       <div className="d-flex justify-content-end gap-2 mt-4">
-        <button className="btn btn-secondary" onClick={() => setView("table")}>Back</button>
-        <button className="btn btn-primary">Save</button>
+        <button className="btn-secondary-custom" onClick={() => setView("table")}>Back</button>
+        <button className="btn-primary-custom" onClick={() => { }}>Save</button>
       </div>
     </div>
   );

@@ -20,6 +20,7 @@ window.JSZip = JSZip;
 pdfMake.vfs = pdfFonts.vfs;
 
 import "../../../App.css";
+import "../../css/finance.css";
 
 const GlobalChargeCode = () => {
     const tableRef1 = useRef(null);
@@ -192,51 +193,6 @@ const GlobalChargeCode = () => {
 
     const renderTableView = () => (
         <div className="container-xxl flex-grow-1 container-p-y pb-5">
-            <style>{`
-                .ocean-card {
-                    background: #fff;
-                    border-radius: 8px;
-                    box-shadow: 0 0.125rem 0.25rem rgba(161, 172, 184, 0.4);
-                    transition: transform 0.3s ease, box-shadow 0.3s ease;
-                    margin-bottom: 20px;
-                    overflow: hidden;
-                }
-                .ocean-card:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 0.25rem 0.5rem rgba(161, 172, 184, 0.6);
-                }
-                .ocean-title {
-                    color: #566a7f;
-                    font-size: 1.125rem;
-                    font-weight: 600;
-                    padding: 1.25rem;
-                    margin-bottom: 0;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                }
-                .bk-section-title {
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                }
-                .table-title {
-                    color: #566a7f;
-                    font-size: 1.35rem;
-                    font-weight: 700;
-                    font-family: "Public Sans", sans-serif;
-                }
-                /* DataTable Responsive Control (+ circle) styling */
-                table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before {
-                    background-color: #50a9e9 !important;
-                    border: 2px solid #fff !important;
-                    box-shadow: 0 0 3px rgba(0,0,0,0.2) !important;
-                }
-                .modal-divider {
-                    margin: 1rem 0;
-                    border-color: #e9ecef;
-                }
-            `}</style>
 
             <div className="d-flex justify-content-between align-items-start mb-4">
                 <div className="title-section">
@@ -326,27 +282,6 @@ const GlobalChargeCode = () => {
 
     const renderFormView = (isView = false) => (
         <div className="container-xxl flex-grow-1 container-p-y pb-5">
-            <style>{`
-                .group-section {
-                    border: 1px solid #d9dee3;
-                    border-radius: 8px;
-                    padding: 24px;
-                    position: relative;
-                    margin-top: 30px;
-                    margin-bottom: 24px;
-                    background: #fff;
-                }
-                .group-label {
-                    position: absolute;
-                    top: -12px;
-                    left: 20px;
-                    background: #fff;
-                    padding: 0 12px;
-                    color: #50a9e9;
-                    font-weight: 600;
-                    font-size: 14px;
-                }
-            `}</style>
 
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <h4 className="table-title mb-0">{isView ? "View Charge Code" : "Create Global Charge Code"}</h4>

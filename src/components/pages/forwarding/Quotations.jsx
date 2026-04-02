@@ -22,6 +22,7 @@ window.JSZip = JSZip;
 pdfMake.vfs = pdfFonts.vfs;
 
 import "../../../App.css";
+import "../../css/forwarding.css";
 
 /* ───── dummy data ───── */
 const dummyQuotations = [
@@ -239,7 +240,7 @@ const Quotations = ({ initialView = "table" }) => {
           salesCoordinator: "",
           location: "",
         });
-        setView("form");
+        switchToForm();
       }
     });
 
@@ -272,6 +273,14 @@ const Quotations = ({ initialView = "table" }) => {
   }, [view, quotations]);
 
   /* ───── helpers ───── */
+  const switchToForm = () => {
+    if (dtRef.current) {
+      dtRef.current.destroy();
+      dtRef.current = null;
+    }
+    setView("form");
+  };
+
   const toggleSection = (key) =>
     setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
 
@@ -323,7 +332,7 @@ const Quotations = ({ initialView = "table" }) => {
     });
     setRevenueEntries([]);
     setCostEntries([]);
-    setView("form");
+    switchToForm();
   };
 
   const totalRevenue = revenueEntries.reduce((s, e) => s + (parseFloat(e.rate) || 0), 0);
@@ -336,12 +345,14 @@ const Quotations = ({ initialView = "table" }) => {
   ════════════════════════════════════════════════════ */
   if (view === "table") {
     return (
-      <div className="container-xxl flex-grow-1 container-p-y">
-        <div className="card">
-          <div className="datatable-toolbar d-flex justify-content-between align-items-start">
-            <div className="title-section">
-              <h5 className="table-title">Quotation</h5>
-            </div>
+      <div className="container-xxl container-p-y pb-5">
+        <h4 className="table-title mb-4">Quotation</h4>
+
+        <div className="ocean-card">
+          <div className="ocean-title">
+            <span className="bk-section-title">
+              <div className="bk-icon-circle"><i className="bx bx-file"></i></div> Quotation List
+            </span>
             <button className="btn-add-record btn-primary-custom" onClick={openCreateModal}>
               <i className="bx bx-plus"></i> Create Quotation
             </button>
@@ -469,9 +480,9 @@ const Quotations = ({ initialView = "table" }) => {
      RENDER — FORM VIEW
   ════════════════════════════════════════════════════ */
   return (
-    <div className="container-xxl flex-grow-1 container-p-y">
+    <div className="container-xxl flex-grow-1 container-p-y pb-5">
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h5 className="qt-form-heading mb-0">Quotes Details</h5>
+        <h5 className="bk-form-heading mb-0" style={{ color: "#566a7f", fontSize: "1.125rem", fontWeight: 600 }}>Quotes Details</h5>
         <button className="btn-secondary-custom" onClick={() => setView("table")}>
           <i className="bx bx-arrow-back me-1"></i> Back to List
         </button>
@@ -481,7 +492,7 @@ const Quotations = ({ initialView = "table" }) => {
       <div className="qt-section-card">
         <div className="bk-section-header" onClick={() => toggleSection("basic")}>
           <span className="bk-section-title">
-             <div className="bk-icon-circle"><i className="bx bx-info-circle"></i></div> Basic Information
+            <div className="bk-icon-circle"><i className="bx bx-info-circle"></i></div> Basic Information
           </span>
           <i className={`bx ${openSections.basic ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
         </div>
@@ -570,7 +581,7 @@ const Quotations = ({ initialView = "table" }) => {
       <div className="qt-section-card">
         <div className="bk-section-header" onClick={() => toggleSection("handler")}>
           <span className="bk-section-title">
-             <div className="bk-icon-circle"><i className="bx bx-user"></i></div> Handler Details
+            <div className="bk-icon-circle"><i className="bx bx-user"></i></div> Handler Details
           </span>
           <i className={`bx ${openSections.handler ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
         </div>
@@ -638,7 +649,7 @@ const Quotations = ({ initialView = "table" }) => {
       <div className="qt-section-card">
         <div className="bk-section-header" onClick={() => toggleSection("cargo")}>
           <span className="bk-section-title">
-             <div className="bk-icon-circle"><i className="bx bx-package"></i></div> Cargo Details
+            <div className="bk-icon-circle"><i className="bx bx-package"></i></div> Cargo Details
           </span>
           <i className={`bx ${openSections.cargo ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
         </div>
@@ -692,8 +703,8 @@ const Quotations = ({ initialView = "table" }) => {
               <div className="col-md-3">
                 <label className="qt-label">Gross Weight <span className="text-danger">*</span></label>
                 <div className="d-flex gap-2">
-                   <input type="text" className="form-field qt-input" placeholder="GrossWeight" />
-                   <select className="form-field qt-input" style={{ width: "80px" }}><option value="">Select</option></select>
+                  <input type="text" className="form-field qt-input" placeholder="GrossWeight" />
+                  <select className="form-field qt-input" style={{ width: "80px" }}><option value="">Select</option></select>
                 </div>
               </div>
             </div>
@@ -711,37 +722,37 @@ const Quotations = ({ initialView = "table" }) => {
                 </div>
               </div>
               <div className="col-md-6">
-                 <label className="qt-label">Packages</label>
-                 <div className="d-flex gap-2">
-                    <select className="form-field qt-input"><option value="">Select Type</option></select>
-                    <input type="text" className="form-field qt-input" placeholder="Packages" />
-                    <select className="form-field qt-input" style={{ width: "80px" }}><option value="">Select</option></select>
-                 </div>
+                <label className="qt-label">Packages</label>
+                <div className="d-flex gap-2">
+                  <select className="form-field qt-input"><option value="">Select Type</option></select>
+                  <input type="text" className="form-field qt-input" placeholder="Packages" />
+                  <select className="form-field qt-input" style={{ width: "80px" }}><option value="">Select</option></select>
+                </div>
               </div>
             </div>
             <div className="row g-3 mb-3">
-               <div className="col-md-4">
-                  <label className="qt-label">Volume <span className="text-danger">*</span></label>
-                  <div className="d-flex gap-2 align-items-center">
-                    <input type="text" className="form-field qt-input" />
-                    <select className="form-field qt-input" style={{ width: "80px" }}><option value="">Select</option></select>
-                    <button className="btn btn-sm btn-info" style={{ height: 38 }}><i className="bx bx-calculator"></i></button>
-                  </div>
-               </div>
-               <div className="col-md-4">
-                  <label className="qt-label">Volume Weight</label>
+              <div className="col-md-4">
+                <label className="qt-label">Volume <span className="text-danger">*</span></label>
+                <div className="d-flex gap-2 align-items-center">
                   <input type="text" className="form-field qt-input" />
-               </div>
-               <div className="col-md-4">
-                  <label className="qt-label">Chargeable Weight <span className="text-danger">*</span></label>
-                  <input type="text" className="form-field qt-input" />
-               </div>
+                  <select className="form-field qt-input" style={{ width: "80px" }}><option value="">Select</option></select>
+                  <button className="btn btn-sm btn-info" style={{ height: 38 }}><i className="bx bx-calculator"></i></button>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <label className="qt-label">Volume Weight</label>
+                <input type="text" className="form-field qt-input" />
+              </div>
+              <div className="col-md-4">
+                <label className="qt-label">Chargeable Weight <span className="text-danger">*</span></label>
+                <input type="text" className="form-field qt-input" />
+              </div>
             </div>
             <div className="row g-3">
-               <div className="col-md-12">
-                  <label className="qt-label">Vehicle Type</label>
-                  <textarea className="form-field qt-input" rows={2} style={{ height: "auto" }}></textarea>
-               </div>
+              <div className="col-md-12">
+                <label className="qt-label">Vehicle Type</label>
+                <textarea className="form-field qt-input" rows={2} style={{ height: "auto" }}></textarea>
+              </div>
             </div>
           </div>
         )}
@@ -751,7 +762,7 @@ const Quotations = ({ initialView = "table" }) => {
       <div className="qt-section-card">
         <div className="bk-section-header" onClick={() => toggleSection("movement")}>
           <span className="bk-section-title">
-             <div className="bk-icon-circle"><i className="bx bxs-truck"></i></div> Movement Details
+            <div className="bk-icon-circle"><i className="bx bxs-truck"></i></div> Movement Details
           </span>
           <i className={`bx ${openSections.movement ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
         </div>
@@ -783,8 +794,8 @@ const Quotations = ({ initialView = "table" }) => {
               <div className="col-md-3">
                 <label className="qt-label">TransitDest/Days</label>
                 <div className="d-flex gap-2">
-                   <select className="form-field qt-input"><option value="">Select</option></select>
-                   <input type="text" className="form-field qt-input" />
+                  <select className="form-field qt-input"><option value="">Select</option></select>
+                  <input type="text" className="form-field qt-input" />
                 </div>
               </div>
               <div className="col-md-3">
@@ -799,61 +810,61 @@ const Quotations = ({ initialView = "table" }) => {
 
             {/* Movements Sub-section */}
             <div className="bk-section-card mb-4" style={{ boxShadow: "none", border: "1px solid #eef0f2" }}>
-               <div className="bk-section-header" style={{ padding: "8px 15px", background: "#f8f9fa" }}>
-                  <span className="bk-section-title" style={{ fontSize: "14px", color: "#3b5998" }}>Movements</span>
-               </div>
-               <div className="qt-section-body" style={{ padding: "15px" }}>
-                  <div className="row g-3 mb-3">
-                    <div className="col-md-3"><label className="qt-label">Origin</label><select className="form-field qt-input"><option value="">Select</option></select></div>
-                    <div className="col-md-3"><label className="qt-label">Place of Receipt</label><select className="form-field qt-input"><option value="">Select</option></select></div>
-                    <div className="col-md-3"><label className="qt-label">Port of Loading</label><select className="form-field qt-input"><option value="">Select</option></select></div>
-                    <div className="col-md-3"><label className="qt-label">Port of Discharge</label><select className="form-field qt-input"><option value="">Select</option></select></div>
-                  </div>
-                  <div className="row g-3 mb-3">
-                    <div className="col-md-3"><label className="qt-label">Place of Delivery</label><select className="form-field qt-input"><option value="">Select</option></select></div>
-                    <div className="col-md-3"><label className="qt-label">Final Destination</label><select className="form-field qt-input"><option value="">Select</option></select></div>
-                    <div className="col-md-3"><label className="qt-label">Trade Line</label><input type="text" className="form-field qt-input" /></div>
-                    <div className="col-md-3"><label className="qt-label">Pickup Address</label><select className="form-field qt-input"><option value="">Select Pickup Address</option></select></div>
-                  </div>
-                  <div className="row g-3">
-                    <div className="col-md-3"><label className="qt-label">Delivery Address</label><select className="form-field qt-input"><option value="">Select Delivery Address</option></select></div>
-                  </div>
-               </div>
+              <div className="bk-section-header" style={{ padding: "8px 15px", background: "#f8f9fa" }}>
+                <span className="bk-section-title" style={{ fontSize: "14px", color: "#3b5998" }}>Movements</span>
+              </div>
+              <div className="qt-section-body" style={{ padding: "15px" }}>
+                <div className="row g-3 mb-3">
+                  <div className="col-md-3"><label className="qt-label">Origin</label><select className="form-field qt-input"><option value="">Select</option></select></div>
+                  <div className="col-md-3"><label className="qt-label">Place of Receipt</label><select className="form-field qt-input"><option value="">Select</option></select></div>
+                  <div className="col-md-3"><label className="qt-label">Port of Loading</label><select className="form-field qt-input"><option value="">Select</option></select></div>
+                  <div className="col-md-3"><label className="qt-label">Port of Discharge</label><select className="form-field qt-input"><option value="">Select</option></select></div>
+                </div>
+                <div className="row g-3 mb-3">
+                  <div className="col-md-3"><label className="qt-label">Place of Delivery</label><select className="form-field qt-input"><option value="">Select</option></select></div>
+                  <div className="col-md-3"><label className="qt-label">Final Destination</label><select className="form-field qt-input"><option value="">Select</option></select></div>
+                  <div className="col-md-3"><label className="qt-label">Trade Line</label><input type="text" className="form-field qt-input" /></div>
+                  <div className="col-md-3"><label className="qt-label">Pickup Address</label><select className="form-field qt-input"><option value="">Select Pickup Address</option></select></div>
+                </div>
+                <div className="row g-3">
+                  <div className="col-md-3"><label className="qt-label">Delivery Address</label><select className="form-field qt-input"><option value="">Select Delivery Address</option></select></div>
+                </div>
+              </div>
             </div>
 
             {/* Carbon Emission Sub-section */}
             <div className="bk-section-card" style={{ boxShadow: "none", border: "1px solid #eef0f2" }}>
-               <div className="bk-section-header" style={{ padding: "8px 15px", background: "#f8f9fa" }}>
-                  <span className="bk-section-title" style={{ fontSize: "14px", color: "#3b5998" }}>Carbon Emission</span>
-               </div>
-               <div className="qt-section-body" style={{ padding: "15px" }}>
-                  <div className="row g-3">
-                    <div className="col-md-4">
-                       <label className="qt-label">Pre Carriage Emission</label>
-                       <div className="d-flex gap-2 align-items-center">
-                          <input type="text" className="form-field qt-input" />
-                          <label className="qt-label mb-0">CO2</label>
-                          <select className="form-field qt-input"><option value="">Select CO2</option></select>
-                       </div>
-                    </div>
-                    <div className="col-md-4">
-                       <label className="qt-label">On Carriage Emission</label>
-                       <div className="d-flex gap-2 align-items-center">
-                          <input type="text" className="form-field qt-input" />
-                          <label className="qt-label mb-0">CO2</label>
-                          <select className="form-field qt-input"><option value="">Select CO2</option></select>
-                       </div>
-                    </div>
-                    <div className="col-md-4">
-                       <label className="qt-label">Main Carriage Emission</label>
-                       <div className="d-flex gap-2 align-items-center">
-                          <input type="text" className="form-field qt-input" />
-                          <label className="qt-label mb-0">CO2</label>
-                          <select className="form-field qt-input"><option value="">Select CO2</option></select>
-                       </div>
+              <div className="bk-section-header" style={{ padding: "8px 15px", background: "#f8f9fa" }}>
+                <span className="bk-section-title" style={{ fontSize: "14px", color: "#3b5998" }}>Carbon Emission</span>
+              </div>
+              <div className="qt-section-body" style={{ padding: "15px" }}>
+                <div className="row g-3">
+                  <div className="col-md-4">
+                    <label className="qt-label">Pre Carriage Emission</label>
+                    <div className="d-flex gap-2 align-items-center">
+                      <input type="text" className="form-field qt-input" />
+                      <label className="qt-label mb-0">CO2</label>
+                      <select className="form-field qt-input"><option value="">Select CO2</option></select>
                     </div>
                   </div>
-               </div>
+                  <div className="col-md-4">
+                    <label className="qt-label">On Carriage Emission</label>
+                    <div className="d-flex gap-2 align-items-center">
+                      <input type="text" className="form-field qt-input" />
+                      <label className="qt-label mb-0">CO2</label>
+                      <select className="form-field qt-input"><option value="">Select CO2</option></select>
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <label className="qt-label">Main Carriage Emission</label>
+                    <div className="d-flex gap-2 align-items-center">
+                      <input type="text" className="form-field qt-input" />
+                      <label className="qt-label mb-0">CO2</label>
+                      <select className="form-field qt-input"><option value="">Select CO2</option></select>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -863,7 +874,7 @@ const Quotations = ({ initialView = "table" }) => {
       <div className="qt-section-card">
         <div className="bk-section-header" onClick={() => toggleSection("chargeSheet")}>
           <span className="bk-section-title">
-             <div className="bk-icon-circle" style={{ color: "#1976d2" }}><i className="bx bx-dollar"></i></div> Charge Sheet Details
+            <div className="bk-icon-circle" style={{ color: "#1976d2" }}><i className="bx bx-dollar"></i></div> Charge Sheet Details
           </span>
           <i className={`bx ${openSections.chargeSheet ? "bx-chevron-up" : "bx-chevron-down"}`} style={{ color: "#1976d2" }}></i>
         </div>

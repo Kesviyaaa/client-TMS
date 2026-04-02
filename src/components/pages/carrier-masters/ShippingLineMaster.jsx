@@ -19,7 +19,7 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 window.JSZip = JSZip;
 pdfMake.vfs = pdfFonts.vfs;
 
-import "../../../App.css";
+import "../../css/carrier.css";
 
 const ShippingLineMaster = () => {
     const tableRef1 = useRef(null);
@@ -54,10 +54,14 @@ const ShippingLineMaster = () => {
     };
 
     const switchToForm = () => {
-        if (dt1.current) dt1.current.destroy();
-        if (dt2.current) dt2.current.destroy();
-        dt1.current = null;
-        dt2.current = null;
+        if (dt1.current) {
+            dt1.current.destroy(true);
+            dt1.current = null;
+        }
+        if (dt2.current) {
+            dt2.current.destroy(true);
+            dt2.current = null;
+        }
         setView("form");
     };
 
@@ -163,39 +167,18 @@ const ShippingLineMaster = () => {
         });
 
         return () => {
-            if (dt1.current) dt1.current.destroy();
-            if (dt2.current) dt2.current.destroy();
+            if (dt1.current) dt1.current.destroy(true);
+            if (dt2.current) dt2.current.destroy(true);
             dt1.current = null;
             dt2.current = null;
         };
     }, [view]);
 
+    /* ════════════════════════════════════════════════════
+       RENDER — TABLE VIEW
+    ════════════════════════════════════════════════════ */
     const renderTableView = () => (
         <div className="container-xxl flex-grow-1 container-p-y pb-5">
-            <style>{`
-        .ocean-card {
-          background: #fff;
-          border-radius: 8px;
-          box-shadow: 0 0.125rem 0.25rem rgba(161, 172, 184, 0.4);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-          margin-bottom: 20px;
-        }
-        .ocean-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 0.25rem 0.5rem rgba(161, 172, 184, 0.6);
-        }
-        .ocean-title {
-          color: #566a7f;
-          font-size: 1.125rem;
-          font-weight: 600;
-          padding: 1.25rem;
-          margin-bottom: 0;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-      `}</style>
-
             <div className="d-flex justify-content-between align-items-start mb-4">
                 <div className="title-section">
                     <h4 className="table-title">Shipping Line Master</h4>
@@ -231,11 +214,11 @@ const ShippingLineMaster = () => {
 
             {/* Details Modal */}
             {showDetailsModal && selectedRow && (
-                <div className="custom-modal-backdrop">
+                <div className="custom-modal-backdrop" onClick={(e) => { if(e.target === e.currentTarget) setShowDetailsModal(false); }}>
                     <div className="custom-modal-card">
                         <button className="custom-close" onClick={() => setShowDetailsModal(false)}>×</button>
                         <h5 className="modal-title">{modalTitle}</h5>
-                        <hr />
+                        <hr className="modal-divider" />
                         <table className="table table-sm">
                             <tbody>
                                 <tr><td><strong>Shipping Line:</strong></td><td>{selectedRow.name}</td></tr>
@@ -249,34 +232,16 @@ const ShippingLineMaster = () => {
         </div>
     );
 
+    /* ════════════════════════════════════════════════════
+       RENDER — FORM VIEW
+    ════════════════════════════════════════════════════ */
     const renderFormView = () => (
         <div className="container-xxl flex-grow-1 container-p-y pb-5">
-            <style>{`
-        .group-section {
-          border: 1px solid #d9dee3;
-          border-radius: 8px;
-          padding: 20px;
-          position: relative;
-          margin-top: 30px;
-          margin-bottom: 20px;
-        }
-        .group-label {
-          position: absolute;
-          top: -12px;
-          left: 20px;
-          background: #fff;
-          padding: 0 10px;
-          color: #50a9e9;
-          font-weight: 600;
-          font-size: 14px;
-        }
-      `}</style>
-
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <h4 className="table-title mb-0">Shipping Line Details</h4>
             </div>
 
-            <div className="card p-0">
+            <div className="card p-0 shadow-none border">
                 <div className="card-body p-4">
                     <h5 className="mb-4" style={{ color: "#50a9e9", fontWeight: 600 }}>Create Shipping Line</h5>
 

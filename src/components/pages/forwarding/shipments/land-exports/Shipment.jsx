@@ -22,18 +22,19 @@ window.JSZip = JSZip;
 pdfMake.vfs = pdfFonts.vfs;
 
 import "../../../../../App.css";
+import "../../../../css/forwarding.css";
 
 /* ───── dummy data ───── */
 const dummyShipments = [
-  { 
-    _id: "1", 
+  {
+    _id: "1",
     shipmentNo: "LES-1001",
     shipmentDate: "2026-03-25",
     jobOrderNo: "JO-5001",
     quotationNo: "QTN-101",
   },
-  { 
-    _id: "2", 
+  {
+    _id: "2",
     shipmentNo: "LES-1002",
     shipmentDate: "2026-03-26",
     jobOrderNo: "JO-5002",
@@ -190,10 +191,15 @@ const LandExportShipment = ({ initialView = "table" }) => {
   ════════════════════════════════════════════════════ */
   if (view === "table") {
     return (
-      <div className="container-xxl flex-grow-1 container-p-y pb-5">
-        <div className="card">
-          <div className="datatable-toolbar d-flex justify-content-between align-items-middle p-3">
-            <h5 className="table-title mb-0">LE Shipments</h5>
+      <div className="container-xxl container-p-y pb-5">
+
+        <h4 className="table-title mb-4">LE Shipments</h4>
+
+        <div className="ocean-card">
+          <div className="ocean-title">
+            <span className="bk-section-title">
+              <div className="bk-icon-circle"><i className="bx bxs-ship"></i></div> Shipment List
+            </span>
             <button className="btn-primary-custom" onClick={switchToForm}>
               <i className="bx bx-plus"></i> Create Shipment
             </button>
@@ -219,8 +225,8 @@ const LandExportShipment = ({ initialView = "table" }) => {
         {showDetailsModal && selectedRow && (
           <div className="custom-modal-backdrop" style={{ zIndex: 99999 }}>
             <div className="custom-modal-card">
-              <button 
-                className="custom-close" 
+              <button
+                className="custom-close"
                 onClick={() => {
                   if (openedRowRef.current) {
                     const node = $(openedRowRef.current.node());
@@ -235,7 +241,7 @@ const LandExportShipment = ({ initialView = "table" }) => {
                 <table className="table table-sm">
                   <tbody>
                     {Object.entries(selectedRow).map(([k, v]) => (
-                        <tr key={k}><td><strong>{k}:</strong></td><td>{String(v)}</td></tr>
+                      <tr key={k}><td><strong>{k}:</strong></td><td>{String(v)}</td></tr>
                     ))}
                   </tbody>
                 </table>
@@ -253,14 +259,14 @@ const LandExportShipment = ({ initialView = "table" }) => {
                 <h4 className="mb-2">Are you sure?</h4>
                 <p className="text-muted mb-4">You want to delete this shipment? This action cannot be undone.</p>
                 <div className="d-flex justify-content-center gap-3">
-                  <button 
-                    className="btn btn-secondary-custom" 
+                  <button
+                    className="btn btn-secondary-custom"
                     onClick={() => setShowDeleteModal(false)}
                   >
                     Cancel
                   </button>
-                  <button 
-                    className="btn btn-danger" 
+                  <button
+                    className="btn btn-danger"
                     onClick={() => {
                       setShipments(prev => prev.filter(s => s._id !== deleteId));
                       setShowDeleteModal(false);
@@ -283,12 +289,11 @@ const LandExportShipment = ({ initialView = "table" }) => {
   return (
     <div className="container-xxl flex-grow-1 container-p-y pb-5">
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h5 className="mb-0" style={{ fontWeight: "700", color: "#566a7f" }}>Shipment Details</h5>
+        <h5 className="bk-form-heading mb-0" style={{ color: "#566a7f", fontSize: "1.125rem", fontWeight: 600 }}>Shipment Details</h5>
         <div className="d-flex gap-2">
-            <button className="btn-secondary-custom" onClick={() => setView("table")}>
-                <i className="bx bx-arrow-back me-1"></i> Back to List
-            </button>
-            <button className="btn-primary-custom" style={{ backgroundColor: '#00b5ff', borderColor: '#00b5ff' }}>Save Shipment</button>
+          <button className="btn-secondary-custom" onClick={() => setView("table")}>
+            <i className="bx bx-arrow-back me-1"></i> Back to List
+          </button>
         </div>
       </div>
 
@@ -296,7 +301,7 @@ const LandExportShipment = ({ initialView = "table" }) => {
       <div className="qt-section-card">
         <div className="bk-section-header" onClick={() => toggleSection("basicInfo")}>
           <span className="bk-section-title">
-             <div className="bk-icon-circle"><i className="bx bx-info-circle"></i></div> Basic Information
+            <div className="bk-icon-circle"><i className="bx bx-info-circle"></i></div> Basic Information
           </span>
           <i className={`bx ${openSections.basicInfo ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
         </div>
@@ -340,7 +345,7 @@ const LandExportShipment = ({ initialView = "table" }) => {
       <div className="qt-section-card">
         <div className="bk-section-header" onClick={() => toggleSection("handlerDetails")}>
           <span className="bk-section-title">
-             <div className="bk-icon-circle"><i className="bx bx-user"></i></div> Handler Details
+            <div className="bk-icon-circle"><i className="bx bx-user"></i></div> Handler Details
           </span>
           <i className={`bx ${openSections.handlerDetails ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
         </div>
@@ -372,7 +377,7 @@ const LandExportShipment = ({ initialView = "table" }) => {
       <div className="qt-section-card">
         <div className="bk-section-header" onClick={() => toggleSection("transportDetails")}>
           <span className="bk-section-title">
-             <div className="bk-icon-circle"><i className="bx bxs-ship"></i></div> Transport Details
+            <div className="bk-icon-circle"><i className="bx bxs-ship"></i></div> Transport Details
           </span>
           <i className={`bx ${openSections.transportDetails ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
         </div>
@@ -401,7 +406,7 @@ const LandExportShipment = ({ initialView = "table" }) => {
       <div className="qt-section-card">
         <div className="bk-section-header" onClick={() => toggleSection("cargoDetails")}>
           <span className="bk-section-title">
-             <div className="bk-icon-circle"><i className="bx bx-package"></i></div> Cargo Details
+            <div className="bk-icon-circle"><i className="bx bx-package"></i></div> Cargo Details
           </span>
           <i className={`bx ${openSections.cargoDetails ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
         </div>
@@ -429,18 +434,18 @@ const LandExportShipment = ({ initialView = "table" }) => {
       {/* 5. PICK UP & DELIVERY (Mini) */}
       <div className="qt-section-card">
         <div className="bk-section-header" onClick={() => toggleSection("pickUp")}>
-            <span className="bk-section-title">
-               <div className="bk-icon-circle"><i className="bx bxs-truck"></i></div> Pick Up & Delivery
-            </span>
-            <i className={`bx ${openSections.pickUp ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
+          <span className="bk-section-title">
+            <div className="bk-icon-circle"><i className="bx bxs-truck"></i></div> Pick Up & Delivery
+          </span>
+          <i className={`bx ${openSections.pickUp ? "bx-chevron-up" : "bx-chevron-down"}`}></i>
         </div>
         {openSections.pickUp && (
-            <div className="qt-section-body">
-                <div className="row g-3">
-                    <div className="col-md-3"><label className="qt-label">Pickup From</label><select className="form-field qt-input"><option>Select</option></select></div>
-                    <div className="col-md-3"><label className="qt-label">Delivery To</label><select className="form-field qt-input"><option>Select</option></select></div>
-                </div>
+          <div className="qt-section-body">
+            <div className="row g-3">
+              <div className="col-md-3"><label className="qt-label">Pickup From</label><select className="form-field qt-input"><option>Select</option></select></div>
+              <div className="col-md-3"><label className="qt-label">Delivery To</label><select className="form-field qt-input"><option>Select</option></select></div>
             </div>
+          </div>
         )}
       </div>
 
@@ -467,15 +472,15 @@ const LandExportShipment = ({ initialView = "table" }) => {
                 <tbody>
                   {routeRows.map(row => (
                     <tr key={row.id}>
-                      <td><select className="form-field qt-input" style={{height: 32}}><option>Select</option></select></td>
-                      <td><input className="form-field qt-input" style={{height: 32}}/></td>
-                      <td><select className="form-field qt-input" style={{height: 32}}><option>Select</option></select></td>
-                      <td><select className="form-field qt-input" style={{height: 32}}><option>Select</option></select></td>
-                      <td><input type="date" className="form-field qt-input" style={{height: 32}}/></td>
-                      <td><input type="date" className="form-field qt-input" style={{height: 32}}/></td>
-                      <td><input className="form-field qt-input" style={{height: 32}}/></td>
-                      <td><input className="form-field qt-input" style={{height: 32}}/></td>
-                      <td><input className="form-field qt-input" style={{height: 32}}/></td>
+                      <td><select className="form-field qt-input" style={{ height: 32 }}><option>Select</option></select></td>
+                      <td><input className="form-field qt-input" style={{ height: 32 }} /></td>
+                      <td><select className="form-field qt-input" style={{ height: 32 }}><option>Select</option></select></td>
+                      <td><select className="form-field qt-input" style={{ height: 32 }}><option>Select</option></select></td>
+                      <td><input type="date" className="form-field qt-input" style={{ height: 32 }} /></td>
+                      <td><input type="date" className="form-field qt-input" style={{ height: 32 }} /></td>
+                      <td><input className="form-field qt-input" style={{ height: 32 }} /></td>
+                      <td><input className="form-field qt-input" style={{ height: 32 }} /></td>
+                      <td><input className="form-field qt-input" style={{ height: 32 }} /></td>
                       <td className="text-center"><button className="bk-remove-btn" onClick={() => setRouteRows(routeRows.filter(r => r.id !== row.id))}>Remove</button></td>
                     </tr>
                   ))}
@@ -535,25 +540,25 @@ const LandExportShipment = ({ initialView = "table" }) => {
                   </div>
                 )}
                 {internalTab === "cost" && (
-                   <div className="tab-pane fade show active">
-                     <div className="row g-3 align-items-end mb-4">
-                        <div className="col-md-2"><label className="qt-label">Vendor</label><select className="form-field qt-input"><option>Select</option></select></div>
-                        <div className="col-md-2"><label className="qt-label">Charge Code</label><select className="form-field qt-input"><option>Select</option></select></div>
-                        <div className="col-md-1"><label className="qt-label">Curr</label><select className="form-field qt-input"><option>USD</option></select></div>
-                        <div className="col-md-2"><label className="qt-label">Rate</label><input className="form-field qt-input" placeholder="0.00" /></div>
-                        <div className="col-md-1"><label className="qt-label">Qty</label><input className="form-field qt-input" placeholder="1" /></div>
-                        <div className="col-md-2"><label className="qt-label">Total</label><input className="form-field qt-input" placeholder="0.00" readOnly /></div>
-                        <div className="col-md-2 text-end"><button className="btn btn-danger" style={{ backgroundColor: '#ff4c51', border: 'none' }}><i className="bx bx-plus me-1"></i> Add Cost</button></div>
-                     </div>
-                     <div className="table-responsive border rounded">
-                       <table className="table table-hover mb-0">
-                         <thead className="table-light">
-                           <tr><th>Vendor</th><th>Charge Name</th><th>Currency</th><th>Rate</th><th>Qty</th><th>Total</th><th>Action</th></tr>
-                         </thead>
-                         <tbody><tr><td colSpan="7" className="text-center py-3 text-muted">No cost entries</td></tr></tbody>
-                       </table>
-                     </div>
-                   </div>
+                  <div className="tab-pane fade show active">
+                    <div className="row g-3 align-items-end mb-4">
+                      <div className="col-md-2"><label className="qt-label">Vendor</label><select className="form-field qt-input"><option>Select</option></select></div>
+                      <div className="col-md-2"><label className="qt-label">Charge Code</label><select className="form-field qt-input"><option>Select</option></select></div>
+                      <div className="col-md-1"><label className="qt-label">Curr</label><select className="form-field qt-input"><option>USD</option></select></div>
+                      <div className="col-md-2"><label className="qt-label">Rate</label><input className="form-field qt-input" placeholder="0.00" /></div>
+                      <div className="col-md-1"><label className="qt-label">Qty</label><input className="form-field qt-input" placeholder="1" /></div>
+                      <div className="col-md-2"><label className="qt-label">Total</label><input className="form-field qt-input" placeholder="0.00" readOnly /></div>
+                      <div className="col-md-2 text-end"><button className="btn btn-danger" style={{ backgroundColor: '#ff4c51', border: 'none' }}><i className="bx bx-plus me-1"></i> Add Cost</button></div>
+                    </div>
+                    <div className="table-responsive border rounded">
+                      <table className="table table-hover mb-0">
+                        <thead className="table-light">
+                          <tr><th>Vendor</th><th>Charge Name</th><th>Currency</th><th>Rate</th><th>Qty</th><th>Total</th><th>Action</th></tr>
+                        </thead>
+                        <tbody><tr><td colSpan="7" className="text-center py-3 text-muted">No cost entries</td></tr></tbody>
+                      </table>
+                    </div>
+                  </div>
                 )}
                 {internalTab === "p&l" && <div className="text-center py-5 text-muted">Profit & Loss Summary will appear here.</div>}
                 {internalTab === "invoice" && <div className="text-center py-5 text-muted">Invoices related to this shipment.</div>}
@@ -567,12 +572,12 @@ const LandExportShipment = ({ initialView = "table" }) => {
       {/* FIXED BOTTOM SUMMARY */}
       <div className="fixed-bottom-summary p-3 bg-white border-top shadow-lg" style={{ position: 'sticky', bottom: 0, zIndex: 10, margin: '0 -24px -24px -24px', boxShadow: '0 -4px 12px rgba(0,0,0,0.05)' }}>
         <div className="container-xxl">
-            <div className="row align-items-center">
-                <div className="col-md-3 border-end"><div className="d-flex justify-content-between px-3"><span>Revenue Total:</span><strong className="text-primary">USD 0.00</strong></div></div>
-                <div className="col-md-3 border-end"><div className="d-flex justify-content-between px-3"><span>Cost Total:</span><strong className="text-danger">USD 0.00</strong></div></div>
-                <div className="col-md-3 border-end"><div className="d-flex justify-content-between px-3"><span>Net Profit:</span><strong className="text-success">USD 0.00</strong></div></div>
-                <div className="col-md-3"><div className="d-flex justify-content-between px-3"><span>Profit %:</span><strong className="text-success">0.00%</strong></div></div>
-            </div>
+          <div className="row align-items-center">
+            <div className="col-md-3 border-end"><div className="d-flex justify-content-between px-3"><span>Revenue Total:</span><strong className="text-primary">USD 0.00</strong></div></div>
+            <div className="col-md-3 border-end"><div className="d-flex justify-content-between px-3"><span>Cost Total:</span><strong className="text-danger">USD 0.00</strong></div></div>
+            <div className="col-md-3 border-end"><div className="d-flex justify-content-between px-3"><span>Net Profit:</span><strong className="text-success">USD 0.00</strong></div></div>
+            <div className="col-md-3"><div className="d-flex justify-content-between px-3"><span>Profit %:</span><strong className="text-success">0.00%</strong></div></div>
+          </div>
         </div>
       </div>
     </div>

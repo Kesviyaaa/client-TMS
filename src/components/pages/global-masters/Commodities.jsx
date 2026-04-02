@@ -21,7 +21,7 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 window.JSZip = JSZip;
 pdfMake.vfs = pdfFonts.vfs;
 
-import "../../../App.css";
+import "../../css/global.css";
 
 const Commodities = ({ initialView = "table" }) => {
     const tableRef = useRef(null);
@@ -57,7 +57,7 @@ const Commodities = ({ initialView = "table" }) => {
     /* ───── Switch to form safely ───── */
     const switchToForm = () => {
         if (dtRef.current) {
-            dtRef.current.destroy();
+            dtRef.current.destroy(true);
             dtRef.current = null;
         }
         setView("form");
@@ -167,7 +167,7 @@ const Commodities = ({ initialView = "table" }) => {
 
         return () => {
             if (dtRef.current) {
-                dtRef.current.destroy();
+                dtRef.current.destroy(true);
                 dtRef.current = null;
             }
         };
@@ -188,54 +188,28 @@ const Commodities = ({ initialView = "table" }) => {
     ════════════════════════════════════════════════════ */
     if (view === "table") {
         return (
-            <div className="container-xxl flex-grow-1 container-p-y pb-5">
-                <style>{`
-          .ocean-card {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0.125rem 0.25rem rgba(161, 172, 184, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-bottom: 20px;
-          }
-          .ocean-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0.25rem 0.5rem rgba(161, 172, 184, 0.6);
-          }
-          .ocean-title {
-            color: #566a7f;
-            font-size: 1.125rem;
-            font-weight: 600;
-            padding: 1.25rem;
-            margin-bottom: 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-          }
-          .dataTables_wrapper .dataTables_paginate .paginate_button {
-            padding: 0 !important;
-            margin: 0 !important;
-            border: none !important;
-            background: transparent !important;
-          }
-        `}</style>
+            <div className="container-xxl container-p-y pb-5">
+                
+                <h4 className="table-title mb-4">Commodity Details</h4>
 
-                <div className="card">
-                    <div className="datatable-toolbar d-flex justify-content-between align-items-start p-3">
-                        <div className="title-section">
-                            <h5 className="table-title">Commodities</h5>
-                        </div>
-                        <button className="btn-add-record btn-primary-custom" onClick={() => { resetForm(); switchToForm(); }}>
-                            <i className="bx bx-plus"></i> Create
+                <div className="ocean-card">
+                    <div className="ocean-title">
+                        <span className="bk-section-title">
+                            <div className="bk-icon-circle"><i className="bx bx-package"></i></div> Commodity List
+                        </span>
+                        <button className="btn-primary-custom" onClick={() => { resetForm(); switchToForm(); }}>
+                            <i className="bx bx-plus"></i> Create Commodity
                         </button>
                     </div>
                     <div className="card-datatable p-3">
-                        <table ref={tableRef} className="table dataTable dtr-inline w-100">
+                        <table ref={tableRef} className="table dataTable dtr-inline w-100 shadow-none">
                             <thead>
                                 <tr>
                                     <th>Name</th>
                                     <th>Description</th>
                                     <th>Nature</th>
                                     <th>Update</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                         </table>
@@ -280,17 +254,8 @@ const Commodities = ({ initialView = "table" }) => {
     ════════════════════════════════════════════════════ */
     return (
         <div className="container-xxl flex-grow-1 container-p-y pb-5">
-            <style>{`
-        .ocean-card {
-          background: #fff;
-          border-radius: 8px;
-          box-shadow: 0 0.125rem 0.25rem rgba(161, 172, 184, 0.4);
-          margin-bottom: 20px;
-        }
-      `}</style>
-
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h5 className="mb-0" style={{ fontWeight: "700", color: "#566a7f" }}>Create Commodities</h5>
+                <h5 className="table-title mb-0">Create Commodities</h5>
             </div>
 
             <div className="ocean-card">
@@ -302,7 +267,7 @@ const Commodities = ({ initialView = "table" }) => {
                             <input
                                 type="text"
                                 name="name"
-                                className="form-field qt-input"
+                                className="form-control qt-input"
                                 placeholder="Enter Name"
                                 value={formData.name}
                                 onChange={handleFormChange}
@@ -313,7 +278,7 @@ const Commodities = ({ initialView = "table" }) => {
                             <input
                                 type="text"
                                 name="description"
-                                className="form-field qt-input"
+                                className="form-control qt-input"
                                 placeholder="Enter Description"
                                 value={formData.description}
                                 onChange={handleFormChange}
@@ -324,7 +289,7 @@ const Commodities = ({ initialView = "table" }) => {
                             <input
                                 type="text"
                                 name="iataCode"
-                                className="form-field qt-input"
+                                className="form-control qt-input"
                                 placeholder="Enter IATA Code"
                                 value={formData.iataCode}
                                 onChange={handleFormChange}
@@ -334,7 +299,7 @@ const Commodities = ({ initialView = "table" }) => {
                             <label className="qt-label">Nature <span className="text-danger">*</span></label>
                             <select
                                 name="nature"
-                                className="form-field qt-input"
+                                className="form-control qt-input"
                                 value={formData.nature}
                                 onChange={handleFormChange}
                             >
@@ -384,7 +349,7 @@ const Commodities = ({ initialView = "table" }) => {
                         <button className="btn-secondary-custom" onClick={() => setView("table")}>
                             <i className="bx bx-arrow-back me-1"></i> Back
                         </button>
-                        <button className="btn-primary-custom">
+                        <button className="btn-primary-custom" onClick={() => setView("table")}>
                             Create
                         </button>
                     </div>

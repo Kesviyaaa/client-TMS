@@ -19,7 +19,7 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 window.JSZip = JSZip;
 pdfMake.vfs = pdfFonts.vfs;
 
-import "../../../App.css";
+import "../../css/carrier.css";
 
 const BLWBClause = () => {
     const tableRef = useRef(null);
@@ -130,24 +130,31 @@ const BLWBClause = () => {
         });
 
         return () => {
-            if (dtRef.current) dtRef.current.destroy();
+            if (dtRef.current) {
+                dtRef.current.destroy(true);
+                dtRef.current = null;
+            }
         };
     }, [clauses]);
 
     return (
         <div className="container-xxl container-p-y pb-5">
+            
+            <h4 className="table-title mb-4">BL/WB Clause Details</h4>
 
-            {/* TABLE */}
-            <div className="card">
-                <div className="datatable-toolbar d-flex justify-content-between p-3">
-                    <h5 className="table-title">BL/WB Clause Details</h5>
+            <div className="ocean-card">
+                <div className="ocean-title">
+                    <span className="bk-section-title">
+                        <div className="bk-icon-circle"><i className="bx bx-list-check"></i></div> Clause List
+                    </span>
                     <button className="btn-primary-custom" onClick={() => setShowModal(true)}>
-                        <i className="bx bx-plus"></i> Create
+                        <i className="bx bx-plus"></i> Create Clause
                     </button>
                 </div>
-
                 <div className="card-datatable p-3">
-                    <table ref={tableRef} className="table w-100"></table>
+                    <div className="table-responsive">
+                        <table ref={tableRef} className="table dataTable dtr-inline w-100 shadow-none"></table>
+                    </div>
                 </div>
             </div>
 
@@ -156,13 +163,13 @@ const BLWBClause = () => {
                 <div className="custom-modal-backdrop" style={{ zIndex: 9999 }} onClick={(e) => { if (e.target === e.currentTarget) handleClose() }}>
                     <div className="custom-modal-card" style={{ maxWidth: "500px" }}>
                         <div className="d-flex justify-content-between align-items-center">
-                            <h5 style={{ color: "#50a9e9", fontSize: "1.125rem", fontWeight: 700, margin: 0 }}>
+                            <h5 className="modal-title">
                                 {editing ? "Edit WB/BL Clause" : "Create WB/BL Clause"}
                             </h5>
-                            <button type="button" onClick={handleClose} style={{ background: "none", border: "none", color: "#566a7f", fontSize: "1.5rem", lineHeight: 1, cursor: "pointer", padding: 0 }}>&times;</button>
+                            <button type="button" className="custom-close" onClick={handleClose}>&times;</button>
                         </div>
 
-                        <hr style={{ border: 0, borderTop: "1px dashed #d9dee3", margin: "1.25rem -24px" }} />
+                        <hr className="modal-divider" />
 
                         <div className="row g-3">
                             <div className="col-12">
@@ -200,9 +207,9 @@ const BLWBClause = () => {
                             </div>
                         </div>
 
-                        <hr style={{ border: 0, borderTop: "1px dashed #d9dee3", margin: "1.25rem -24px" }} />
+                        <hr className="modal-divider" />
 
-                        <div className="d-flex justify-content-end gap-3">
+                        <div className="modal-buttons">
                             <button className="btn-secondary-custom" onClick={handleClose}>
                                 Cancel
                             </button>

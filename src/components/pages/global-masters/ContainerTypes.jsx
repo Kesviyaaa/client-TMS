@@ -21,7 +21,7 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 window.JSZip = JSZip;
 pdfMake.vfs = pdfFonts.vfs;
 
-import "../../../App.css";
+import "../../css/global.css";
 
 /* ───── initial form ───── */
 const emptyForm = {
@@ -64,8 +64,8 @@ const ContainerTypes = ({ initialView = "table" }) => {
 
     /* ───── switchToForm (safe DT destroy) ───── */
     const switchToForm = () => {
-        if (dtRef1.current) { dtRef1.current.destroy(); dtRef1.current = null; }
-        if (dtRef2.current) { dtRef2.current.destroy(); dtRef2.current = null; }
+        if (dtRef1.current) { dtRef1.current.destroy(true); dtRef1.current = null; }
+        if (dtRef2.current) { dtRef2.current.destroy(true); dtRef2.current = null; }
         setView("form");
     };
 
@@ -130,7 +130,7 @@ const ContainerTypes = ({ initialView = "table" }) => {
                     className: "no-export text-center", responsivePriority: 1,
                     orderable: false, searchable: false,
                     render: (d) =>
-                        `<button class="btn btn-sm view-master-btn" data-id="${d.isoCode}" style="background:#50a9e9;color:#fff;border-radius:6px;font-size:12px;padding:4px 14px;">View</button>`,
+                        `<div class="d-flex justify-content-center"><i class="bx bx-show view-master-btn text-info cursor-pointer" data-id="${d.isoCode}" title="View" style="font-size: 18px;"></i></div>`,
                 },
             ],
             order: [[0, "asc"]],
@@ -163,14 +163,14 @@ const ContainerTypes = ({ initialView = "table" }) => {
                     className: "no-export text-center", responsivePriority: 1,
                     orderable: false, searchable: false,
                     render: (d) =>
-                        `<button class="btn btn-sm edit-client-btn" data-id="${d.isoCode}" style="background:#50a9e9;color:#fff;border-radius:6px;font-size:12px;padding:4px 14px;">Edit</button>`,
+                        `<div class="d-flex justify-content-center"><i class="bx bx-edit edit-client-btn text-primary cursor-pointer" data-id="${d.isoCode}" title="Edit" style="font-size: 18px;"></i></div>`,
                 },
                 {
                     data: null, title: "Delete",
                     className: "no-export text-center", responsivePriority: 1,
                     orderable: false, searchable: false,
                     render: (d) =>
-                        `<button class="btn btn-sm remove-client-btn" data-id="${d.isoCode}" style="background:#ff4d4f;color:#fff;border-radius:6px;font-size:12px;padding:4px 14px;">Remove</button>`,
+                        `<div class="d-flex justify-content-center"><i class="bx bx-trash remove-client-btn text-danger cursor-pointer" data-id="${d.isoCode}" title="Delete" style="font-size: 18px;"></i></div>`,
                 },
             ],
             order: [[0, "asc"]],
@@ -223,8 +223,10 @@ const ContainerTypes = ({ initialView = "table" }) => {
         });
 
         return () => {
-            if (dtRef1.current) dtRef1.current.destroy();
-            if (dtRef2.current) dtRef2.current.destroy();
+            if (dtRef1.current) dtRef1.current.destroy(true);
+            if (dtRef2.current) dtRef2.current.destroy(true);
+            dtRef1.current = null;
+            dtRef2.current = null;
         };
     }, [view]);
 
@@ -237,14 +239,8 @@ const ContainerTypes = ({ initialView = "table" }) => {
     if (view === "table") {
         return (
             <div className="container-xxl flex-grow-1 container-p-y pb-5">
-                <style>{`
-                    .ocean-card { background:#fff; border-radius:8px; box-shadow:0 0.125rem 0.25rem rgba(161,172,184,.4); transition:transform .3s,box-shadow .3s; margin-bottom:20px; }
-                    .ocean-card:hover { transform:translateY(-5px); box-shadow:0 0.25rem 0.5rem rgba(161,172,184,.6); }
-                    .ocean-title { color:#566a7f; font-size:1.125rem; font-weight:600; padding:1.25rem; display:flex; align-items:center; justify-content:space-between; }
-                    .dataTables_wrapper .dataTables_paginate .paginate_button { padding:0!important; margin:0!important; border:none!important; background:transparent!important; }
-                `}</style>
-
-                {/* breadcrumb */}
+                
+                {/* header */}
                 <div className="d-flex justify-content-between align-items-start mb-4">
                     <h4 className="table-title">Container Types</h4>
                     <nav aria-label="breadcrumb">
@@ -263,7 +259,7 @@ const ContainerTypes = ({ initialView = "table" }) => {
                         </span>
                     </div>
                     <div className="card-datatable pb-1">
-                        <table ref={tableRef1} className="table dataTable dtr-inline w-100">
+                        <table ref={tableRef1} className="table dataTable dtr-inline w-100 shadow-none">
                             <thead>
                                 <tr>
                                     <th>ISO Code</th><th>Size</th><th>Type</th>
@@ -287,7 +283,7 @@ const ContainerTypes = ({ initialView = "table" }) => {
                         </button>
                     </div>
                     <div className="card-datatable pb-1">
-                        <table ref={tableRef2} className="table dataTable dtr-inline w-100">
+                        <table ref={tableRef2} className="table dataTable dtr-inline w-100 shadow-none">
                             <thead>
                                 <tr>
                                     <th>ISO Code</th><th>Size</th><th>Type</th>
@@ -350,13 +346,12 @@ const ContainerTypes = ({ initialView = "table" }) => {
     return (
         <div className="container-xxl flex-grow-1 container-p-y pb-5">
 
-            {/* breadcrumb */}
+            {/* header */}
             <div className="d-flex justify-content-between align-items-start mb-4">
                 <h4 className="table-title">Global Masters</h4>
-
             </div>
 
-            <div className="card p-0">
+            <div className="card p-0 shadow-none border">
                 <div className="card-body p-4">
                     <h6 style={{ color: "#50a9e9", fontWeight: 600, marginBottom: "1.5rem" }}>Create Container Type</h6>
 
@@ -364,15 +359,15 @@ const ContainerTypes = ({ initialView = "table" }) => {
                     <div className="row g-3 mb-4">
                         <div className="col-md-3">
                             <label className="qt-label">ISO <span className="text-danger">*</span></label>
-                            <input type="text" name="iso" className="form-field qt-input" placeholder="Enter ISO" value={formData.iso} onChange={handleChange} />
+                            <input type="text" name="iso" className="form-control qt-input" placeholder="Enter ISO" value={formData.iso} onChange={handleChange} />
                         </div>
                         <div className="col-md-3">
                             <label className="qt-label">Description <span className="text-danger">*</span></label>
-                            <input type="text" name="description" className="form-field qt-input" placeholder="Enter Description" value={formData.description} onChange={handleChange} />
+                            <input type="text" name="description" className="form-control qt-input" placeholder="Enter Description" value={formData.description} onChange={handleChange} />
                         </div>
                         <div className="col-md-3">
                             <label className="qt-label">Size <span className="text-danger">*</span></label>
-                            <select name="size" className="form-field qt-input" value={formData.size} onChange={handleChange}>
+                            <select name="size" className="form-control qt-input" value={formData.size} onChange={handleChange}>
                                 <option value="">--Select Size--</option>
                                 <option value="20">20</option>
                                 <option value="40">40</option>
@@ -381,7 +376,7 @@ const ContainerTypes = ({ initialView = "table" }) => {
                         </div>
                         <div className="col-md-3">
                             <label className="qt-label">Type <span className="text-danger">*</span></label>
-                            <input type="text" name="type" className="form-field qt-input" placeholder="Enter Type" value={formData.type} onChange={handleChange} />
+                            <input type="text" name="type" className="form-control qt-input" placeholder="Enter Type" value={formData.type} onChange={handleChange} />
                         </div>
                     </div>
 
@@ -389,7 +384,7 @@ const ContainerTypes = ({ initialView = "table" }) => {
                     <div className="row g-3 mb-4">
                         <div className="col-md-3">
                             <label className="qt-label">TEU's <span className="text-danger">*</span></label>
-                            <input type="text" name="teus" className="form-field qt-input" placeholder="Enter TEU's" value={formData.teus} onChange={handleChange} />
+                            <input type="text" name="teus" className="form-control qt-input" placeholder="Enter TEU's" value={formData.teus} onChange={handleChange} />
                         </div>
                         <div className="col-md-3 d-flex flex-column justify-content-end pb-1">
                             <label className="qt-label">Is Tank Container</label>
@@ -410,8 +405,8 @@ const ContainerTypes = ({ initialView = "table" }) => {
                         <div className="col-md-3">
                             <label className="qt-label">Tare Weight <span className="text-danger">*</span></label>
                             <div className="d-flex gap-2">
-                                <input type="number" name="tareWeight" className="form-field qt-input" value={formData.tareWeight} onChange={handleChange} />
-                                <select name="tareWeightUnit" className="form-field qt-input" style={{ width: "75px" }} value={formData.tareWeightUnit} onChange={handleChange}>
+                                <input type="number" name="tareWeight" className="form-control qt-input" value={formData.tareWeight} onChange={handleChange} />
+                                <select name="tareWeightUnit" className="form-control qt-input" style={{ width: "75px" }} value={formData.tareWeightUnit} onChange={handleChange}>
                                     <option value="KG">KG</option>
                                     <option value="LB">LB</option>
                                 </select>
@@ -424,8 +419,8 @@ const ContainerTypes = ({ initialView = "table" }) => {
                         <div className="col-md-3">
                             <label className="qt-label">Payload <span className="text-danger">*</span></label>
                             <div className="d-flex gap-2">
-                                <input type="number" name="payload" className="form-field qt-input" value={formData.payload} onChange={handleChange} />
-                                <select name="payloadUnit" className="form-field qt-input" style={{ width: "75px" }} value={formData.payloadUnit} onChange={handleChange}>
+                                <input type="number" name="payload" className="form-control qt-input" value={formData.payload} onChange={handleChange} />
+                                <select name="payloadUnit" className="form-control qt-input" style={{ width: "75px" }} value={formData.payloadUnit} onChange={handleChange}>
                                     <option value="KG">KG</option>
                                     <option value="LB">LB</option>
                                 </select>
@@ -434,8 +429,8 @@ const ContainerTypes = ({ initialView = "table" }) => {
                         <div className="col-md-3">
                             <label className="qt-label">Cubic Capacity <span className="text-danger">*</span></label>
                             <div className="d-flex gap-2">
-                                <input type="number" name="cubicCapacity" className="form-field qt-input" value={formData.cubicCapacity} onChange={handleChange} />
-                                <select name="cubicCapacityUnit" className="form-field qt-input" style={{ width: "75px" }} value={formData.cubicCapacityUnit} onChange={handleChange}>
+                                <input type="number" name="cubicCapacity" className="form-control qt-input" value={formData.cubicCapacity} onChange={handleChange} />
+                                <select name="cubicCapacityUnit" className="form-control qt-input" style={{ width: "75px" }} value={formData.cubicCapacityUnit} onChange={handleChange}>
                                     <option value="CCM">CCM</option>
                                     <option value="CFT">CFT</option>
                                 </select>
@@ -444,10 +439,10 @@ const ContainerTypes = ({ initialView = "table" }) => {
                         <div className="col-md-3">
                             <label className="qt-label">Outer Dimensions (LBXH) <span className="text-danger">*</span></label>
                             <div className="d-flex gap-1 align-items-center">
-                                <input type="number" name="outerL" className="form-field qt-input" placeholder="L" value={formData.outerL} onChange={handleChange} style={{ minWidth: 0 }} />
-                                <input type="number" name="outerB" className="form-field qt-input" placeholder="B" value={formData.outerB} onChange={handleChange} style={{ minWidth: 0 }} />
-                                <input type="number" name="outerH" className="form-field qt-input" placeholder="H" value={formData.outerH} onChange={handleChange} style={{ minWidth: 0 }} />
-                                <select name="outerUnit" className="form-field qt-input" style={{ width: "70px" }} value={formData.outerUnit} onChange={handleChange}>
+                                <input type="number" name="outerL" className="form-control qt-input" placeholder="L" value={formData.outerL} onChange={handleChange} style={{ minWidth: 0 }} />
+                                <input type="number" name="outerB" className="form-control qt-input" placeholder="B" value={formData.outerB} onChange={handleChange} style={{ minWidth: 0 }} />
+                                <input type="number" name="outerH" className="form-control qt-input" placeholder="H" value={formData.outerH} onChange={handleChange} style={{ minWidth: 0 }} />
+                                <select name="outerUnit" className="form-control qt-input" style={{ width: "70px" }} value={formData.outerUnit} onChange={handleChange}>
                                     <option value="">--</option>
                                     <option value="MM">MM</option>
                                     <option value="CM">CM</option>
@@ -458,9 +453,9 @@ const ContainerTypes = ({ initialView = "table" }) => {
                         <div className="col-md-3">
                             <label className="qt-label">Inner Dimensions (LBXH) <span className="text-danger">*</span></label>
                             <div className="d-flex gap-1">
-                                <input type="number" name="innerL" className="form-field qt-input" placeholder="L" value={formData.innerL} onChange={handleChange} style={{ minWidth: 0 }} />
-                                <input type="number" name="innerB" className="form-field qt-input" placeholder="B" value={formData.innerB} onChange={handleChange} style={{ minWidth: 0 }} />
-                                <input type="number" name="innerH" className="form-field qt-input" placeholder="H" value={formData.innerH} onChange={handleChange} style={{ minWidth: 0 }} />
+                                <input type="number" name="innerL" className="form-control qt-input" placeholder="L" value={formData.innerL} onChange={handleChange} style={{ minWidth: 0 }} />
+                                <input type="number" name="innerB" className="form-control qt-input" placeholder="B" value={formData.innerB} onChange={handleChange} style={{ minWidth: 0 }} />
+                                <input type="number" name="innerH" className="form-control qt-input" placeholder="H" value={formData.innerH} onChange={handleChange} style={{ minWidth: 0 }} />
                             </div>
                         </div>
                     </div>
@@ -469,7 +464,7 @@ const ContainerTypes = ({ initialView = "table" }) => {
                     <div className="row g-3 mb-4">
                         <div className="col-md-3">
                             <label className="qt-label">CGM Code</label>
-                            <select name="cgmCode" className="form-field qt-input" value={formData.cgmCode} onChange={handleChange}>
+                            <select name="cgmCode" className="form-control qt-input" value={formData.cgmCode} onChange={handleChange}>
                                 <option value=""></option>
                             </select>
                         </div>
@@ -480,7 +475,7 @@ const ContainerTypes = ({ initialView = "table" }) => {
                         <button className="btn-secondary-custom" onClick={() => setView("table")}>
                             <i className="bx bx-arrow-back me-1"></i> Back
                         </button>
-                        <button className="btn-primary-custom">
+                        <button className="btn-primary-custom" onClick={() => setView("table")}>
                             Create
                         </button>
                     </div>

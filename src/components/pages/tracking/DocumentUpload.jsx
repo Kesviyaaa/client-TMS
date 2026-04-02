@@ -22,6 +22,7 @@ window.JSZip = JSZip;
 pdfMake.vfs = pdfFonts.vfs;
 
 import "../../../App.css";
+import "../../css/tracking.css";
 
 const DocumentUpload = () => {
     const tableRef = useRef(null);
@@ -124,52 +125,6 @@ const DocumentUpload = () => {
 
     return (
         <div className="container-xxl flex-grow-1 container-p-y pb-5">
-            <style>{`
-                .ocean-card {
-                   background: #fff;
-                   border-radius: 8px;
-                   box-shadow: 0 0.125rem 0.25rem rgba(161, 172, 184, 0.4);
-                   transition: transform 0.3s ease, box-shadow 0.3s ease;
-                   margin-bottom: 20px;
-                }
-                .ocean-card:hover {
-                   transform: translateY(-5px);
-                   box-shadow: 0 0.25rem 0.5rem rgba(161, 172, 184, 0.6);
-                }
-                .filter-label {
-                   font-size: 13px;
-                   color: #566a7f;
-                   font-weight: 600;
-                   margin-bottom: 5px;
-                }
-                .filter-input {
-                   font-size: 14px;
-                   border: 1px solid #d9dee3;
-                   border-radius: 0.375rem;
-                   padding: 0.4375rem 0.875rem;
-                   color: #697a8d;
-                   background-color: #fff;
-                   width: 100%;
-                }
-                .filter-input:focus {
-                   border-color: #50A9E9;
-                   outline: none;
-                }
-                .ocean-title {
-                   color: #566a7f;
-                   font-size: 1.125rem;
-                   font-weight: 600;
-                   padding: 1.25rem;
-                   margin-bottom: 0;
-                   display: flex;
-                   align-items: center;
-                }
-                .date-range-container {
-                   display: flex;
-                   align-items: center;
-                   gap: 10px;
-                }
-            `}</style>
 
 
 

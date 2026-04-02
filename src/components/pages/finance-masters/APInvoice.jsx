@@ -23,6 +23,7 @@ window.JSZip = JSZip;
 pdfMake.vfs = pdfFonts.vfs;
 
 import "../../../App.css";
+import "../../css/finance.css";
 
 const APInvoice = ({ initialView = "table" }) => {
     const tableRef = useRef(null);
@@ -66,6 +67,10 @@ const APInvoice = ({ initialView = "table" }) => {
         valueDate: "",
         account: ""
     });
+
+    useEffect(() => {
+        setView(initialView);
+    }, [initialView]);
 
     useEffect(() => {
         if (view !== "table" || !tableRef.current) return;
@@ -132,7 +137,7 @@ const APInvoice = ({ initialView = "table" }) => {
 
         return () => {
             if (dtRef.current) {
-                dtRef.current.destroy(true);
+                dtRef.current.destroy();
                 dtRef.current = null;
             }
         };
@@ -151,6 +156,10 @@ const APInvoice = ({ initialView = "table" }) => {
     };
 
     const switchToForm = () => {
+        if (dtRef.current) {
+            dtRef.current.destroy(true);
+            dtRef.current = null;
+        }
         setView("form");
         navigate("/finance-masters/accounts/ap-invoice/create");
     };
@@ -162,25 +171,8 @@ const APInvoice = ({ initialView = "table" }) => {
 
     if (view === "table") {
         return (
-            <div className="container-xxl container-p-y pb-5">
-                <style>{`
-                    .ocean-card {
-                        background: #fff;
-                        border-radius: 8px;
-                        box-shadow: 0 0.125rem 0.25rem rgba(161, 172, 184, 0.4);
-                        margin-bottom: 20px;
-                    }
-                    .ocean-title {
-                        color: #566a7f;
-                        font-size: 1.125rem;
-                        font-weight: 600;
-                        padding: 1.25rem;
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                    }
-                `}</style>
-                <h4 className="table-title mb-4">AP Invoice</h4>
+            <div className="container-xxl container-p-y pb-5" key="api-table-view">
+        <h4 className="table-title mb-4">AP Invoice</h4>
                 <div className="ocean-card">
                     <div className="ocean-title">
                         <span className="bk-section-title">
@@ -199,119 +191,7 @@ const APInvoice = ({ initialView = "table" }) => {
     }
 
     return (
-        <div className="container-xxl flex-grow-1 container-p-y pb-5">
-            <style>{`
-                .bk-form-wrapper {
-                    background: transparent;
-                    display: flex;
-                    flex-direction: column;
-                }
-                .bk-section-card {
-                    background: #fff;
-                    border-radius: 8px;
-                    box-shadow: 0 0.125rem 0.25rem rgba(161, 172, 184, 0.4);
-                    margin-bottom: 20px;
-                    overflow: hidden;
-                    font-family: 'Public Sans', sans-serif;
-                }
-                .bk-form-heading {
-                    color: #566a7f;
-                    font-size: 1.125rem;
-                    font-weight: 600;
-                }
-                .bk-section-header {
-                    padding: 15px 25px;
-                    border-bottom: 1px solid #f0f2f4;
-                    background: #fdfdfd;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                }
-                .bk-section-title {
-                    color: #50a9e9;
-                    font-size: 15px;
-                    font-weight: 700;
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                }
-                .bk-icon-circle {
-                    width: 32px;
-                    height: 32px;
-                    border-radius: 50%;
-                    background: rgba(80, 169, 233, 0.1);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: #50a9e9;
-                }
-                .bk-section-body {
-                    padding: 25px;
-                }
-                .qt-label {
-                    font-size: 11px;
-                    font-weight: 600;
-                    color: #566a7f;
-                    margin-bottom: 4px;
-                    display: block;
-                }
-                .qt-input {
-                    font-size: 13px;
-                    border: 1px solid #d9dee3;
-                    border-radius: 5px;
-                    padding: 7px 12px;
-                    width: 100%;
-                    outline: none;
-                    background: #fff;
-                    color: #3b4d61;
-                }
-                .charge-head {
-                    display: grid;
-                    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 2fr 50px;
-                    gap: 10px;
-                    padding: 10px;
-                    background: #eef1f4;
-                    font-weight: 700;
-                    font-size: 11px;
-                    color: #566a7f;
-                    border-radius: 4px;
-                }
-                .charge-row {
-                    display: grid;
-                    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 2fr 50px;
-                    gap: 10px;
-                    padding: 8px 10px;
-                    border-bottom: 1px solid #f0f2f4;
-                    align-items: center;
-                }
-                .total-card {
-                    width: 300px;
-                    margin-left: auto;
-                    margin-top: 15px;
-                    border: 1px solid #d9dee3;
-                }
-                .total-line {
-                    display: flex;
-                    border-bottom: 1px solid #d9dee3;
-                    font-size: 12px;
-                    font-weight: 600;
-                }
-                .total-line:last-child {
-                    border-bottom: none;
-                }
-                .total-label {
-                    flex: 1;
-                    padding: 8px 12px;
-                    color: #566a7f;
-                    border-right: 1px solid #d9dee3;
-                }
-                .total-value {
-                    width: 120px;
-                    padding: 8px 12px;
-                    text-align: right;
-                    color: #50a9e9;
-                }
-            `}</style>
+        <div className="container-xxl flex-grow-1 container-p-y pb-5" key="api-form-view">
 
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <h5 className="bk-form-heading mb-0">Accounts Payable Invoice</h5>

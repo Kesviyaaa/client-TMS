@@ -22,14 +22,15 @@ window.JSZip = JSZip;
 pdfMake.vfs = pdfFonts.vfs;
 
 import "../../../App.css";
+import "../../css/performance.css";
 
 // ───── Bracket Wrapper Component ─────
 const BracketCard = ({ children, className = "", style = {} }) => (
-    <div className={`bracket-card ${className}`} style={{ position: "relative", backgroundColor: "#fff", transition: "transform 0.3s ease, box-shadow 0.3s ease", ...style }}>
-        <div className="br-tl" style={{ position: "absolute", top: 0, left: 0, width: "12px", height: "12px", borderTop: "2px solid #a1acb8", borderLeft: "2px solid #a1acb8" }}></div>
-        <div className="br-tr" style={{ position: "absolute", top: 0, right: 0, width: "12px", height: "12px", borderTop: "2px solid #a1acb8", borderRight: "2px solid #a1acb8" }}></div>
-        <div className="br-bl" style={{ position: "absolute", bottom: 0, left: 0, width: "12px", height: "12px", borderBottom: "2px solid #a1acb8", borderLeft: "2px solid #a1acb8" }}></div>
-        <div className="br-br" style={{ position: "absolute", bottom: 0, right: 0, width: "12px", height: "12px", borderBottom: "2px solid #a1acb8", borderRight: "2px solid #a1acb8" }}></div>
+    <div className={`bracket-card ${className}`} style={style}>
+        <div className="br-tl"></div>
+        <div className="br-tr"></div>
+        <div className="br-bl"></div>
+        <div className="br-br"></div>
         {children}
     </div>
 );
@@ -109,30 +110,12 @@ const VariationReport = () => {
     const [activeTab3, setActiveTab3] = useState("Agent Nomination");
 
     return (
-        <div className="container-xxl flex-grow-1 container-p-y pb-5" style={{ background: "#f5f5f9" }}>
-            <style>{`
-        .hover-card:hover {
-           transform: translateY(-5px);
-           box-shadow: 0 0.5rem 1rem rgba(161, 172, 184, 0.45) !important;
-        }
-        .header-filter-input {
-           font-size: 13px;
-           border: 1px solid #d9dee3;
-           border-radius: 4px;
-           padding: 6px 10px;
-           color: #697a8d;
-           background-color: #fff;
-           outline: none;
-        }
-      `}</style>
-
+        <div className="container-xxl flex-grow-1 container-p-y pb-5">
             {/* ───── HEADER ───── */}
             <div className="d-flex justify-content-between align-items-center mb-4 px-3">
-                <h5 className="fw-bold m-0" style={{ color: "#2E8B57", fontSize: "14px", letterSpacing: "0.5px" }}>
-                    <span style={{ color: '#566a7f' }}>DASHBOARD</span> VARIATION REPORT
+                <h5 className="perf-header-title text-uppercase">
+                    <span className="text-muted pe-1">DASHBOARD</span> VARIATION REPORT
                 </h5>
-
-
             </div>
 
 
@@ -171,17 +154,15 @@ const VariationReport = () => {
                         {/* View 2: Import / Export Tabs */}
                         {viewState === 2 && (
                             <div className="w-100">
-                                <BracketCard className="d-flex mb-4" style={{ height: "55px", padding: 0 }}>
+                                <BracketCard className="perf-mode-container mb-4">
                                     <div
                                         onClick={() => setActiveTab2("Import")}
-                                        className="d-flex align-items-center justify-content-center flex-grow-1 h-100 fw-bold"
-                                        style={{ cursor: "pointer", borderRight: "1px solid #ddd", color: activeTab2 === "Import" ? "black" : "#50a9e9", backgroundColor: activeTab2 === "Import" ? "#f9f9f9" : "transparent", fontSize: "14px" }}>
+                                        className={`perf-mode-tab ${activeTab2 === "Import" ? "active" : "inactive"}`}>
                                         Import
                                     </div>
                                     <div
                                         onClick={() => setActiveTab2("Export")}
-                                        className="d-flex align-items-center justify-content-center flex-grow-1 h-100 fw-bold"
-                                        style={{ cursor: "pointer", color: activeTab2 === "Export" ? "black" : "#50a9e9", backgroundColor: activeTab2 === "Export" ? "#f9f9f9" : "transparent", fontSize: "14px" }}>
+                                        className={`perf-mode-tab ${activeTab2 === "Export" ? "active" : "inactive"}`}>
                                         Export
                                     </div>
                                 </BracketCard>
@@ -192,13 +173,13 @@ const VariationReport = () => {
                         {/* View 3: Nomination / Free Hand / Sub Agent Tabs */}
                         {viewState === 3 && (
                             <div className="w-100">
-                                <div className="d-flex justify-content-around border-bottom mb-4 mx-2">
+                                <div className="perf-sub-tab-container mx-2">
                                     {["Agent Nomination", "Free Hand", "Sub Agent"].map((tab) => (
                                         <div
                                             key={tab}
                                             onClick={() => setActiveTab3(tab)}
-                                            className="pb-2 fw-bold"
-                                            style={{ cursor: "pointer", color: activeTab3 === tab ? "#50a9e9" : "#a1acb8", borderBottom: activeTab3 === tab ? "3px solid #50a9e9" : "3px solid transparent", width: "33%", textAlign: "center", fontSize: "13px" }}>
+                                            className={`perf-sub-tab ${activeTab3 === tab ? "active" : "inactive"}`}
+                                            style={{ width: '33.33%' }}>
                                             {tab}
                                         </div>
                                     ))}

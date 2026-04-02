@@ -13,6 +13,7 @@ window.JSZip = JSZip;
 pdfMake.vfs = pdfFonts.vfs
 
 import "../../../../../App.css";
+import "../../../../css/forwarding.css";
 
 /* ───── DUMMY DATA ───── */
 const dummyConsols = [
@@ -65,7 +66,7 @@ const SeaExportConsol = ({ initialView = "table" }) => {
 
         // Clean up
         if (dtRef.current) {
-            dtRef.current.destroy(true);
+            dtRef.current.destroy();
             dtRef.current = null;
         }
 
@@ -140,7 +141,7 @@ const SeaExportConsol = ({ initialView = "table" }) => {
 
         // ACTIONS
         $(tableRef.current).on("click", ".edit-icon", function () {
-            setView("form");
+            switchToForm();
         });
 
         $(tableRef.current).on("click", ".delete-icon", function () {
@@ -160,13 +161,21 @@ const SeaExportConsol = ({ initialView = "table" }) => {
 
         return () => {
             if (dtRef.current) {
-                dtRef.current.destroy(true);
+                dtRef.current.destroy();
                 dtRef.current = null;
             }
         };
     }, [view, consols]);
 
     /* ───── HANDLERS ───── */
+    const switchToForm = () => {
+        if (dtRef.current) {
+            dtRef.current.destroy();
+            dtRef.current = null;
+        }
+        setView("form");
+    };
+
     const toggleSection = (s) => setOpenSections(prev => ({ ...prev, [s]: !prev[s] }));
 
     const addRouteRow = () => setRouteRows([...routeRows, { id: Date.now(), mode: "", type: "", from: "", to: "", etaOrigin: "", etd: "", etaDest: "", ataDest: "", remarks: "" }]);
@@ -210,11 +219,16 @@ const SeaExportConsol = ({ initialView = "table" }) => {
         <>
             {/* VIEW: TABLE */}
             <div style={{ display: view === "table" ? "block" : "none" }}>
-                <div className="container-xxl flex-grow-1 container-p-y pb-5">
-                    <div className="card">
-                        <div className="datatable-toolbar d-flex justify-content-between align-items-middle p-3">
-                            <h5 className="table-title mb-0">SE Consols</h5>
-                            <button className="btn-add-record btn-primary-custom" onClick={() => setView("form")}>
+                <div className="container-xxl container-p-y pb-5">
+
+                <h4 className="table-title mb-4">SE Consols</h4>
+
+                    <div className="ocean-card">
+                        <div className="ocean-title">
+                            <span className="bk-section-title">
+                                <div className="bk-icon-circle"><i className="bx bx-layer"></i></div> Consol List
+                            </span>
+                            <button className="btn-add-record btn-primary-custom" onClick={switchToForm}>
                                 <i className="bx bx-plus"></i> Create Consol
                             </button>
                         </div>
@@ -277,7 +291,7 @@ const SeaExportConsol = ({ initialView = "table" }) => {
             <div style={{ display: view === "form" ? "block" : "none" }}>
                 <div className="container-xxl flex-grow-1 container-p-y pb-5">
                     <div className="d-flex justify-content-between align-items-center mb-4">
-                        <h5 className="mb-0" style={{ fontWeight: "700", color: "#566a7f" }}>Sea Export Consol Details</h5>
+                        <h5 className="bk-form-heading mb-0" style={{ color: "#566a7f", fontSize: "1.125rem", fontWeight: 600 }}>Sea Export Consol Details</h5>
                         <button className="btn-secondary-custom" onClick={() => setView("table")}>
                             <i className="bx bx-arrow-back me-1"></i> Back to List
                         </button>
@@ -445,8 +459,8 @@ const SeaExportConsol = ({ initialView = "table" }) => {
                                     <table className="bk-dynamic-table">
                                         <thead>
                                             <tr>
-                                                <th>Date</th><th>Shipment No</th><th>Shipper</th><th>Consignee</th>
-                                                <th>Cargo Type</th><th>Packages</th><th>Volume</th><th>Gross Wt</th><th>Charge Wt</th><th>Remove</th>
+                                                <th>Date</th><th>Shipment No</th><th>Cargo Type</th><th>Gross Wt</th><th>Charge Wt</th><th>Shipper</th><th>Consignee</th>
+                                                <th>Packages</th><th>Volume</th><th>Remove</th>
                                             </tr>
                                         </thead>
                                         <tbody>

@@ -2,23 +2,29 @@ import React, { useEffect, useRef, useState } from "react";
 import $ from "jquery";
 
 import "datatables.net-bs5";
-import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
-import "datatables.net-responsive";
-import "datatables.net-responsive-bs5";
-import "datatables.net-buttons";
 import "datatables.net-buttons-bs5";
+import "datatables.net-responsive-bs5";
+import "datatables.net-buttons/js/buttons.colVis";
 import "datatables.net-buttons/js/buttons.html5";
 import "datatables.net-buttons/js/buttons.print";
-import "datatables.net-buttons/js/buttons.colVis";
 
-import "../../../App.css";
+import "../../css/system.css";
 
 const User = ({ initialView = "table" }) => {
     const tableRef = useRef(null);
     const dtRef = useRef(null);
 
     const [view, setView] = useState(initialView);
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState([
+        {
+            _id: "1",
+            staffName: "John Doe",
+            emailId: "john@example.com",
+            city: "Dubai",
+            state: "Dubai",
+            role: "Admin"
+        }
+    ]);
     
     const [documentRows, setDocumentRows] = useState([]);
 
@@ -52,18 +58,10 @@ const User = ({ initialView = "table" }) => {
 
     /* ───── Switch View ───── */
     const switchToForm = () => {
-        if (dtRef.current) {
-            dtRef.current.destroy();
-            dtRef.current = null;
-        }
         setView("form");
     };
 
     const switchToTable = () => {
-        if (dtRef.current) {
-            dtRef.current.destroy();
-            dtRef.current = null;
-        }
         setView("table");
     };
 
@@ -99,6 +97,7 @@ const User = ({ initialView = "table" }) => {
                     extend: "collection",
                     text: '<i class="bx bx-export"></i> Export',
                     className: "export-btn",
+                    autoClose: true,
                     dropIcon: false,
                     buttons: ["print", "copy", "excel", "pdf"]
                 },
@@ -151,42 +150,7 @@ const User = ({ initialView = "table" }) => {
     ═══════════════════════════════ */
     if (view === "table") {
         return (
-            <div className="container-xxl container-p-y pb-5">
-                <style>{`
-                    .ocean-card {
-                        background: #fff;
-                        border-radius: 8px;
-                        box-shadow: 0 0.125rem 0.25rem rgba(161, 172, 184, 0.4);
-                        margin-bottom: 20px;
-                    }
-                    .ocean-title {
-                        color: #566a7f;
-                        font-size: 1.125rem;
-                        font-weight: 600;
-                        padding: 1.25rem;
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                    }
-                    .bk-section-title {
-                        color: #50a9e9;
-                        font-size: 15px;
-                        font-weight: 700;
-                        display: flex;
-                        align-items: center;
-                        gap: 10px;
-                    }
-                    .bk-icon-circle {
-                        width: 32px;
-                        height: 32px;
-                        border-radius: 50%;
-                        background: rgba(80, 169, 233, 0.1);
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        color: #50a9e9;
-                    }
-                `}</style>
+            <div className="container-xxl container-p-y pb-5" key="user-table-view">
                 <h4 className="table-title mb-4">User Master</h4>
 
                 <div className="ocean-card">
@@ -212,96 +176,7 @@ const User = ({ initialView = "table" }) => {
         FORM VIEW
     ═══════════════════════════════ */
     return (
-        <div className="container-xxl flex-grow-1 container-p-y pb-5">
-            <style>{`
-                .bk-form-wrapper {
-                    background: transparent;
-                    display: flex;
-                    flex-direction: column;
-                }
-                .bk-section-card {
-                    background: #fff;
-                    border-radius: 8px;
-                    box-shadow: 0 0.125rem 0.25rem rgba(161, 172, 184, 0.4);
-                    margin-bottom: 20px;
-                    overflow: hidden;
-                    font-family: 'Public Sans', sans-serif;
-                }
-                .bk-form-heading {
-                    color: #566a7f;
-                    font-size: 1.125rem;
-                    font-weight: 600;
-                }
-                .bk-section-header {
-                    padding: 15px 25px;
-                    border-bottom: 1px solid #f0f2f4;
-                    background: #fdfdfd;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                }
-                .bk-section-title {
-                    color: #50a9e9;
-                    font-size: 15px;
-                    font-weight: 700;
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                }
-                .bk-icon-circle {
-                    width: 32px;
-                    height: 32px;
-                    border-radius: 50%;
-                    background: rgba(80, 169, 233, 0.1);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: #50a9e9;
-                }
-                .bk-section-body {
-                    padding: 25px;
-                }
-                .qt-label {
-                    font-size: 11px;
-                    font-weight: 600;
-                    color: #566a7f;
-                    margin-bottom: 4px;
-                    display: block;
-                }
-                .qt-input {
-                    font-size: 13px;
-                    border: 1px solid #d9dee3;
-                    border-radius: 5px;
-                    padding: 7px 12px;
-                    width: 100%;
-                    outline: none;
-                    background: #fff;
-                    color: #3b4d61;
-                }
-                .required-mark {
-                    color: #ff3e1d;
-                }
-                .grid-table-head {
-                    display: grid;
-                    gap: 10px;
-                    padding: 10px;
-                    background: #eef1f4;
-                    font-weight: 700;
-                    font-size: 11px;
-                    color: #566a7f;
-                    border-radius: 4px 4px 0 0;
-                    border: 1px solid #d9dee3;
-                }
-                .grid-table-row {
-                    display: grid;
-                    gap: 10px;
-                    padding: 8px 10px;
-                    border: 1px solid #d9dee3;
-                    border-top: none;
-                    align-items: center;
-                }
-            `}</style>
-
+        <div className="container-xxl flex-grow-1 container-p-y pb-5" key="user-form-view">
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <h5 className="bk-form-heading mb-0">Create User</h5>
                 <button className="btn-secondary-custom" onClick={switchToTable}>
@@ -542,7 +417,7 @@ const User = ({ initialView = "table" }) => {
                     <button className="btn-secondary-custom" onClick={switchToTable}>
                         Cancel
                     </button>
-                    <button className="btn-primary-custom">
+                    <button className="btn-primary-custom" onClick={switchToTable}>
                         Save
                     </button>
                 </div>

@@ -1,0 +1,284 @@
+/* finance.css - Centralized Styles for Finance Masters */
+
+/* --- Card & Container Styles --- */
+.ocean-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0.125rem 0.25rem rgba(161, 172, 184, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.ocean-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.25rem 0.5rem rgba(161, 172, 184, 0.6);
+}
+
+.ocean-title {
+    color: #566a7f;
+    font-size: 1.125rem;
+    font-weight: 600;
+    padding: 1.25rem;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.table-title {
+    color: #566a7f;
+    font-size: 1.35rem;
+    font-weight: 700;
+    font-family: "Public Sans", sans-serif;
+}
+
+/* --- Section Titles & Icons --- */
+.bk-section-title {
+    color: #50a9e9;
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0;
+}
+
+.bk-icon-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(80, 169, 233, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #50a9e9;
+}
+
+/* --- Form Elements --- */
+.qt-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #566a7f;
+    margin-bottom: 4px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.qt-input {
+    font-size: 13px;
+    border: 1px solid #d9dee3;
+    border-radius: 5px;
+    padding: 7px 12px;
+    width: 100%;
+    outline: none;
+    background: #fff;
+    color: #3b4d61;
+    transition: border-color 0.2s;
+}
+
+.qt-input:focus {
+    border-color: #50a9e9;
+    box-shadow: 0 0 0 0.2rem rgba(80, 169, 233, 0.15);
+}
+
+/* --- Form Layouts (Invoices) --- */
+.bk-form-wrapper {
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+}
+
+.bk-section-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0.125rem 0.25rem rgba(161, 172, 184, 0.4);
+    margin-bottom: 20px;
+    overflow: hidden;
+    font-family: 'Public Sans', sans-serif;
+}
+
+.bk-form-heading {
+    color: #566a7f;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.bk-section-header {
+    padding: 15px 25px;
+    border-bottom: 1px solid #f0f2f4;
+    background: #fdfdfd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.2s;
+}
+
+.bk-section-header:hover {
+    background: #f8f9fa;
+}
+
+.bk-section-body {
+    padding: 25px;
+}
+
+/* --- Group Sections (GlobalChargeCode) --- */
+.group-section {
+    border: 1px solid #d9dee3;
+    border-radius: 8px;
+    padding: 24px;
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 24px;
+    background: #fff;
+}
+
+.group-label {
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: #fff;
+    padding: 0 12px;
+    color: #50a9e9;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* --- Charge Grid (Invoices) --- */
+.charge-head {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 2fr 50px;
+    gap: 10px;
+    padding: 10px;
+    background: #eef1f4;
+    font-weight: 700;
+    font-size: 11px;
+    color: #566a7f;
+    border-radius: 4px;
+}
+
+.charge-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 2fr 50px;
+    gap: 10px;
+    padding: 8px 10px;
+    border-bottom: 1px solid #f0f2f4;
+    align-items: center;
+}
+
+/* --- Total Summary (Invoices) --- */
+.total-card {
+    width: 300px;
+    margin-left: auto;
+    margin-top: 15px;
+    border: 1px solid #d9dee3;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.total-line {
+    display: flex;
+    border-bottom: 1px solid #d9dee3;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.total-line:last-child {
+    border-bottom: none;
+}
+
+.total-label {
+    flex: 1;
+    padding: 8px 12px;
+    color: #566a7f;
+    border-right: 1px solid #d9dee3;
+    background: #f9f9f9;
+}
+
+.total-value {
+    width: 120px;
+    padding: 8px 12px;
+    text-align: right;
+    color: #50a9e9;
+    background: #fff;
+}
+
+/* --- Custom Modal Styles --- */
+.custom-modal-backdrop {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(3px);
+}
+
+.custom-modal-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 600px;
+    padding: 24px;
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-title-custom {
+    color: #50a9e9;
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.modal-divider {
+    border: 0;
+    border-top: 1px dashed #d9dee3;
+    margin: 1.25rem -24px;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    color: #566a7f;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.modal-close-btn:hover {
+    color: #ff3e1d;
+}
+
+/* --- DataTable Adjustments --- */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+.dataTables_info {
+    font-size: 13px;
+    color: #697a8d;
+}
+
+.dt-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before {
+    background-color: #50a9e9 !important;
+    border: 2px solid #fff !important;
+    box-shadow: 0 0 3px rgba(0,0,0,0.2) !important;
+}

@@ -1,0 +1,311 @@
+/* system.css - Centralized Styles for System Masters */
+
+/* --- Card & Container Styles --- */
+.ocean-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0.125rem 0.25rem rgba(161, 172, 184, 0.4);
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.ocean-title {
+    color: #566a7f;
+    font-size: 1.125rem;
+    font-weight: 600;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0;
+}
+
+.table-title {
+    color: #566a7f;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+/* --- Section Titles & Icons --- */
+.bk-section-title {
+    color: #50a9e9;
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bk-icon-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(80, 169, 233, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #50a9e9;
+}
+
+.sub-section-title {
+    color: #50a9e9;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px dashed #d9dee3;
+}
+
+/* --- Form Layout (System/Module Specific) --- */
+.bk-form-wrapper {
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+}
+
+.bk-section-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0.125rem 0.25rem rgba(161, 172, 184, 0.4);
+    margin-bottom: 20px;
+    overflow: hidden;
+    font-family: 'Public Sans', sans-serif;
+    border: 1px solid #d9dee3;
+}
+
+.bk-form-heading {
+    color: #566a7f;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.bk-section-header {
+    padding: 15px 25px;
+    border-bottom: 1px solid #f0f2f4;
+    background: #fdfdfd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bk-section-body {
+    padding: 25px;
+}
+
+/* --- Form Elements --- */
+.qt-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #566a7f;
+    margin-bottom: 4px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.qt-input,
+.form-control {
+    font-size: 13px;
+    border: 1px solid #d9dee3;
+    border-radius: 5px;
+    padding: 7px 12px;
+    width: 100%;
+    outline: none;
+    background: #fff;
+    color: #3b4d61;
+    transition: border-color 0.2s;
+}
+
+.qt-input:focus,
+.form-control:focus {
+    border-color: #50a9e9;
+    box-shadow: 0 0 0 0.2rem rgba(80, 169, 233, 0.15);
+}
+
+.required-mark {
+    color: #ff3e1d;
+}
+
+/* --- Organization Specific (Tabs & Sidebar) --- */
+.org-wrapper-card {
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #d9dee3;
+    box-shadow: 0 0.125rem 0.25rem rgba(161, 172, 184, 0.4);
+    padding: 24px;
+}
+
+.org-top-checkboxes {
+    border: 1px solid #d9dee3;
+    border-radius: 8px;
+    background: #fff;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.org-top-checkboxes label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #566a7f;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.org-sidebar {
+    width: 250px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.org-tab {
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #566a7f;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.org-tab:hover {
+    background: rgba(80, 169, 233, 0.05);
+}
+
+.org-tab.active {
+    background: #5c6ea4;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(92, 110, 164, 0.3);
+}
+
+.org-content-card {
+    flex-grow: 1;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #d9dee3;
+    min-height: 500px;
+}
+
+.org-content-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #f0f2f4;
+    color: #50a9e9;
+    font-size: 14px;
+    font-weight: 700;
+    background: #fdfdfd;
+}
+
+.org-content-body {
+    padding: 20px;
+}
+
+/* --- Inline Grid Tables --- */
+.grid-table-head {
+    display: grid;
+    gap: 10px;
+    padding: 10px;
+    background: #eef1f4;
+    font-weight: 700;
+    font-size: 11px;
+    color: #566a7f;
+    border-radius: 4px 4px 0 0;
+    border: 1px solid #d9dee3;
+}
+
+.grid-table-row {
+    display: grid;
+    gap: 10px;
+    padding: 8px 10px;
+    border: 1px solid #d9dee3;
+    border-top: none;
+    align-items: center;
+}
+
+/* --- Custom Modal Styles --- */
+.custom-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(3px);
+}
+
+.custom-modal-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 600px;
+    padding: 24px;
+    font-family: 'Public Sans', sans-serif;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-title-custom {
+    color: #50a9e9;
+    font-size: 1.125rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+}
+
+.modal-divider {
+    border: 0;
+    border-top: 1px dashed #d9dee3;
+    margin: 1.25rem -24px;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    color: #566a7f;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.modal-close-btn:hover {
+    color: #ff3e1d;
+}
+
+/* --- DataTable Adjustments --- */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+.dataTables_info {
+    font-size: 13px;
+    color: #697a8d;
+}
+
+.export-btn {
+    box-shadow: 0 0.125rem 0.25rem rgba(161, 172, 184, 0.4);
+}

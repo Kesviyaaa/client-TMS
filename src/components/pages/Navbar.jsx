@@ -27,10 +27,10 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
   };
   const handleClick = (item) => {
     const updated = [item, ...recent.filter(p => p.path !== item.path)].slice(0, 5);
-  
+
     setRecent(updated);
     localStorage.setItem("recentSearches", JSON.stringify(updated));
-  
+
     closeSearch();
   };
 
@@ -55,7 +55,7 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
       title: "Congratulation Lettie 🎉",
       description: "Won the monthly best seller gold badge",
       time: "1h ago",
-      avatar: "../../assets/img/avatars/1.png",
+      avatar: `${import.meta.env.BASE_URL}assets/img/avatars/2.png`,
     },
     {
       title: "Charles Franklin",
@@ -68,7 +68,7 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
       title: "New Message ✉️",
       description: "You have new message from Natalie",
       time: "1h ago",
-      avatar: "../../assets/img/avatars/2.png",
+      avatar: `${import.meta.env.BASE_URL}assets/img/avatars/2.png`,
     },
     {
       title: "Whoo! You have new order 🛒",
@@ -81,7 +81,7 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
       title: "Application has been approved 🚀",
       description: "Your ABC project application has been approved.",
       time: "2 days ago",
-      avatar: "../../assets/img/avatars/9.png",
+      avatar: `${import.meta.env.BASE_URL}assets/img/avatars/9.png`,
     },
     {
       title: "Monthly report is generated",
@@ -134,23 +134,23 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
 
   const handleThemeChange = (mode) => {
     const html = document.documentElement;
-  
+
     html.classList.remove("light-style", "dark-style");
-  
+
     if (mode === "dark") {
       html.classList.add("dark-style");
     } else if (mode === "light") {
       html.classList.add("light-style");
     } else if (mode === "system") {
       const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  
+
       if (prefersDark) {
         html.classList.add("dark-style");
       } else {
         html.classList.add("light-style");
       }
     }
-  
+
     localStorage.setItem("theme", mode);
     setTheme(mode);
   };
@@ -172,7 +172,7 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
 
   const buildSearchData = () => {
     const data = [];
-  
+
     // 🔹 FORWARDING
     data.push(
       { name: "Quotations", path: "/quotations", category: "FORWARDING", icon: "bx bx-file" },
@@ -190,7 +190,7 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
       { name: "Airline Charges", path: "/airline-charges", category: "FORWARDING", icon: "bx bx-money" },
       { name: "Company Tariff Freight", path: "/company-tariff-freight", category: "FORWARDING", icon: "bx bx-dollar" },
     );
-  
+
     // 🔹 TRACKING
     data.push(
       { name: "Tracking Dashboard", path: "/tracking-dashboard", category: "TRACKING", icon: "bx bx-home" },
@@ -201,7 +201,7 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
       { name: "Ocean Calendar", path: "/ocean-calendar", category: "TRACKING", icon: "bx bx-calendar" },
       { name: "Air Calendar", path: "/air-calendar", category: "TRACKING", icon: "bx bx-calendar-event" },
     );
-  
+
     // 🔹 PERFORMANCE
     data.push(
       { name: "Air Import Dashboard", path: "/performance/air-import/dashboard", category: "PERFORMANCE", icon: "bx bxs-plane" },
@@ -212,7 +212,7 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
       { name: "Sales Performance (AE)", path: "/performance/air-export/sales", category: "PERFORMANCE", icon: "bx bx-trending-up" },
       { name: "Variation Report", path: "/performance/variation", category: "PERFORMANCE", icon: "bx bx-line-chart" },
     );
-  
+
     // 🔹 GLOBAL MASTERS
     data.push(
       { name: "Ports", path: "/global-masters/ports", category: "GLOBAL MASTERS", icon: "bx bxs-map" },
@@ -223,7 +223,7 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
       { name: "Terminal Operator", path: "/global-masters/terminal-operator", category: "GLOBAL MASTERS", icon: "bx bx-git-branch" },
       { name: "CFS / Yard", path: "/global-masters/cfs-yard", category: "GLOBAL MASTERS", icon: "bx bx-building-house" },
     );
-  
+
     // 🔹 CARRIER MASTERS
     data.push(
       { name: "Airline Master", path: "/carrier-masters/airline", category: "CARRIER MASTERS", icon: "bx bxs-plane" },
@@ -231,14 +231,14 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
       { name: "BL / WB Clause", path: "/carrier-masters/bl-clause", category: "CARRIER MASTERS", icon: "bx bx-file" },
       { name: "Vessels Master", path: "/carrier-masters/vessels", category: "CARRIER MASTERS", icon: "bx bx-anchor" },
     );
-  
+
     // 🔹 FINANCE MASTERS
     data.push(
       { name: "Global Charge Codes", path: "/finance-masters/charge-codes", category: "FINANCE MASTERS", icon: "bx bx-money" },
       { name: "Airline Commission", path: "/finance-masters/airline-commission", category: "FINANCE MASTERS", icon: "bx bx-line-chart" },
       { name: "Shipping Line Brokerage", path: "/finance-masters/shipping-brokerage", category: "FINANCE MASTERS", icon: "bx bx-trending-up" },
     );
-  
+
     // 🔹 SYSTEM MASTERS
     data.push(
       { name: "Organisation Details", path: "/system-master/org-details", category: "SYSTEM MASTERS", icon: "bx bx-buildings" },
@@ -246,10 +246,10 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
       { name: "User Creation", path: "/system-master/user", category: "SYSTEM MASTERS", icon: "bx bx-user" },
       { name: "User Role", path: "/system-master/user-role", category: "SYSTEM MASTERS", icon: "bx bx-id-card" },
     );
-  
+
     return data;
   };
-  
+
   const pages = buildSearchData();
 
   useEffect(() => {
@@ -260,7 +260,8 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
       }
 
       if (e.key === "Escape") {
-        closeSearch();      }
+        closeSearch();
+      }
     };
 
     document.addEventListener("keydown", handleKey);
@@ -269,13 +270,13 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
 
   const handleSearch = (value) => {
     setSearchQuery(value);
-  
+
     const filtered = pages.filter((p) =>
       (p.name + " " + p.category)
         .toLowerCase()
         .includes(value.toLowerCase())
     );
-  
+
     setResults(filtered);
   };
 
@@ -289,7 +290,8 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
 
       // ESC → close search
       if (e.key === "Escape") {
-        closeSearch();      }
+        closeSearch();
+      }
     };
 
     document.addEventListener("keydown", handleKeyDown);
@@ -313,14 +315,13 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
 
   return (
     <nav
-      className={`layout-navbar navbar ${
-        collapsed ? "sidebar-collapsed" : "sidebar-expanded"
-      } ${hovered ? "sidebar-hovered" : ""}`}
+      className={`layout-navbar navbar ${collapsed ? "sidebar-collapsed" : "sidebar-expanded"
+        } ${hovered ? "sidebar-hovered" : ""}`}
     >
       {/* Left menu toggle */}
       <div className="layout-menu-toggle navbar-nav align-items-center me-4 me-xl-0 d-xl-none">
-        <a 
-          className="nav-item nav-link px-0 me-xl-6" 
+        <a
+          className="nav-item nav-link px-0 me-xl-6"
           href="#!"
           onClick={(e) => {
             e.preventDefault();
@@ -358,9 +359,8 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
         <ul className="navbar-nav flex-row align-items-center ms-md-auto">
           {/* Language dropdown */}
           <li
-            className={`nav-item dropdown-language dropdown me-2 me-xl-0 ${
-              langOpen ? "show" : ""
-            }`}
+            className={`nav-item dropdown-language dropdown me-2 me-xl-0 ${langOpen ? "show" : ""
+              }`}
             ref={langRef}
           >
             <a
@@ -374,9 +374,8 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
               <i className="icon-base bx bx-globe icon-md"></i>
             </a>
             <ul
-              className={`dropdown-menu dropdown-menu-end ${
-                langOpen ? "show" : ""
-              }`}
+              className={`dropdown-menu dropdown-menu-end ${langOpen ? "show" : ""
+                }`}
             >
               <li>
                 <button className="dropdown-item">English</button>
@@ -395,9 +394,8 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
 
           {/* Theme switcher */}
           <li
-            className={`nav-item dropdown-style-switcher dropdown me-2 me-xl-0 ${
-              themeOpen ? "show" : ""
-            }`}
+            className={`nav-item dropdown-style-switcher dropdown me-2 me-xl-0 ${themeOpen ? "show" : ""
+              }`}
             ref={themeRef}
           >
             <a
@@ -409,19 +407,17 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
               }}
             >
               <i
-                className={`bx bx-sm ${
-                  theme === "dark"
-                    ? "bx-moon"
-                    : theme === "light"
+                className={`bx bx-sm ${theme === "dark"
+                  ? "bx-moon"
+                  : theme === "light"
                     ? "bx-sun"
                     : "bx-laptop"
-                }`}
+                  }`}
               ></i>
             </a>
             <ul
-              className={`dropdown-menu dropdown-menu-end ${
-                themeOpen ? "show" : ""
-              }`}
+              className={`dropdown-menu dropdown-menu-end ${themeOpen ? "show" : ""
+                }`}
             >
               <li>
                 <button
@@ -454,9 +450,8 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
           </li>
 
           <li
-            className={`nav-item dropdown-shortcuts navbar-dropdown dropdown me-2 me-xl-0 ${
-              shortcutsOpen ? "show" : ""
-            }`}
+            className={`nav-item dropdown-shortcuts navbar-dropdown dropdown me-2 me-xl-0 ${shortcutsOpen ? "show" : ""
+              }`}
             ref={shortcutsRef}
           >
             <a
@@ -471,9 +466,8 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
             </a>
 
             <div
-              className={`dropdown-menu dropdown-menu-end p-3 ${
-                shortcutsOpen ? "show" : ""
-              }`}
+              className={`dropdown-menu dropdown-menu-end p-3 ${shortcutsOpen ? "show" : ""
+                }`}
             >
               <div className="dropdown-menu-header border-bottom mb-2 d-flex justify-content-between align-items-center">
                 <h6 className="mb-0">Shortcuts</h6>
@@ -507,9 +501,8 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
           </li>
 
           <li
-            className={`nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-2 ${
-              notifOpen ? "show" : ""
-            }`}
+            className={`nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-2 ${notifOpen ? "show" : ""
+              }`}
             ref={notifRef}
           >
             <a
@@ -524,9 +517,8 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
             </a>
 
             <ul
-              className={`dropdown-menu dropdown-menu-end p-0 ${
-                notifOpen ? "show" : ""
-              }`}
+              className={`dropdown-menu dropdown-menu-end p-0 ${notifOpen ? "show" : ""
+                }`}
             >
               {/* Header */}
               <li className="dropdown-menu-header border-bottom">
@@ -566,9 +558,8 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
                               />
                             ) : (
                               <span
-                                className={`avatar-initial rounded-circle ${
-                                  item.avatarClass || "bg-label-secondary"
-                                }`}
+                                className={`avatar-initial rounded-circle ${item.avatarClass || "bg-label-secondary"
+                                  }`}
                               >
                                 {item.initials}
                               </span>
@@ -617,9 +608,8 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
             </ul>
           </li>
           <li
-            className={`nav-item navbar-dropdown dropdown-user dropdown ${
-              userOpen ? "show" : ""
-            }`}
+            className={`nav-item navbar-dropdown dropdown-user dropdown ${userOpen ? "show" : ""
+              }`}
             ref={userRef}
           >
             <a
@@ -632,16 +622,15 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
             >
               <div className="avatar avatar-online">
                 <img
-                  src="../../assets/img/avatars/1.png"
+                  src={`${import.meta.env.BASE_URL}assets/img/avatars/2.png`}
                   alt="avatar"
                   className="rounded-circle"
                 />
               </div>
             </a>
             <ul
-              className={`dropdown-menu dropdown-menu-end ${
-                userOpen ? "show" : ""
-              }`}
+              className={`dropdown-menu dropdown-menu-end ${userOpen ? "show" : ""
+                }`}
             >
               <li>
                 <a
@@ -652,7 +641,7 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
                     <div className="flex-shrink-0 me-3">
                       <div className="avatar avatar-online">
                         <img
-                          src="../../assets/img/avatars/1.png"
+                          src={`${import.meta.env.BASE_URL}assets/img/avatars/2.png`}
                           alt="avatar"
                           className="w-px-40 h-auto rounded-circle"
                         />
@@ -735,22 +724,22 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
       {searchOpen && (
         <div className="search-modal-overlay">
           <div className="search-modal">
-          <div className="search-header modern">
-  <i className="bx bx-search search-icon"></i>
+            <div className="search-header modern">
+              <i className="bx bx-search search-icon"></i>
 
-  <input
-    type="text"
-    placeholder="Search anything (Ctrl + K)"
-    value={searchQuery}
-    onChange={(e) => handleSearch(e.target.value)}
-    autoFocus
-  />
+              <input
+                type="text"
+                placeholder="Search anything (Ctrl + K)"
+                value={searchQuery}
+                onChange={(e) => handleSearch(e.target.value)}
+                autoFocus
+              />
 
-  <div className="search-actions">
-    <i className="bx bx-x fs-4 me-2" onClick={closeSearch} style={{ cursor: 'pointer', color: '#6b7280' }}></i>
-    <kbd>ESC</kbd>
-  </div>
-</div>
+              <div className="search-actions">
+                <i className="bx bx-x fs-4 me-2" onClick={closeSearch} style={{ cursor: 'pointer', color: '#6b7280' }}></i>
+                <kbd>ESC</kbd>
+              </div>
+            </div>
 
             <div className="search-results">
               {/* DEFAULT VIEW */}
@@ -844,40 +833,40 @@ const Navbar = ({ collapsed, hovered, toggleMobileMenu }) => {
                 </div>
               )}
 
-{searchQuery !== "" &&
-  Object.entries(
-    results.reduce((acc, item) => {
-      if (!acc[item.category]) acc[item.category] = [];
-      acc[item.category].push(item);
-      return acc;
-    }, {})
-  ).map(([category, items]) => (
-    <div key={category} className="search-group">
-      <div className="search-group-title">{category}</div>
+              {searchQuery !== "" &&
+                Object.entries(
+                  results.reduce((acc, item) => {
+                    if (!acc[item.category]) acc[item.category] = [];
+                    acc[item.category].push(item);
+                    return acc;
+                  }, {})
+                ).map(([category, items]) => (
+                  <div key={category} className="search-group">
+                    <div className="search-group-title">{category}</div>
 
-      {items.map((item, i) => (
-  <Link
-    key={i}
-    to={item.path}
-    className="search-result modern"
-    onClick={() => handleClick(item)}
-  >
-    <div className="left">
-      <i className={item.icon}></i>
-    </div>
+                    {items.map((item, i) => (
+                      <Link
+                        key={i}
+                        to={item.path}
+                        className="search-result modern"
+                        onClick={() => handleClick(item)}
+                      >
+                        <div className="left">
+                          <i className={item.icon}></i>
+                        </div>
 
-    <div className="center">
-      <div className="title">{item.name}</div>
-      <div className="meta">{category}</div>
-    </div>
+                        <div className="center">
+                          <div className="title">{item.name}</div>
+                          <div className="meta">{category}</div>
+                        </div>
 
-    <div className="right">
-      <span>↵</span>
-    </div>
-  </Link>
-))}
-    </div>
-  ))}
+                        <div className="right">
+                          <span>↵</span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                ))}
             </div>
           </div>
         </div>

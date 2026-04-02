@@ -21,7 +21,7 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 window.JSZip = JSZip;
 pdfMake.vfs = pdfFonts.vfs;
 
-import "../../../App.css";
+import "../../css/global.css";
 
 const CFS = () => {
     const tableRef = useRef(null);
@@ -177,35 +177,34 @@ const CFS = () => {
     }, [cfsList]);
 
     return (
-        <div className="container-xxl flex-grow-1 container-p-y pb-5">
-            <div className="card">
-                <div className="datatable-toolbar d-flex justify-content-between align-items-start p-3">
-                    <div className="title-section">
-                        <h5 className="table-title">CFS / Yard Master</h5>
-                    </div>
-                    <button
-                        className="btn-add-record btn-primary-custom"
-                        onClick={() => {
-                            setEditingId(null);
-                            setShowModal(true);
-                        }}
-                    >
-                        <i className="bx bx-plus"></i> Create
+        <div className="container-xxl container-p-y pb-5">
+            
+            <h4 className="table-title mb-4">CFS / Yard Master</h4>
+
+            <div className="ocean-card">
+                <div className="ocean-title">
+                    <span className="bk-section-title">
+                        <div className="bk-icon-circle"><i className="bx bx-map-pin"></i></div> Yard List
+                    </span>
+                    <button className="btn-primary-custom" onClick={() => { setEditingId(null); setShowModal(true); }}>
+                        <i className="bx bx-plus"></i> Create Yard
                     </button>
                 </div>
                 <div className="card-datatable p-3">
-                    <table ref={tableRef} className="table dataTable dtr-inline w-100">
-                        <thead>
-                            <tr>
-                                <th>CFS / Yard Name</th>
-                                <th>Code</th>
-                                <th>Contact Person</th>
-                                <th>Mobile</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                    </table>
+                    <div className="table-responsive">
+                        <table ref={tableRef} className="table dataTable dtr-inline w-100 shadow-none">
+                            <thead>
+                                <tr>
+                                    <th>CFS / Yard Name</th>
+                                    <th>Code</th>
+                                    <th>Contact Person</th>
+                                    <th>Mobile</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -214,13 +213,13 @@ const CFS = () => {
                 <div className="custom-modal-backdrop" style={{ zIndex: 9999 }} onClick={(e) => { if (e.target === e.currentTarget) handleClose() }}>
                     <div className="custom-modal-card" style={{ maxWidth: "700px" }}>
                         <div className="d-flex justify-content-between align-items-center">
-                            <h5 style={{ color: "#50a9e9", fontSize: "1.125rem", fontWeight: 700, margin: 0 }}>
+                            <h5 className="modal-title">
                                 {editingId ? "Edit CFS / Yard Master" : "Create CFS / Yard Master"}
                             </h5>
-                            <button type="button" onClick={handleClose} style={{ background: "none", border: "none", color: "#566a7f", fontSize: "1.5rem", lineHeight: 1, cursor: "pointer", padding: 0 }}>&times;</button>
+                            <button type="button" className="custom-close" onClick={handleClose}>&times;</button>
                         </div>
 
-                        <hr style={{ border: 0, borderTop: "1px dashed #d9dee3", margin: "1.25rem -24px" }} />
+                        <hr className="modal-divider" />
 
                         <div className="row g-4 mb-4">
                             <div className="col-md-6">
@@ -318,9 +317,9 @@ const CFS = () => {
                             </div>
                         </div>
 
-                        <hr style={{ border: 0, borderTop: "1px dashed #d9dee3", margin: "1.25rem -24px" }} />
+                        <hr className="modal-divider" />
 
-                        <div className="d-flex justify-content-end gap-3">
+                        <div className="modal-buttons mt-4">
                             <button className="btn-secondary-custom" onClick={handleClose}>
                                 Cancel
                             </button>

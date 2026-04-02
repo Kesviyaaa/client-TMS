@@ -11,7 +11,7 @@ import "datatables.net-buttons/js/buttons.html5";
 import "datatables.net-buttons/js/buttons.print";
 import "datatables.net-buttons/js/buttons.colVis";
 
-import "../../../App.css";
+import "../../css/system.css";
 
 const Role = () => {
     const tableRef = useRef(null);
@@ -59,6 +59,7 @@ const Role = () => {
                     text: '<i class="bx bx-export"></i> Export',
                     className: "export-btn",
                     dropIcon: false,
+                    autoClose: true,
                     buttons: ["print", "copy", "excel", "pdf"]
                 },
                 {
@@ -98,7 +99,7 @@ const Role = () => {
 
         return () => {
             if (dtRef.current) {
-                dtRef.current.destroy();
+                dtRef.current.destroy(true);
                 dtRef.current = null;
             }
         };
@@ -120,105 +121,6 @@ const Role = () => {
 
     return (
         <div className="container-xxl container-p-y pb-5">
-            <style>{`
-                .ocean-card {
-                    background: #fff;
-                    border-radius: 8px;
-                    box-shadow: 0 0.125rem 0.25rem rgba(161, 172, 184, 0.4);
-                    margin-bottom: 20px;
-                }
-                .ocean-title {
-                    color: #566a7f;
-                    font-size: 1.125rem;
-                    font-weight: 600;
-                    padding: 1.25rem;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                }
-                .bk-section-title {
-                    color: #50a9e9;
-                    font-size: 15px;
-                    font-weight: 700;
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                }
-                .bk-icon-circle {
-                    width: 32px;
-                    height: 32px;
-                    border-radius: 50%;
-                    background: rgba(80, 169, 233, 0.1);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: #50a9e9;
-                }
-                
-                /* Custom Modal Standardization */
-                .custom-modal-backdrop {
-                    position: fixed;
-                    top: 0; left: 0; right: 0; bottom: 0;
-                    background: rgba(0, 0, 0, 0.5);
-                    z-index: 9999;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-                .custom-modal-card {
-                    background: #fff;
-                    border-radius: 8px;
-                    box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
-                    width: 100%;
-                    max-width: 500px;
-                    padding: 24px;
-                    font-family: 'Public Sans', sans-serif;
-                }
-                .modal-title-custom {
-                    color: #50a9e9;
-                    font-size: 1.125rem;
-                    font-weight: 700;
-                    margin: 0;
-                }
-                .modal-divider {
-                    border: 0;
-                    border-top: 1px dashed #d9dee3;
-                    margin: 1.25rem -24px;
-                }
-                .modal-close-btn {
-                    background: none;
-                    border: none;
-                    color: #566a7f;
-                    font-size: 1.5rem;
-                    line-height: 1;
-                    cursor: pointer;
-                    padding: 0;
-                }
-                .qt-label {
-                    font-size: 12px;
-                    font-weight: 600;
-                    color: #566a7f;
-                    margin-bottom: 6px;
-                    display: block;
-                }
-                .qt-input {
-                    font-size: 13px;
-                    border: 1px solid #d9dee3;
-                    border-radius: 5px;
-                    padding: 8px 12px;
-                    width: 100%;
-                    outline: none;
-                    background: #fff;
-                    color: #3b4d61;
-                }
-                .required-mark {
-                    color: #ff3e1d;
-                }
-                .required-mark {
-                    color: #ff3e1d;
-                }
-            `}</style>
-            
             <h4 className="table-title mb-4">Roles</h4>
 
             <div className="ocean-card">

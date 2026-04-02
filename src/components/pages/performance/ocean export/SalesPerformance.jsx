@@ -39,7 +39,7 @@ const BracketCard = ({ children, className = "", style = {} }) => (
 const SalesTable = ({ title, activeMainTab }) => {
     const tableRef = useRef(null);
     const dtRef = useRef(null);
-    const [viewMode, setViewMode] = useState("chart");
+    const [viewMode, setViewMode] = useState("table"); // 'table', 'chart', 'summary'
     const [activeSubTab, setActiveSubTab] = useState("Agent Nomination");
 
     useEffect(() => {
@@ -138,6 +138,11 @@ const SalesTable = ({ title, activeMainTab }) => {
                         <i className="bx bx-x fs-5"></i>
                     </div>
                     <div
+                        onClick={() => setViewMode("table")}
+                        className={`view-toggle-btn ${viewMode === "table" ? "active" : "inactive"}`}>
+                        <i className="bx bx-table fs-5"></i>
+                    </div>
+                    <div
                         onClick={() => setViewMode("chart")}
                         className={`view-toggle-btn ${viewMode === "chart" ? "active" : "inactive"}`}>
                         <i className="bx bx-bar-chart-alt-2 fs-5"></i>
@@ -175,15 +180,22 @@ const SalesTable = ({ title, activeMainTab }) => {
                 </div>
             )}
 
+            {/* Table View */}
+            <div style={{ display: viewMode === "table" ? "block" : "none" }} className="card-datatable pb-1">
+                <table ref={tableRef} className="table dataTable dtr-inline w-100">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
             {/* Chart View */}
             <div style={{ display: viewMode === "chart" ? "block" : "none" }}>
-                <div className="d-flex justify-content-around border-bottom mb-4 mx-2">
+                <div className="perf-sub-tab-container mx-2">
                     {["Agent Nomination", "Free Hand", "Sub Agent"].map((tab) => (
                         <div
                             key={tab}
                             onClick={() => setActiveSubTab(tab)}
-                            className="pb-2 fw-bold"
-                            style={{ cursor: "pointer", color: activeSubTab === tab ? "#50a9e9" : "#a1acb8", borderBottom: activeSubTab === tab ? "3px solid #50a9e9" : "3px solid transparent", width: "33%", textAlign: "center", fontSize: "14px" }}>
+                            className={`perf-sub-tab ${activeSubTab === tab ? "active" : "inactive"}`}>
                             {tab}
                         </div>
                     ))}
@@ -225,28 +237,15 @@ const OceanExportSalesPerformance = () => {
                 </div>
             </div>
 
-            <BracketCard className="mb-4 d-flex" style={{ height: "55px", padding: 0, overflow: 'hidden' }}>
+            <BracketCard className="mb-4 perf-mode-container">
                 <div
                     onClick={() => setActiveMainTab("Forwarding")}
-                    className="d-flex align-items-center justify-content-center flex-grow-1 h-100 fw-bold text-uppercase"
-                    style={{
-                        cursor: "pointer",
-                        borderRight: "1px solid #ddd",
-                        color: activeMainTab === "Forwarding" ? "#2E8B57" : "#000",
-                        backgroundColor: activeMainTab === "Forwarding" ? "#f9f9f9" : "transparent",
-                        fontSize: "14px"
-                    }}>
+                    className={`perf-mode-tab ${activeMainTab === "Forwarding" ? "active" : "inactive"}`}>
                     Forwarding
                 </div>
                 <div
                     onClick={() => setActiveMainTab("CCL")}
-                    className="d-flex align-items-center justify-content-center flex-grow-1 h-100 fw-bold text-uppercase"
-                    style={{
-                        cursor: "pointer",
-                        color: activeMainTab === "CCL" ? "#2E8B57" : "#000",
-                        backgroundColor: activeMainTab === "CCL" ? "#f9f9f9" : "transparent",
-                        fontSize: "14px"
-                    }}>
+                    className={`perf-mode-tab ${activeMainTab === "CCL" ? "active" : "inactive"}`}>
                     CCL
                 </div>
             </BracketCard>

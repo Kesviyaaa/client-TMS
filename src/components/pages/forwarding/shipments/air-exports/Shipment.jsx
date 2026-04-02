@@ -174,7 +174,7 @@ const Shipment = ({ initialView = "table" }) => {
             const rowData = shipments.find(s => s._id == id);
             if (rowData) {
                 setFormData(prev => ({ ...prev, ...rowData }));
-                setView("form");
+                switchToForm();
             }
         });
 
@@ -192,15 +192,28 @@ const Shipment = ({ initialView = "table" }) => {
         };
     }, [view, shipments]);
 
+    const switchToForm = () => {
+        if (dtRef.current) {
+            dtRef.current.destroy();
+            dtRef.current = null;
+        }
+        setView("form");
+    };
+
     const toggleSection = (key) => setOpenSections(prev => ({ ...prev, [key]: !prev[key] }));
 
     if (view === "table") {
         return (
-            <div className="container-xxl flex-grow-1 container-p-y">
-                <div className="card">
-                    <div className="datatable-toolbar d-flex justify-content-between align-items-middle p-3">
-                        <h5 className="table-title mb-0">AE Shipments</h5>
-                        <button className="btn-primary-custom" onClick={() => setView("form")}>
+            <div className="container-xxl container-p-y pb-5">
+
+                <h4 className="table-title mb-4">AE Shipments</h4>
+
+                <div className="ocean-card">
+                    <div className="ocean-title">
+                        <span className="bk-section-title">
+                            <div className="bk-icon-circle"><i className="bx bxs-plane-take-off"></i></div> Shipment List
+                        </span>
+                        <button className="btn-primary-custom" onClick={switchToForm}>
                             <i className="bx bx-plus"></i> Create Shipment
                         </button>
                     </div>
@@ -300,9 +313,9 @@ const Shipment = ({ initialView = "table" }) => {
 
     // ───── Form View ─────
     return (
-        <div className="container-xxl flex-grow-1 container-p-y">
+        <div className="container-xxl flex-grow-1 container-p-y pb-5">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h5 className="mb-0" style={{ fontWeight: "700", color: "#566a7f" }}>Shipment Details</h5>
+                <h5 className="bk-form-heading mb-0" style={{ color: "#566a7f", fontSize: "1.125rem", fontWeight: 600 }}>Shipment Details</h5>
                 <button className="btn-secondary-custom" onClick={() => setView("table")}>
                     <i className="bx bx-arrow-back me-1"></i> Back to List
                 </button>

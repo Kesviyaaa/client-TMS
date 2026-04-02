@@ -190,23 +190,22 @@ const SalesTable = ({ title, activeMainTab }) => {
 
             {/* Chart View */}
             <div style={{ display: viewMode === "chart" ? "block" : "none" }}>
-                <div className="d-flex justify-content-around border-bottom mb-4 mx-2">
+                <div className="perf-sub-tab-container mx-2">
                     {["Agent Nomination", "Free Hand", "Sub Agent"].map((tab) => (
                         <div
                             key={tab}
                             onClick={() => setActiveSubTab(tab)}
-                            className="pb-2 fw-bold"
-                            style={{ cursor: "pointer", color: activeSubTab === tab ? "#50a9e9" : "#a1acb8", borderBottom: activeSubTab === tab ? "3px solid #50a9e9" : "3px solid transparent", width: "33%", textAlign: "center", fontSize: "14px" }}>
+                            className={`perf-sub-tab ${activeSubTab === tab ? "active" : "inactive"}`}>
                             {tab}
                         </div>
                     ))}
                 </div>
                 <div className="d-flex justify-content-end mb-2 pe-2">
-                    <div className="view-toggle-btn active" style={{ width: '40px' }}>
+                    <div className="view-toggle-btn active ms-auto" style={{ width: '40px' }}>
                         <i className="bx bx-table sm"></i>
                     </div>
                 </div>
-                <div className="border border-light-subtle rounded d-flex align-items-center justify-content-center" style={{ height: "150px" }}>
+                <div className="chart-placeholder">
                     <p className="text-muted small">No visualization available</p>
                 </div>
             </div>
@@ -241,28 +240,15 @@ const SalesPerformance = () => {
                 </div>
             </div>
 
-            <BracketCard className="mb-4 d-flex" style={{ height: "55px", padding: 0, overflow: 'hidden' }}>
+            <BracketCard className="mb-4 perf-mode-container">
                 <div
                     onClick={() => setActiveMainTab("Forwarding")}
-                    className="d-flex align-items-center justify-content-center flex-grow-1 h-100 fw-bold text-uppercase"
-                    style={{
-                        cursor: "pointer",
-                        borderRight: "1px solid #ddd",
-                        color: activeMainTab === "Forwarding" ? "#2E8B57" : "#000",
-                        backgroundColor: activeMainTab === "Forwarding" ? "#f9f9f9" : "transparent",
-                        fontSize: "14px"
-                    }}>
+                    className={`perf-mode-tab ${activeMainTab === "Forwarding" ? "active" : "inactive"}`}>
                     Forwarding
                 </div>
                 <div
                     onClick={() => setActiveMainTab("CCL")}
-                    className="d-flex align-items-center justify-content-center flex-grow-1 h-100 fw-bold text-uppercase"
-                    style={{
-                        cursor: "pointer",
-                        color: activeMainTab === "CCL" ? "#2E8B57" : "#000",
-                        backgroundColor: activeMainTab === "CCL" ? "#f9f9f9" : "transparent",
-                        fontSize: "14px"
-                    }}>
+                    className={`perf-mode-tab ${activeMainTab === "CCL" ? "active" : "inactive"}`}>
                     CCL
                 </div>
             </BracketCard>

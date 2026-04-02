@@ -22,6 +22,7 @@ window.JSZip = JSZip;
 pdfMake.vfs = pdfFonts.vfs;
 
 import "../../../../App.css";
+import "../../../css/tracking.css";
 
 /* ───── Dummy Data ───── */
 const dummyMilestones = [
@@ -144,20 +145,25 @@ const CreateMilestone = () => {
     }
 
     return (
-        <div className="container-xxl flex-grow-1 container-p-y pb-5">
-            <div className="card">
-                <div className="datatable-toolbar d-flex justify-content-between align-items-start p-3">
-                    <div className="title-section">
-                        <h5 className="table-title">Milestones Details</h5>
-                    </div>
-                    <button className="btn-add-record btn-primary-custom" onClick={(e) => e.preventDefault()}>
+        <div className="container-xxl container-p-y pb-5">
+            
+            <h4 className="table-title mb-4">Milestones Details</h4>
+
+            <div className="ocean-card">
+                <div className="ocean-title">
+                    <span className="bk-section-title">
+                        <div className="bk-icon-circle"><i className="bx bx-flag"></i></div> Milestone List
+                    </span>
+                    <button className="btn-primary-custom" onClick={(e) => e.preventDefault()}>
                         <i className="bx bx-plus"></i> Create Milestone
                     </button>
                 </div>
 
                 <div className="card-datatable p-3">
-                    <table ref={tableRef} className="table dataTable dtr-inline w-100">
-                    </table>
+                    <div className="table-responsive">
+                        <table ref={tableRef} className="table dataTable dtr-inline w-100 shadow-none">
+                        </table>
+                    </div>
                 </div>
             </div>
 

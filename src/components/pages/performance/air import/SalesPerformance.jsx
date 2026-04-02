@@ -46,8 +46,8 @@ const SalesTable = ({ title, activeMainTab }) => {
     if (activeMainTab === "CCL" || viewMode === "summary" || viewMode === "chart") return;
     if (!tableRef.current) return;
     if (dtRef.current) {
-        dtRef.current.destroy();
-        dtRef.current = null;
+      dtRef.current.destroy();
+      dtRef.current = null;
     }
 
     $.fn.dataTable.ext.errMode = "none";
@@ -101,7 +101,7 @@ const SalesTable = ({ title, activeMainTab }) => {
     });
 
     setTimeout(() => {
-        $(".dt-button").removeClass("btn btn-secondary");
+      $(".dt-button").removeClass("btn btn-secondary");
     }, 0);
 
     return () => {
@@ -116,12 +116,12 @@ const SalesTable = ({ title, activeMainTab }) => {
   if (activeMainTab === "CCL") {
     return (
       <BracketCard className="p-4" style={{ minHeight: "150px" }}>
-          <div className="d-flex justify-content-between align-items-center mb-0 pe-3">
-              <h6 className="fw-bold m-0 text-heading text-uppercase">{title}</h6>
-              <button className="export-btn shadow-none h-100 px-4" style={{ height: "35px", fontSize: '11px' }}>
-                  <i className="bx bx-spreadsheet me-1 fs-6"></i> Download Excel
-              </button>
-          </div>
+        <div className="d-flex justify-content-between align-items-center mb-0 pe-3">
+          <h6 className="fw-bold m-0 text-heading text-uppercase">{title}</h6>
+          <button className="export-btn shadow-none h-100 px-4" style={{ height: "35px", fontSize: '11px' }}>
+            <i className="bx bx-spreadsheet me-1 fs-6"></i> Download Excel
+          </button>
+        </div>
       </BracketCard>
     );
   }
@@ -130,56 +130,56 @@ const SalesTable = ({ title, activeMainTab }) => {
   return (
     <BracketCard className="p-4">
       <div className="d-flex justify-content-between align-items-center mb-0 pe-3">
-           <h6 className="fw-bold m-0 text-heading text-uppercase">{title}</h6>
-           <div className="d-flex gap-2">
-                <div 
-                  onClick={() => setViewMode("summary")}
-                  className={`view-toggle-btn ${viewMode === "summary" ? "active" : "inactive"}`}>
-                  <i className="bx bx-x fs-5"></i>
-                </div>
-                <div 
-                  onClick={() => setViewMode("table")}
-                  className={`view-toggle-btn ${viewMode === "table" ? "active" : "inactive"}`}>
-                  <i className="bx bx-table fs-5"></i>
-                </div>
-                <div 
-                  onClick={() => setViewMode("chart")}
-                  className={`view-toggle-btn ${viewMode === "chart" ? "active" : "inactive"}`}>
-                  <i className="bx bx-bar-chart-alt-2 fs-5"></i>
-                </div>
-           </div>
+        <h6 className="fw-bold m-0 text-heading text-uppercase">{title}</h6>
+        <div className="d-flex gap-2">
+          <div
+            onClick={() => setViewMode("summary")}
+            className={`view-toggle-btn ${viewMode === "summary" ? "active" : "inactive"}`}>
+            <i className="bx bx-x fs-5"></i>
+          </div>
+          <div
+            onClick={() => setViewMode("table")}
+            className={`view-toggle-btn ${viewMode === "table" ? "active" : "inactive"}`}>
+            <i className="bx bx-table fs-5"></i>
+          </div>
+          <div
+            onClick={() => setViewMode("chart")}
+            className={`view-toggle-btn ${viewMode === "chart" ? "active" : "inactive"}`}>
+            <i className="bx bx-bar-chart-alt-2 fs-5"></i>
+          </div>
+        </div>
       </div>
 
       {/* Operations Bar - Hidden in Chart mode */}
       {viewMode !== "chart" && (
-         <div className="d-flex justify-content-end mb-3 gap-2 align-items-center pe-3 h-auto" style={{ minHeight: '40px' }}>
-            {/* If summary mode (X), show only Excel Download without arrows */}
-            {viewMode === "summary" ? (
-               <button className="export-btn shadow-none h-100" style={{ height: "32px", width: '150px' }}>
-                  <i className="bx bx-spreadsheet me-1"></i> Download Excel
-               </button>
-            ) : (
-              <>
-                <select className="header-filter-input py-1 px-2" style={{ width: "60px", height: "32px" }}>
-                    <option value=""></option>
-                </select>
-                <button className="export-btn py-1 px-2 h-100 d-flex align-items-center" style={{ height: "32px", fontSize: '11.5px', fontWeight: '600' }}>
-                  <i className="bx bx-spreadsheet me-1"></i> Download Excel
-                </button>
-                <select className="header-filter-input py-1 px-2" style={{ width: "60px", height: "32px" }}>
-                    <option value=""></option>
-                </select>
-                <select className="header-filter-input py-1 px-2" style={{ width: "60px", height: "32px" }}>
-                    <option value=""></option>
-                </select>
-                <select className="header-filter-input py-1 px-2" style={{ width: "60px", height: "32px" }}>
-                    <option value=""></option>
-                </select>
-              </>
-            )}
-         </div>
+        <div className="d-flex justify-content-end mb-3 gap-2 align-items-center pe-3 h-auto" style={{ minHeight: '40px' }}>
+          {/* If summary mode (X), show only Excel Download without arrows */}
+          {viewMode === "summary" ? (
+            <button className="export-btn shadow-none h-100" style={{ height: "32px", width: '150px' }}>
+              <i className="bx bx-spreadsheet me-1"></i> Download Excel
+            </button>
+          ) : (
+            <>
+              <select className="header-filter-input py-1 px-2" style={{ width: "60px", height: "32px" }}>
+                <option value=""></option>
+              </select>
+              <button className="export-btn py-1 px-2 h-100 d-flex align-items-center" style={{ height: "32px", fontSize: '11.5px', fontWeight: '600' }}>
+                <i className="bx bx-spreadsheet me-1"></i> Download Excel
+              </button>
+              <select className="header-filter-input py-1 px-2" style={{ width: "60px", height: "32px" }}>
+                <option value=""></option>
+              </select>
+              <select className="header-filter-input py-1 px-2" style={{ width: "60px", height: "32px" }}>
+                <option value=""></option>
+              </select>
+              <select className="header-filter-input py-1 px-2" style={{ width: "60px", height: "32px" }}>
+                <option value=""></option>
+              </select>
+            </>
+          )}
+        </div>
       )}
-      
+
       {/* Table View */}
       <div style={{ display: viewMode === "table" ? "block" : "none" }} className="card-datatable pb-1">
         <table ref={tableRef} className="table dataTable dtr-inline w-100">
@@ -190,25 +190,24 @@ const SalesTable = ({ title, activeMainTab }) => {
 
       {/* Chart View */}
       <div style={{ display: viewMode === "chart" ? "block" : "none" }}>
-         <div className="d-flex justify-content-around border-bottom mb-4 mx-2">
-            {["Agent Nomination", "Free Hand", "Sub Agent"].map((tab) => (
-                <div
-                    key={tab}
-                    onClick={() => setActiveSubTab(tab)}
-                    className="pb-2 fw-bold"
-                    style={{ cursor: "pointer", color: activeSubTab === tab ? "#50a9e9" : "#a1acb8", borderBottom: activeSubTab === tab ? "3px solid #50a9e9" : "3px solid transparent", width: "33%", textAlign: "center", fontSize: "14px" }}>
-                    {tab}
-                </div>
-            ))}
-         </div>
-         <div className="d-flex justify-content-end mb-2 pe-2">
-            <div className="view-toggle-btn active" style={{ width: '40px' }}>
-                <i className="bx bx-table sm"></i>
+        <div className="perf-sub-tab-container mx-2">
+          {["Agent Nomination", "Free Hand", "Sub Agent"].map((tab) => (
+            <div
+              key={tab}
+              onClick={() => setActiveSubTab(tab)}
+              className={`perf-sub-tab ${activeSubTab === tab ? "active" : "inactive"}`}>
+              {tab}
             </div>
-         </div>
-         <div className="border border-light-subtle rounded d-flex align-items-center justify-content-center" style={{ height: "150px" }}>
-            <p className="text-muted small">No visualization available</p>
-         </div>
+          ))}
+        </div>
+        <div className="d-flex justify-content-end mb-2 pe-2">
+          <div className="view-toggle-btn active" style={{ width: '40px' }}>
+            <i className="bx bx-table sm"></i>
+          </div>
+        </div>
+        <div className="border border-light-subtle rounded d-flex align-items-center justify-content-center" style={{ height: "150px" }}>
+          <p className="text-muted small">No visualization available</p>
+        </div>
       </div>
 
       {/* Summary (X) View status area - removed dotted line */}
@@ -228,47 +227,34 @@ const SalesPerformance = () => {
         <h5 className="perf-header-title text-uppercase">
           <span className="text-muted pe-1">DASHBOARD</span> <span className="perf-air-import">SALES PERFORMANCE</span>
         </h5>
-        
+
         <div className="d-flex align-items-center gap-3">
-           <select className="header-filter-input" style={{ width: "240px", height: "38px" }}>
-              <option value=""></option>
-           </select>
-           <div className="d-flex align-items-center border rounded overflow-hidden shadow-sm bg-white">
-              <input type="text" className="border-0 px-2 py-2 text-center text-muted small" style={{ width: "110px", outline: 'none' }} defaultValue="dd/mm/yyyy" />
-              <div className="bg-light border-start border-end px-3 py-2 text-muted fw-bold small">To</div>
-              <input type="text" className="border-0 px-2 py-2 text-center text-muted small" style={{ width: "110px", outline: 'none' }} defaultValue="dd/mm/yyyy" />
-           </div>
+          <select className="header-filter-input" style={{ width: "240px", height: "38px" }}>
+            <option value=""></option>
+          </select>
+          <div className="d-flex align-items-center border rounded overflow-hidden shadow-sm bg-white">
+            <input type="text" className="border-0 px-2 py-2 text-center text-muted small" style={{ width: "110px", outline: 'none' }} defaultValue="dd/mm/yyyy" />
+            <div className="bg-light border-start border-end px-3 py-2 text-muted fw-bold small">To</div>
+            <input type="text" className="border-0 px-2 py-2 text-center text-muted small" style={{ width: "110px", outline: 'none' }} defaultValue="dd/mm/yyyy" />
+          </div>
         </div>
       </div>
 
-      <BracketCard className="mb-4 d-flex" style={{ height: "55px", padding: 0, overflow: 'hidden' }}>
+      <BracketCard className="mb-4 perf-mode-container">
           <div
               onClick={() => setActiveMainTab("Forwarding")}
-              className="d-flex align-items-center justify-content-center flex-grow-1 h-100 fw-bold text-uppercase"
-              style={{ 
-                  cursor: "pointer", 
-                  borderRight: "1px solid #ddd", 
-                  color: activeMainTab === "Forwarding" ? "#2E8B57" : "#000", 
-                  backgroundColor: activeMainTab === "Forwarding" ? "#f9f9f9" : "transparent", 
-                  fontSize: "14px" 
-              }}>
+              className={`perf-mode-tab ${activeMainTab === "Forwarding" ? "active" : "inactive"}`}>
               Forwarding
           </div>
           <div
               onClick={() => setActiveMainTab("CCL")}
-              className="d-flex align-items-center justify-content-center flex-grow-1 h-100 fw-bold text-uppercase"
-              style={{ 
-                  cursor: "pointer", 
-                  color: activeMainTab === "CCL" ? "#2E8B57" : "#000", 
-                  backgroundColor: activeMainTab === "CCL" ? "#f9f9f9" : "transparent", 
-                  fontSize: "14px" 
-              }}>
+              className={`perf-mode-tab ${activeMainTab === "CCL" ? "active" : "inactive"}`}>
               CCL
           </div>
       </BracketCard>
 
       <div className="mt-4">
-         <SalesTable title="Sales Performance" activeMainTab={activeMainTab} />
+        <SalesTable title="Sales Performance" activeMainTab={activeMainTab} />
       </div>
 
     </div>
