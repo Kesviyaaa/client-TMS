@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import $ from "jquery";
+import { useNavigate } from "react-router-dom";
 import "datatables.net-bs5";
 import "datatables.net-buttons-bs5";
 import "datatables.net-responsive-bs5";
@@ -28,7 +29,11 @@ const Organisation = ({ initialView = "table" }) => {
     const dtRef = useRef(null);
 
     const [view, setView] = useState(initialView);
-    const [data, setData] = useState(initialData);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        setView(initialView);
+    }, [initialView]);
     const [activeTab, setActiveTab] = useState("Basic Information");
     const [documentRows, setDocumentRows] = useState([]);
     const [registrationRows, setRegistrationRows] = useState([]);
@@ -69,11 +74,11 @@ const Organisation = ({ initialView = "table" }) => {
 
     /* ───── Switch View Helpers ───── */
     const switchToForm = () => {
-        setView("form");
+        navigate("/system-master/org-details/create");
     };
 
     const switchToTable = () => {
-        setView("table");
+        navigate("/system-master/org-details");
     };
 
     const handleChange = (e) => {

@@ -236,8 +236,11 @@ function App() {
 
                   {/* System Masters */}
                   <Route path="/system-master/org-details" element={<Organisation />} />
+                  <Route path="/system-master/org-details/create" element={<Organisation initialView="form" />} />
                   <Route path="/system-master/branch" element={<Branch />} />
+                  <Route path="/system-master/branch/create" element={<Branch initialView="form" />} />
                   <Route path="/system-master/user" element={<User />} />
+                  <Route path="/system-master/user/create" element={<User initialView="form" />} />
                   <Route path="/system-master/user-role" element={<Role />} />
 
 

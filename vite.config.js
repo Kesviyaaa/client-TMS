@@ -17,9 +17,24 @@ export default defineConfig({
         /^dataTables/,
         /^modal/,
         /^dropdown/,
+        /^bk-/,
+        /^ocean-/,
+        /^perf-/,
+        /^qt-/,
         "show",
         "active"
       ]
     })
-  ]
+  ],
+  build: {
+    chunkSizeWarningLimit: 1000,
+    outDir: "dist",
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom", "react-router-dom", "jquery", "datatables.net-bs5"]
+        }
+      }
+    }
+  }
 })

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import $ from "jquery";
+import { useNavigate } from "react-router-dom";
 
 import "datatables.net-bs5";
 import "datatables.net-buttons-bs5";
@@ -15,6 +16,12 @@ const User = ({ initialView = "table" }) => {
     const dtRef = useRef(null);
 
     const [view, setView] = useState(initialView);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        setView(initialView);
+    }, [initialView]);
+
     const [users, setUsers] = useState([
         {
             _id: "1",
@@ -58,11 +65,11 @@ const User = ({ initialView = "table" }) => {
 
     /* ───── Switch View ───── */
     const switchToForm = () => {
-        setView("form");
+        navigate("/system-master/user/create");
     };
 
     const switchToTable = () => {
-        setView("table");
+        navigate("/system-master/user");
     };
 
     /* ───── DataTable Init ───── */
