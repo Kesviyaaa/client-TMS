@@ -19,17 +19,134 @@ const Role = () => {
 
     const [roles, setRoles] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [deleteId, setDeleteId] = useState(null);
+    const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
 
     const [formData, setFormData] = useState({
         roleName: "",
-        moduleName: "",
-        description: ""
+        description: "",
+        status: "Active"
     });
+
+    const API_BASE = "http://localhost:5005/api/user-roles";
+
+    // ✅ Fetch Data
+    const fetchData = async () => {
+        try {
+            const response = await fetch(API_BASE);
+            if (!response.ok) return;
+            const data = await response.json();
+            setRoles(data);
+        } catch (error) {
+            console.error("Error fetching roles:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    // ✅ Lock scroll on modal open
+    useEffect(() => {
+        if (showModal || showDeleteModal) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+        return () => { document.body.style.overflow = "auto"; };
+    }, [showModal, showDeleteModal]);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+        if (errors[name]) {
+            setErrors(prev => ({ ...prev, [name]: "" }));
+        }
+    };
+
+    // ✅ Save Data (Create/Update)
+    const handleSave = async (e) => {
+        if (e) e.preventDefault();
+        
+        const newErrors = {};
+        if (!formData.roleName || !formData.roleName.trim()) newErrors.roleName = "Role Name is required";
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return;
+        }
+
+        setLoading(true);
+        try {
+            const url = isEditing ? `${API_BASE}/${formData._id}` : API_BASE;
+            const method = isEditing ? "PUT" : "POST";
+
+            const response = await fetch(url, {
+                method,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                await fetchData();
+                handleClose();
+            } else {
+                const result = await response.json();
+                alert(`Error: ${result.error || "Failed to save"}`);
+            }
+        } catch (error) {
+            console.error("Error saving role:", error);
+            alert("Network error.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // ✅ Delete Data
+    const handleDelete = async () => {
+        if (!deleteId) return;
+        setLoading(true);
+        try {
+            const response = await fetch(`${API_BASE}/${deleteId}`, {
+                method: "DELETE"
+            });
+            if (response.ok) {
+                await fetchData();
+                setShowDeleteModal(false);
+                setDeleteId(null);
+            }
+        } catch (error) {
+            console.error("Error deleting role:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleOpenCreate = () => {
+        setFormData({ roleName: "", description: "", status: "Active" });
+        setErrors({});
+        setIsEditing(false);
+        setShowModal(true);
+    };
+
+    const handleClose = () => {
+        setShowModal(false);
+        setIsEditing(false);
+        setErrors({});
+    };
 
     /* ───── DataTable Init ───── */
     useEffect(() => {
         if (!tableRef.current) return;
-        if (dtRef.current) return;
+        
+        if (dtRef.current) {
+            dtRef.current.destroy();
+            $(tableRef.current).empty();
+            dtRef.current = null;
+        }
 
         $.fn.dataTable.Buttons.defaults.dom.button.className = "export-btn";
 
@@ -40,11 +157,8 @@ const Role = () => {
                 "<'row align-items-center px-3 pb-3 mt-3'<'col-md-5'i><'col-md-7 d-flex justify-content-end'p>>",
 
             responsive: true,
-            scrollY: "400px",
-            scrollCollapse: true,
             paging: true,
             pageLength: 10,
-
             data: roles,
 
             language: {
@@ -73,22 +187,31 @@ const Role = () => {
             columns: [
                 { data: "roleName", title: "Role Name" },
                 { data: "description", title: "Description" },
-                { data: "createdOn", title: "Created On" },
+                {
+                    data: "status",
+                    title: "Status",
+                    className: "text-center",
+                    render: d => `<span class="badge ${d === "Active" ? "bg-label-success" : "bg-label-secondary"}">${d || "Active"}</span>`
+                },
                 {
                     data: null,
                     title: "Edit",
+                    className: "text-center no-export",
                     orderable: false,
-                    searchable: false,
-                    render: () =>
-                        `<div class="text-center"><button class="btn btn-primary btn-sm" style="font-size:12px; height: 28px; padding: 0 10px;">Edit</button></div>`
+                    render: (row) =>
+                        `<div class="d-flex justify-content-center">
+                            <i class="bx bx-edit edit-btn text-primary cursor-pointer" data-id="${row._id}" style="font-size:18px;"></i>
+                        </div>`
                 },
                 {
                     data: null,
                     title: "Remove",
+                    className: "text-center no-export",
                     orderable: false,
-                    searchable: false,
-                    render: () =>
-                        `<div class="text-center"><button class="btn btn-danger btn-sm" style="font-size:12px; height: 28px; padding: 0 10px; background-color: #ff4d4f; border-color: #ff4d4f;">Remove</button></div>`
+                    render: (row) =>
+                        `<div class="d-flex justify-content-center">
+                            <i class="bx bx-trash remove-btn text-danger cursor-pointer" data-id="${row._id}" style="font-size:18px;"></i>
+                        </div>`
                 }
             ]
         });
@@ -97,26 +220,36 @@ const Role = () => {
             $(".dt-button").removeClass("btn btn-secondary");
         }, 0);
 
+        /* Action Handlers */
+        const table = $(tableRef.current);
+        table.off("click").on("click", ".edit-btn", function () {
+            const id = String($(this).data("id"));
+            handleEdit(id);
+        });
+
+        table.on("click", ".remove-btn", function () {
+            const id = String($(this).data("id"));
+            if (id) {
+                setDeleteId(id);
+                setShowDeleteModal(true);
+            }
+        });
+
         return () => {
             if (dtRef.current) {
-                dtRef.current.destroy(true);
+                dtRef.current.destroy();
                 dtRef.current = null;
             }
         };
     }, [roles]);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value
-        }));
-    };
-
-    const handleSave = () => {
-        // Validation logic or save logic here
-        setShowModal(false);
-        setFormData({ roleName: "", moduleName: "", description: "" });
+    const handleEdit = (id) => {
+        const rowData = roles.find(item => String(item._id) === String(id));
+        if (rowData) {
+            setFormData(rowData);
+            setIsEditing(true);
+            setShowModal(true);
+        }
     };
 
     return (
@@ -129,23 +262,37 @@ const Role = () => {
                         <div className="bk-icon-circle"><i className="bx bx-id-card"></i></div> Role Details
                     </span>
 
-                    <button className="btn-add-record btn-primary-custom" onClick={() => setShowModal(true)}>
+                    <button className="btn-add-record btn-primary-custom" onClick={handleOpenCreate}>
                         <i className="bx bx-plus"></i> Create
                     </button>
                 </div>
 
                 <div className="card-datatable p-3">
-                    <table ref={tableRef} className="table dataTable dtr-inline w-100"></table>
+                    <div className="table-responsive">
+                        <table ref={tableRef} className="table dataTable dtr-inline w-100">
+                            <thead>
+                                <tr>
+                                    <th>Role Name</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                    <th className="text-center">Edit</th>
+                                    <th className="text-center">Remove</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
 
-            {/* Custom Modal */}
+            {/* Main Create/Edit Modal */}
             {showModal && (
-                <div className="custom-modal-backdrop" onClick={(e) => { if(e.target === e.currentTarget) setShowModal(false) }}>
-                    <div className="custom-modal-card">
+                <div className="custom-modal-backdrop" style={{ zIndex: 9999 }} onClick={(e) => { if(e.target === e.currentTarget) handleClose() }}>
+                    <div className="custom-modal-card" style={{ maxWidth: "500px" }}>
                         <div className="d-flex justify-content-between align-items-center">
-                            <h5 className="modal-title-custom">Create Role</h5>
-                            <button type="button" className="modal-close-btn" onClick={() => setShowModal(false)}>&times;</button>
+                            <h5 className="modal-title-custom">
+                                {isEditing ? "Edit User Role" : "Create User Role"}
+                            </h5>
+                            <button type="button" className="modal-close-btn" onClick={handleClose}>&times;</button>
                         </div>
                         
                         <hr className="modal-divider" />
@@ -160,36 +307,75 @@ const Role = () => {
                                     value={formData.roleName} 
                                     onChange={handleChange} 
                                 />
+                                {errors.roleName && <small className="text-danger d-block mt-1">{errors.roleName}</small>}
                             </div>
-                            <div className="col-12">
-                                <label className="qt-label">Module Name</label>
-                                <textarea 
-                                    name="moduleName" 
-                                    className="qt-input" 
-                                    rows="2" 
-                                    placeholder="Enter Module Name"
-                                    value={formData.moduleName} 
-                                    onChange={handleChange} 
-                                ></textarea>
-                            </div>
+                            
                             <div className="col-12">
                                 <label className="qt-label">Description</label>
                                 <textarea 
                                     name="description" 
                                     className="qt-input" 
-                                    rows="2" 
+                                    rows="3" 
                                     placeholder="Enter Description"
                                     value={formData.description} 
                                     onChange={handleChange} 
                                 ></textarea>
                             </div>
+
+                            <div className="col-12">
+                                <label className="qt-label">Status</label>
+                                <div className="d-flex gap-4 mt-2">
+                                    <div className="form-check">
+                                        <input className="form-check-input" type="radio" name="status" id="stActive" value="Active" checked={formData.status === "Active"} onChange={handleChange} />
+                                        <label className="form-check-label" htmlFor="stActive">Active</label>
+                                    </div>
+                                    <div className="form-check">
+                                        <input className="form-check-input" type="radio" name="status" id="stInactive" value="Inactive" checked={formData.status === "Inactive"} onChange={handleChange} />
+                                        <label className="form-check-label" htmlFor="stInactive">Inactive</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         
-                        <hr className="modal-divider" style={{ marginBottom: "1.25rem", marginTop: "1.25rem" }} />
+                        <hr className="modal-divider" />
                         
                         <div className="d-flex justify-content-end gap-3">
-                            <button className="btn-secondary-custom" onClick={() => setShowModal(false)}>Cancel</button>
-                            <button className="btn-primary-custom" onClick={handleSave}>Create</button>
+                            <button className="btn-secondary-custom" onClick={handleClose} disabled={loading}>
+                                Cancel
+                            </button>
+                            <button className="btn-primary-custom" onClick={handleSave} disabled={loading}>
+                                {loading ? "Processing..." : (isEditing ? "Update" : "Create")}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Delete Confirmation Modal */}
+            {showDeleteModal && (
+                <div className="custom-modal-backdrop" style={{ zIndex: 99999 }}>
+                    <div className="custom-modal-card" style={{ maxWidth: "400px" }}>
+                        <div className="text-center p-4">
+                            <i className="bx bx-error-circle text-warning border-0 mb-3" style={{ fontSize: "5rem" }}></i>
+                            <h4 className="mb-2">Are you sure?</h4>
+                            <p className="text-muted mb-4">You want to delete this role? This action cannot be undone.</p>
+                            <div className="d-flex justify-content-center gap-3">
+                                <button
+                                    className="btn-secondary-custom"
+                                    onClick={() => setShowDeleteModal(false)}
+                                    disabled={loading}
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    className="btn-danger-custom"
+                                    style={{ background: "#ff3e1d", color: "#fff", border: "none", padding: "8px 20px", borderRadius: "6px" }}
+                                    onClick={handleDelete}
+                                    disabled={loading}
+                                >
+                                    {loading ? "Deleting..." : "Yes, Delete it!"}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

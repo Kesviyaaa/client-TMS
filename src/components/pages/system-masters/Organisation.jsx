@@ -30,6 +30,7 @@ const Organisation = ({ initialView = "table" }) => {
 
     const [view, setView] = useState(initialView);
     const navigate = useNavigate();
+    const [data, setData] = useState(initialData);
 
     useEffect(() => {
         setView(initialView);
@@ -92,7 +93,12 @@ const Organisation = ({ initialView = "table" }) => {
     /* ---------------- DataTable ---------------- */
     useEffect(() => {
         if (view !== "table" || !tableRef.current) return;
-        if (dtRef.current) return;
+        
+        if (dtRef.current) {
+            dtRef.current.destroy();
+            $(tableRef.current).empty();
+            dtRef.current = null;
+        }
 
         $.fn.dataTable.Buttons.defaults.dom.button.className = "export-btn";
 
@@ -101,8 +107,6 @@ const Organisation = ({ initialView = "table" }) => {
                 "<'row align-items-center px-3'<'col-md-6'B><'col-md-6 d-flex align-items-center justify-content-end gap-3'lf>>" +
                 "t" +
                 "<'d-flex justify-content-between align-items-center px-3 pb-3'ip>",
-            scrollY: "350px",
-            scrollCollapse: true,
             paging: true,
             responsive: true,
             data: data,
@@ -196,7 +200,20 @@ const Organisation = ({ initialView = "table" }) => {
                         <table
                             ref={tableRef}
                             className="table dataTable dtr-inline w-100"
-                        ></table>
+                        >
+                            <thead>
+                                <tr>
+                                    <th>Organization Code</th>
+                                    <th>Company Name</th>
+                                    <th>Branch Name</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th>Created On</th>
+                                    <th>Status</th>
+                                    <th className="text-center">Edit</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                 </div>
             </div>

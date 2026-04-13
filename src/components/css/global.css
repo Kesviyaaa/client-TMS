@@ -60,7 +60,7 @@
     font-size: 11px;
     font-weight: 600;
     color: #566a7f;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     display: block;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -76,6 +76,24 @@
     background: #fff;
     color: #3b4d61;
     transition: border-color 0.2s;
+}
+
+.input-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon-left {
+    position: absolute;
+    left: 12px;
+    color: #a1adb8;
+    font-size: 18px;
+    z-index: 2;
+}
+
+.input-icon .qt-input {
+    padding-left: 38px !important;
 }
 
 .qt-input:focus, .form-control:focus {

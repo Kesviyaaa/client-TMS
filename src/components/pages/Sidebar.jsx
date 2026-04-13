@@ -372,7 +372,7 @@ const Sidebar = ({ collapsed, toggleSidebar, setWrapperHover, showMobileMenu }) 
 
       {/* 🔷 BRAND */}
       <div className="app-brand demo">
-        <a href="#!" className="app-brand-link text-decoration-none">
+        <Link to="/dashboard" className="app-brand-link text-decoration-none">
           <span className="app-brand-logo demo">
             <img
               src={collapsed && !hovered ? iconLogo : logo}
@@ -380,7 +380,7 @@ const Sidebar = ({ collapsed, toggleSidebar, setWrapperHover, showMobileMenu }) 
               className="sidebar-logo"
             />
           </span>
-        </a>
+        </Link>
       </div>
 
       <div className="menu-inner-shadow"></div>
